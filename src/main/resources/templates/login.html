@@ -1,0 +1,112 @@
+
+<!doctype html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- meta data -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--font-family-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;subset=devanagari,latin-ext" rel="stylesheet">
+
+    <!-- title of site -->
+    <title>Sign in</title>
+    <!--font-awesome.min.css-->
+    <link rel="stylesheet" th:href="@{/css/util/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/util/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/util/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/util/bootsnav.css}" >
+    <link rel="stylesheet" th:href="@{/css/login/style_login.css}">
+    <link rel="stylesheet" th:href="@{/css/login/responsive.css}">
+    <link th:href="@{/css/util/sweetalert2.min.css}" rel="stylesheet"/>
+
+    <script th:src="@{/js/sweetalert2.js}"></script>
+
+    <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            function login(){
+                document.getElementById("login").disabled = true;
+                $.ajax({
+                    type:"POST",
+                    url:"/user/login",
+                    dataType:"json",
+                    data:{
+                        username:$("#username").val(),
+                        password:$("#password").val(),
+                    },
+                    success:function(data){
+                        if(data.flag == 1){
+                            swal({
+                                text: "Signed in successfully",
+                                type: "success",
+                                confirm:'ok',
+                                confirmButtonColor: '#5a84fd',
+                            }).then(function (){
+                                window.location.href="/user/index";
+                            });
+                        }else{
+                            swal({
+                                text: data.msg,
+                                type: "error",
+                                confirm:'ok',
+                                confirmButtonColor: '#fd2c45',
+                            });
+
+                            document.getElementById("login").disabled = false;
+                        }
+                    },
+                });
+            }
+            $("#login").click(function(){
+                login();
+            });
+
+        })
+
+    </script>
+</head>
+<body>
+<!-- signin end -->
+<section class="signin">
+    <div class="container animated fadeInDown">
+
+        <div class="sign-content">
+            <h2>用户登录</h2>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="signin-form">
+                        <form action="#" method="#">
+                            <div class="form-group">
+                                <label for="username">username</label>
+                                <input type="text" name="username" class="form-control" id="username" placeholder="enter your username here">
+                            </div><!--/.form-group -->
+                            <div class="form-group">
+                                <label for="password">password</label>
+                                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                            </div><!--/.form-group -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="signin-footer">
+                                        <button id="login" type="submit" class="btn signin_btn" data-toggle="modal" data-target=".signin_modal">SIGN IN</button>
+                                        <p>
+                                            Don’t have an Account ?
+                                            <a th:href="@{/user/toRegister}">register</a>
+                                        </p>
+                                    </div><!--/.signin-footer -->
+                                </div><!--/.col-->
+                            </div><!--/.row -->
+                        </form><!--/form -->
+                    </div><!--/.signin-form -->
+                </div><!--/.col -->
+            </div><!--/.row -->
+        </div><!--/.sign-content -->
+    </div><!--/.container -->
+
+</section><!--/.signin -->
+
+</body>
+
+</html>

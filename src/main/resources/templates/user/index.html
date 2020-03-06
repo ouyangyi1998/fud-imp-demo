@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>用户界面</title>
+
+    <link th:href="@{/css/util/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/index/perfect-scrollbar.css}" rel="stylesheet">
+    <link th:href="@{/css/index/morris.css}" rel="stylesheet">
+    <link th:href="@{/css/index/c3.min.css}" rel="stylesheet">
+    <link th:href="@{/css/index/style.css}" rel="stylesheet">
+    <link th:href="@{/css/index/dashboard1.css}" rel="stylesheet">
+    <link th:href="@{/css/index/default.css}" id="theme" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/font-awesome/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/index/spinners.css}">
+    <link th:href="@{/css/util/sweetalert2.min.css}" rel="stylesheet"/>
+
+    <script th:src="@{/js/sweetalert2.js}"></script>
+    <script th:src="@{/js/jquery.js}"></script>
+    <script type="text/javascript">
+       $(document).ready(function () {
+           var a1=document.getElementById("a1"); getColor(a1);
+           var a2=document.getElementById("a2"); getColor(a2);
+           var a3=document.getElementById("a3"); getColor(a3);
+           var a4=document.getElementById("a4");getColor(a4);
+           var a5=document.getElementById("a5");getColor(a5);
+
+           var b1=document.getElementById("b1"); getColor(b1);
+           var b2=document.getElementById("b2"); getColor(b2);
+           var b3=document.getElementById("b3"); getColor(b3);
+           var b4=document.getElementById("b4");getColor(b4);
+           var b5=document.getElementById("b5");getColor(b5);
+
+           var c1=document.getElementById("c1"); getColor(c1);
+           var c2=document.getElementById("c2"); getColor(c2);
+           var c3=document.getElementById("c3"); getColor(c3);
+           var c4=document.getElementById("c4");getColor(c4);
+           var c5=document.getElementById("c5");getColor(c5);
+           function getColor(x) {
+               if (x==null)
+               {
+                   return false;
+               }
+               x.style.background = 'rgb(' + Math.ceil(Math.random() * 255) + ',' + Math.ceil(Math.random() * 255) + ',' + Math.ceil(Math.random() * 255) + ')';
+           }
+       });
+       function search() {
+           event.preventDefault();
+           $.ajax({
+               type: "POST",
+               url: "/user/search",
+               dataType: "json",
+               data: {
+                   contents: $("#contents").val(),
+               },
+               success: function (data) {
+                   if (data.flag == 1) {
+
+                       window.location.href = "/user/search";
+
+                   } else {
+                       swal({
+                           text: data.msg,
+                           type: "info",
+                           confirm: 'ok',
+                           confirmButtonColor: '#fd2c45',
+                       });
+                   }
+               },
+           });
+       }
+
+    </script>
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">Loading</p>
+    </div>
+</div>
+
+
+<div id="main-wrapper">
+    <header class="topbar ">
+        <nav class="navbar top-navbar navbar-expand-md">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://www.github.com"/>
+                <span>
+                    <i class="fa fa-github fa-2x" style="color: #5a84fd"></i>
+                </span>
+            </div>
+
+            <div class="navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="fa fa-bars"></i></a> </li>
+                    <li class="nav-item hidden-xs-down search-box"> <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="fa fa-search"></i></a>
+                        <form class="app-search" onsubmit="search()">
+                            <input type="text" class="form-control" id="contents" placeholder="Search & enter">
+                            <a class="srh-btn">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </form>
+                    </li>
+                </ul>
+                <ul class="navbar-nav my-lg-0">
+                    <li class="nav-item dropdown u-pro">
+                        <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="round round-success" th:text="${session.index}"></span>&nbsp;&nbsp;<span class="hidden-md-down" th:text="${session.user.username}"></span> </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li class="active"> <a class="waves-effect waves-dark" th:href="@{/user/index}" aria-expanded="false"><i class="fa fa-bar-chart" style="color: #51b2fd"></i><span class="hide-menu" >数据分析</span></a>
+                    </li>
+                    <li> <a class="waves-effect waves-dark" th:href="@{/user/information}" aria-expanded="false"><i class="fa fa-user-circle-o" style="color: #fdca56"></i><span class="hide-menu">个人信息</span></a>
+                    </li>
+                    <li> <a class="waves-effect waves-dark" th:href="@{/user/download}" aria-expanded="false"><i class="fa fa-chevron-circle-down" style="color: #aa61fd"></i><span class="hide-menu">我的文件下载</span></a>
+                    </li>
+                    <li> <a class="waves-effect waves-dark" th:href="@{/user/toUpload}" aria-expanded="false"><i class="fa fa-chevron-circle-up" style="color: #5a84fd"></i><span class="hide-menu">文件上传</span></a>
+                    </li>
+<!--                    <li> <a class="waves-effect waves-dark" th:href="@{/user/hotfile}" aria-expanded="false"><i class="fa fa-heart" style="color: #fd5e6f"></i><span class="hide-menu">查看热门文件</span></a>-->
+<!--                    </li>-->
+                    <li> <a class="waves-effect waves-dark" th:href="@{/user/filemanager}" aria-expanded="false"><i class="fa fa-reorder" style="color: #a1fd94"></i><span class="hide-menu">已上传文件管理</span></a>
+                    </li>
+                    <shiro:hasAnyRoles name="SUPERVIP,ADMIN">
+                        <li> <a class="waves-effect waves-dark" th:href="@{/admin/index}" aria-expanded="false"><i class="fa fa-user-plus" style="color: #fd55af"></i><span class="hide-menu">管理员中心</span></a>
+                        </li>
+                    </shiro:hasAnyRoles>
+                </ul>
+                <div class="text-center m-t-30">
+                    <a th:href="@{/user/logout}" class="btn waves-effect waves-light btn-info hidden-md-down">Logout</a>
+                </div>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">用户数据分析</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">数据分析</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- Sales Chart and browser state-->
+            <!-- ============================================================== -->
+            <div class="row ">
+                <!-- Column -->
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex no-block">
+                                <div>
+                                    <h5 class="card-title m-b-0">上传下载文件</h5>
+                                </div>
+                                <div class="ml-auto">
+                                    <ul class="list-inline text-center font-12">
+                                        <li><i class="fa fa-circle text-info"></i>上传</li>
+                                        <li><i class="fa fa-circle text-primary"></i>下载</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="" id="upload-download-chart" style="height: 355px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column -->
+               <!-- <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex m-b-30 no-block">
+                                <h5 class="card-title m-b-0 align-self-center">上传下载文件分类</h5>
+                                <div class="ml-auto">
+                                    <select class="custom-select b-0">
+                                        <option selected="">上传</option>
+                                        <option value="1">下载</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="files" style="height:260px; width:100%;"></div>
+                            <ul class="list-inline m-t-30 text-center font-12">
+                                <li><i class="fa fa-circle text-purple"></i>文档</li>
+                                <li><i class="fa fa-circle text-success"></i>媒体</li>
+                                <li><i class="fa fa-circle text-info"></i>其他</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Sales Chart -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Projects of the Month -->
+            <!-- ============================================================== -->
+
+            <!-- Column -->
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12 ">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 align="center">用户文件被下载次数</h3>
+                            <div class="table-responsive m-t-20 no-wrap">
+                                <table class="table vm no-th-brd pro-of-month">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2">文件名</th>
+                                        <th>文件类型</th>
+                                        <th>文件上传日期</th>
+                                        <th>下载次数</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="file:${mostDownloaded}">
+                                        <td style="width:50px;">
+                                            <span class="round" th:id="a+${fileStat.index+1}" th:text="${#strings.substring(file.name,0,1)}" ></span></td>
+                                        <td>
+                                            <h6 th:text="${file.name}"></h6><small class="text-muted" th:text="${file.size}"></small>
+                                        </td>
+                                        <td th:text="${file.suffix}"></td>
+                                        <td th:text="${file.createTime}"></td>
+                                        <td th:text="${file.downloadTimes}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Projects of the Month -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-lg-6 col-sm-6 col-xs-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="box-title">总下载次数</h3>
+                            <ul class="list-inline two-part">
+                                <li>
+                                    <div id="sparklinedash"></div>
+                                </li>
+                                <li class="text-right"><i class="fa fa-group fa-2x" style="color: #beffb8"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span class="counter text-muted" style="font-size: 30px" th:text="${downloadTimesByCurrUser}"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6 col-xs-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="box-title">总上传次数</h3>
+                            <ul class="list-inline two-part">
+                                <li>
+                                    <div id="sparklinedash2"></div>
+                                </li>
+                                <li class="text-right"><i class="fa fa-cloud-upload fa-2x" style="color: #6bd6ff"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span class="counter text-muted" style="font-size: 30px" th:text="${uploadTimesByCurrUser}"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+              <!--  <div class="col-lg-4 col-sm-6 col-xs-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="box-title">总下载次数</h3>
+                            <ul class="list-inline two-part">
+                                <li>
+                                    <div id="sparklinedash3"></div>
+                                </li>
+                                <li class="text-right"><i class="fa fa-cloud-download fa-2x" style="color:rgba(161,79,253,0.68);"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span class="counter text-muted" style="font-size: 30px" th:text="${downloadTimes}"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+          <!--  <div class="row">
+                <div class="col-lg-6 col-sm-6 col-xs-12">
+                    <div class="card">
+                        <div class="card-body" >
+                            <h3 class="box-title">总下载次数</h3>
+                            <ul class="list-inline two-part">
+                                <li>
+                                    <div id="sparklinedash"></div>
+                                </li>
+                                <li class="text-right">
+                                    <i class="fa fa-level-down fa-2x" style="color: greenyellow"></i>
+                                </li>
+                                <li class="text-left">
+                                    <h1 class="text-muted" th:text="${downloadTimesByCurrUser}"></h1>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6 col-xs-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="box-title">总上传次数</h3>
+                            <ul class="list-inline two-part">
+                                <li>
+                                    <div id="sparklinedash2"></div>
+                                </li>
+                                <li class="text-right">
+                                    <i class="fa fa-level-up fa-2x" style="color: deepskyblue"></i>
+                                </li>
+                                <li class="text-left">
+                                    <h1 class="text-muted" th:text="${uploadTimesByCurrUser}"></h1>
+                                </li>
+                            </ul>
+                        </div>　
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-xs-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="box-title">被下载次数</h3>
+                            <ul class="list-inline two-part">
+                                <li>
+                                    <div id="sparklinedash3"></div>
+                                </li>
+                                <li class="text-right">
+                                    <i class="fa fa-line-chart fa-2x" style="color: #ff3245"></i>
+                                </li>
+                                <li class="text-left">
+                                    <h1 class="text-muted" th:text="${downloadTimesByCurrUser}"></h1>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <!-- ============================================================== -->
+            <!-- Notification And Feeds -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <!-- Start Notification -->
+                <div class="col-lg-6 col-md-12">
+                    <div class="card ">
+                        <div class="card-body">
+                            <h5 class="card-title">最新下载文件</h5>
+                            <div class="table-responsive m-t-20 no-wrap">
+                            <table class="table vm no-th-brd pro-of-month">
+                                <thead>
+                                <tr>
+                                    <th colspan="2">文件名</th>
+                                    <th>下载日期</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="file:${latestDownloaded}">
+                                    <td style="width:50px;">
+                                        <span class="round" th:id="b+${fileStat.index+1}" th:text="${#strings.substring(file.name,0,1)}" >
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <h6 th:text="${file.name}"></h6>
+                                    </td>
+                                    <td class="text-muted" th:text="${file.createTime}"></td>
+                                </tr>
+                                </tbody>
+
+
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Notification -->
+                <!-- Start Feeds -->
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">最新上传文件</h5>
+                            <div class="table-responsive m-t-20 no-wrap">
+                                <table class="table vm no-th-brd pro-of-month">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2">文件名</th>
+                                        <th>上传日期</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="file:${latestUploaded}">
+                                        <td style="width:50px;">
+                                        <span class="round" th:id="c+${fileStat.index+1}" th:text="${#strings.substring(file.name,0,1)}" >
+                                        </span>
+                                        </td>
+                                        <td>
+                                            <h6 th:text="${file.name}"></h6>
+                                        </td>
+                                        <td class="text-muted" th:text="${file.createTime}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Feeds -->
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<script th:src="@{/js/jquery.js}"></script>
+<!-- Bootstrap popper Core JavaScript -->
+<script th:src="@{/js/index/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script th:src="@{/js/index/perfect-scrollbar.jquery.min.js}"></script>
+<!--Wave Effects -->
+<script th:src="@{/js/index/waves.js}"></script>
+<!--Menu sidebar -->
+<script th:src="@{/js/index/sidebarmenu.js}"></script>
+<!--Custom JavaScript -->
+<script th:src="@{/js/index/custom.min.js}"></script>
+<!-- ============================================================== -->
+<!--morris JavaScript -->
+<script th:src="@{/js/index/raphael-min.js}"></script>
+<script th:src="@{/js/index/morris.min.js}"></script>
+<!--c3 JavaScript -->
+<script th:src="@{/js/index/d3.min.js}"></script>
+<script th:src="@{/js/index/c3.min.js}"></script>
+<!-- Chart JS -->
+<script th:src="@{/js/index/dashboard1.js}"></script>
+</body>
+
+</html>

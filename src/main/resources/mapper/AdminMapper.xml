@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.centerm.fud_demo.dao.AdminDao">
+    <select id="getUserState" resultType="int" parameterType="long">
+        SELECT fud.user.state
+        FROM fud.user
+        WHERE fud.user.id=#{userId}
+    </select>
+    <update id="banUser" parameterType="long">
+       UPDATE fud.user
+       SET fud.user.state=1
+       WHERE fud.user.id=#{userId}
+    </update>
+    <update id="releaseUser" parameterType="long">
+       UPDATE fud.user
+       SET fud.user.state=false
+       WHERE fud.user.id=#{userId}
+    </update>
+    <select id="getUserExceptAdminAndSuperVIP" resultType="com.centerm.fud_demo.entity.User" parameterType="long">
+        SELECT user.id, user.username, user.password, user.create_time AS createTime, user.state, user.role_id
+        FROM fud.user
+        WHERE fud.user.role_id!=2 AND fud.user.role_id!=3
+    </select>
+    <select id="getUserLikeContents" parameterType="string" resultType="com.centerm.fud_demo.entity.User">
+        SELECT fud.user.*
+        FROM fud.user
+        WHERE user.username LIKE #{contents} AND fud.user.role_id!=3 AND fud.user.role_id!=2
+        ORDER BY fud.user.id
+    </select>
+    <select id="getAllUploadToMorrisJs" resultType="java.util.HashMap">
+        SELECT DATE_FORMAT(fud.file.create_time,'%Y-%m-%d') AS days,COUNT(*) AS upload
+        FROM fud.file
+        WHERE  fud.file.create_time BETWEEN SUBDATE( DATE( NOW( ) ), INTERVAL 7 DAY )
+          AND DATE( NOW( ) )
+        GROUP BY days
+        ORDER BY days DESC
+    </select>
+    <select id="getAllDownloadToMorrisJs"  resultType="java.util.HashMap">
+        SELECT DATE_FORMAT(fud.download.create_time,'%Y-%m-%d') AS days,COUNT(*) AS download
+        FROM fud.download
+        WHERE fud.download.create_time BETWEEN SUBDATE( DATE( NOW( ) ), INTERVAL 7 DAY )
+          AND DATE( NOW( ) )
+        GROUP BY days
+        ORDER BY days DESC
+    </select>
+    <select id="getAdminNumber" resultType="long">
+        SELECT COUNT(*)
+        FROM fud.user
+        WHERE fud.user.role_id=2 OR fud.user.role_id=3
+    </select>
+    <select id="getAllUserNumber" resultType="long">
+        SELECT COUNT(*)
+        FROM fud.user
+    </select>
+</mapper>

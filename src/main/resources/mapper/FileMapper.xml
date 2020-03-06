@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.centerm.fud_demo.dao.FileDao">
+    <parameterMap id="FileRecord" type="com.centerm.fud_demo.entity.FileRecord"/>
+    <parameterMap id="DownloadRecord" type="com.centerm.fud_demo.entity.DownloadRecord"/>
+
+    <update id="updateFile" parameterType="long">
+        UPDATE fud.file
+        SET download_times=download_times+1
+        WHERE file.id=#{fileId}
+    </update>
+    <update id="updateFileRecord">
+        UPDATE fud.file
+        SET fud.file.md5=#{fileMd5}, fud.file.size=#{fileSize}, fud.file.backup_url=#{backupPath}
+        WHERE fud.file.id=#{fileId}
+    </update>
+    <select id="getFileByUserId" parameterType="long" resultType="com.centerm.fud_demo.entity.FileRecord">
+        SELECT file.id, file.name, file.size, file.suffix, date_format(fud.file.create_time,'%Y-%m-%d') AS createTime
+        FROM fud.file
+        WHERE fud.file.user_id=#{userId}
+        ORDER BY fud.file.create_time DESC
+    </select>
+    <insert id="saveFileBegin" parameterMap="FileRecord">
+        INSERT INTO file(name, local_url, size, user_id, md5, suffix, backup_url, uuid, status)
+        VALUES(#{name}, #{localUrl}, #{size}, #{userId}, #{md5}, #{suffix}, #{backupUrl}, #{uuid}, #{status})
+    </insert>
+    <insert id="saveFileSmall" parameterMap="FileRecord">
+        INSERT INTO file(name, local_url, size, user_id, md5, suffix, backup_url, uuid, status)
+        VALUES(#{name}, #{localUrl}, #{size}, #{userId}, #{md5}, #{suffix}, #{backupUrl}, #{uuid}, #{status})
+    </insert>
+    <update id="saveFileEnd" parameterMap="FileRecord">
+        UPDATE fud.file
+        SET file.status=#{status}
+        WHERE file.uuid=#{uuid}
+    </update>
+    <delete id="deleteFileById" parameterType="long">
+        DELETE FROM fud.file
+        WHERE file.id=#{param2} AND file.user_id=#{param1}
+    </delete>
+    <delete id="deleteFile" parameterType="long">
+        DELETE FROM fud.file
+        WHERE file.id=#{fileId}
+    </delete>
+    <delete id="deleteDownloadRecord" parameterType="long">
+        DELETE FROM fud.download
+        WHERE download.file_id=#{fileId}
+    </delete>
+    <delete id="deleteFileByPath" parameterType="string">
+        DELETE FROM fud.file
+        WHERE file.local_url=#{filePath}
+    </delete>
+    <insert id="addDownloadRecord" parameterMap="DownloadRecord">
+        INSERT INTO fud.download(user_id, file_id)
+        VALUES (#{userId}, #{fileId})
+    </insert>
+    <insert id="addFileRecord" parameterMap="FileRecord">
+        INSERT INTO fud.file(name, local_url, size, user_id, md5, suffix, backup_url)
+        VALUES(#{name}, #{localUrl}, #{size}, #{userId}, #{md5}, #{suffix}, #{backupUrl})
+    </insert>
+    <select id="getFileById" parameterType="long" resultType="com.centerm.fud_demo.entity.FileRecord">
+        SELECT file.id, file.name, file.md5, file.local_url localUrl, file.create_time createTime
+        FROM fud.file
+        WHERE id = #{id}
+        ORDER BY fud.file.create_time DESC
+    </select>
+    <select id="getAllFile" resultType="com.centerm.fud_demo.entity.FileRecord">
+        SELECT file.id, file.name, file.size, file.suffix, file.create_time createTime
+        FROM fud.file
+        ORDER BY fud.file.create_time DESC
+    </select>
+
+    <select id="getMostDownloadRecordById" resultType="com.centerm.fud_demo.entity.FileRecord" parameterType="long">
+        SELECT file.name, file.size, file.suffix,  date_format(fud.file.create_time,'%Y-%m-%d') AS createTime, file.download_times downloadTimes
+        FROM fud.file
+        WHERE fud.file.user_id=#{id}
+        ORDER BY download_times DESC
+        LIMIT 0,5
+    </select>
+    <select id="getDownloadTimesByUserId" parameterType="long" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM fud.download
+        WHERE fud.download.user_id = #{userId}
+    </select>
+    <select id="getDownloadTimes" resultType="java.lang.Long">
+        SELECT IFNULL(SUM(file.download_times), 0)
+        FROM fud.file
+    </select>
+    <select id="getUploadTimes" resultType="java.lang.Long">
+        SELECT IFNULL(COUNT(*), 0)
+        FROM fud.file
+    </select>
+    <select id="getLatestUploaded" resultType="com.centerm.fud_demo.entity.FileRecord" parameterType="long">
+        SELECT file.name,  date_format(fud.file.create_time,'%Y-%m-%d') AS createTime
+        FROM fud.file
+        WHERE fud.file.user_id=#{id}
+        ORDER BY fud.file.create_time DESC
+        LIMIT 0, 5
+    </select>
+    <select id="getLatestDownloaded" resultType="com.centerm.fud_demo.entity.FileRecord" parameterType="long">
+        SELECT f.name,  date_format(d.create_time,'%Y-%m-%d') AS createTime
+        FROM fud.file f, fud.download d
+        WHERE d.file_id=f.id AND f.user_id=#{userId}
+        ORDER BY d.create_time DESC
+        LIMIT 0, 5
+    </select>
+
+    <select id="getFileIdByUrl" resultType="long">
+        SELECT file.id
+        FROM fud.file
+        WHERE file.local_url=#{localUrl}
+    </select>
+    <select id="getFileLikeContents" resultType="com.centerm.fud_demo.entity.FileRecord">
+        SELECT file.id, file.name, file.size, file.suffix, DATE_FORMAT(file.create_time, '%Y-%m-%d') createTime
+        FROM fud.file
+        WHERE file.name LIKE #{param1} AND file.user_id=#{param2}
+    </select>
+    <select id="getUploadToMorrisJs" parameterType="long" resultType="java.util.HashMap">
+        SELECT DATE_FORMAT(fud.file.create_time,'%Y-%m-%d') AS days,COUNT(*) AS upload
+        FROM fud.file
+        WHERE fud.file.user_id = #{userId}
+          AND fud.file.create_time BETWEEN SUBDATE( DATE( NOW( ) ), INTERVAL 7 DAY )
+          AND DATE( NOW( ) )
+        GROUP BY days
+        ORDER BY days DESC
+    </select>
+    <select id="getDownloadToMorrisJs" parameterType="long" resultType="java.util.HashMap">
+        SELECT DATE_FORMAT(fud.download.create_time,'%Y-%m-%d') AS days,COUNT(*) AS download
+        FROM fud.download
+        WHERE fud.download.user_id = #{userId}
+          AND fud.download.create_time BETWEEN SUBDATE( DATE( NOW( ) ), INTERVAL 7 DAY )
+          AND DATE( NOW( ) )
+        GROUP BY days
+        ORDER BY days DESC
+    </select>
+    <select id="getMostDownloadRecord" resultType="com.centerm.fud_demo.entity.FileRecord">
+        SELECT file.name, file.size, file.suffix, date_format(fud.file.create_time,'%Y-%m-%d') AS createTime, file.download_times downloadTimes
+        FROM fud.file
+        ORDER BY download_times DESC
+        LIMIT 0,5
+    </select>
+    <select id="getUploadTimesByCurrUser" resultType="long" parameterType="long">
+        SELECT IFNULL(COUNT(*), 0)
+        FROM fud.file
+        WHERE fud.file.user_id=#{userId}
+    </select>
+    <select id="getFileByName" resultType="com.centerm.fud_demo.entity.FileRecord">
+        SELECT file.id, file.size, file.md5
+        FROM fud.file
+        WHERE file.name=#{fileName}
+    </select>
+    <select id="getFileIdByFileName" resultType="java.lang.Long">
+        SELECT file.id
+        FROM fud.file
+        WHERE file.name=#{fileName}
+    </select>
+    <select id="getFileBackupUrl" resultType="java.lang.String">
+        SELECT file.backup_url
+        FROM fud.file
+        WHERE file.local_url=#{filePath}
+    </select>
+    <update id="updateFileMd5">
+        UPDATE fud.file
+        SET file.md5=#{fileMd5}
+        AND file.backup_url=#{backupPath}
+        WHERE file.id=#{fileId}
+    </update>
+    <select id="findFileByFileMd5" resultType="com.centerm.fud_demo.entity.FileRecord">
+        SELECT file.id,file.uuid, file.name, file.md5, file.suffix, file.status
+        FROM fud.file
+        WHERE file.md5=#{param1} AND file.user_id=#{param2}
+    </select>
+</mapper>

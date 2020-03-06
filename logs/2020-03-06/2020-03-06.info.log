@@ -1,0 +1,270 @@
+[2020-03-06 14:49:59.019] [main] [INFO ] com.centerm.fud_demo.FudDemoApplication - Starting FudDemoApplication on sheva-laptop with PID 24587 (/home/sheva/IdeaProjects/fud_demo-1-master/target/classes started by sheva in /home/sheva/IdeaProjects/fud_demo-1-master)
+[2020-03-06 14:49:59.023] [main] [INFO ] com.centerm.fud_demo.FudDemoApplication - No active profile set, falling back to default profiles: default
+[2020-03-06 14:50:00.035] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'shiroConfig' of type [com.centerm.fud_demo.shiro.conf.ShiroConfig$$EnhancerBySpringCGLIB$$987e4823] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.145] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'hashedCredentialsMatcher' of type [org.apache.shiro.authc.credential.HashedCredentialsMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.170] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dataSourceConfig' of type [com.centerm.fud_demo.config.DataSourceConfig$$EnhancerBySpringCGLIB$$75930354] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.206] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dataSource' of type [com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.399] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sqlSessionFactory' of type [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.402] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userDao' of type [org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.403] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userDao' of type [com.sun.proxy.$Proxy63] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.404] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userServiceImpl' of type [com.centerm.fud_demo.service.Impl.UserServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.405] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'shiroRealm' of type [com.centerm.fud_demo.shiro.UserRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.551] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'ehCacheManager' of type [org.apache.shiro.cache.ehcache.EhCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.552] [main] [INFO ] org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+[2020-03-06 14:50:00.553] [main] [INFO ] org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+[2020-03-06 14:50:00.557] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionListener' of type [com.centerm.fud_demo.listener.Listener] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.561] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionIdCookie' of type [org.apache.shiro.web.servlet.SimpleCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.565] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionIdGenerator' of type [org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.568] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionDAO' of type [org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.570] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionManager' of type [org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.572] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'securityManager' of type [org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.573] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'getMethodInvokingFactoryBean' of type [org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.575] [main] [INFO ] org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [shiro-activeSessionCache]
+[2020-03-06 14:50:00.577] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'kickoutSessionControlFilter' of type [com.centerm.fud_demo.filter.KickoutSessionControllerFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.600] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:00.954] [main] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8888 (https) 8080 (http)
+[2020-03-06 14:50:00.962] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-8888"]
+[2020-03-06 14:50:00.963] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+[2020-03-06 14:50:00.968] [main] [INFO ] org.apache.catalina.core.StandardService - Starting service [Tomcat]
+[2020-03-06 14:50:00.968] [main] [INFO ] org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.29]
+[2020-03-06 14:50:01.029] [main] [INFO ] o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+[2020-03-06 14:50:01.029] [main] [INFO ] org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1916 ms
+[2020-03-06 14:50:01.040] [main] [INFO ] com.centerm.fud_demo.config.DruidConfig - druid初始化完成
+[2020-03-06 14:50:01.106] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:50:01.106] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:50:01.300] [main] [INFO ] o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+[2020-03-06 14:50:01.594] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-8888"]
+[2020-03-06 14:50:02.101] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+[2020-03-06 14:50:02.116] [main] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8888 (https) 8080 (http) with context path ''
+[2020-03-06 14:50:02.121] [main] [INFO ] com.centerm.fud_demo.FudDemoApplication - Started FudDemoApplication in 3.73 seconds (JVM running for 4.731)
+[2020-03-06 14:50:06.107] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:50:06.107] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:50:11.107] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:50:11.108] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:50:16.108] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:50:16.109] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:50:21.109] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:50:21.109] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:50:25.896] [SpringContextShutdownHook] [INFO ] o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+[2020-03-06 14:50:28.962] [main] [INFO ] com.centerm.fud_demo.FudDemoApplication - Starting FudDemoApplication on sheva-laptop with PID 24735 (/home/sheva/IdeaProjects/fud_demo-1-master/target/classes started by sheva in /home/sheva/IdeaProjects/fud_demo-1-master)
+[2020-03-06 14:50:28.963] [main] [INFO ] com.centerm.fud_demo.FudDemoApplication - No active profile set, falling back to default profiles: default
+[2020-03-06 14:50:29.886] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'shiroConfig' of type [com.centerm.fud_demo.shiro.conf.ShiroConfig$$EnhancerBySpringCGLIB$$b8d34c7b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:29.990] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'hashedCredentialsMatcher' of type [org.apache.shiro.authc.credential.HashedCredentialsMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.010] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dataSourceConfig' of type [com.centerm.fud_demo.config.DataSourceConfig$$EnhancerBySpringCGLIB$$95e807ac] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.046] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dataSource' of type [com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.243] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sqlSessionFactory' of type [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.246] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userDao' of type [org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.248] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userDao' of type [com.sun.proxy.$Proxy63] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.248] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userServiceImpl' of type [com.centerm.fud_demo.service.Impl.UserServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.249] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'shiroRealm' of type [com.centerm.fud_demo.shiro.UserRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.350] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'ehCacheManager' of type [org.apache.shiro.cache.ehcache.EhCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.350] [main] [INFO ] org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+[2020-03-06 14:50:30.351] [main] [INFO ] org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+[2020-03-06 14:50:30.353] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionListener' of type [com.centerm.fud_demo.listener.Listener] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.355] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionIdCookie' of type [org.apache.shiro.web.servlet.SimpleCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.357] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionIdGenerator' of type [org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.359] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionDAO' of type [org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.361] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionManager' of type [org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.362] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'securityManager' of type [org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.364] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'getMethodInvokingFactoryBean' of type [org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.366] [main] [INFO ] org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [shiro-activeSessionCache]
+[2020-03-06 14:50:30.367] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'kickoutSessionControlFilter' of type [com.centerm.fud_demo.filter.KickoutSessionControllerFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.390] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:50:30.721] [main] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8888 (https) 8080 (http)
+[2020-03-06 14:50:30.730] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-8888"]
+[2020-03-06 14:50:30.731] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+[2020-03-06 14:50:30.737] [main] [INFO ] org.apache.catalina.core.StandardService - Starting service [Tomcat]
+[2020-03-06 14:50:30.737] [main] [INFO ] org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.29]
+[2020-03-06 14:50:30.809] [main] [INFO ] o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+[2020-03-06 14:50:30.809] [main] [INFO ] org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1752 ms
+[2020-03-06 14:50:30.819] [main] [INFO ] com.centerm.fud_demo.config.DruidConfig - druid初始化完成
+[2020-03-06 14:50:30.882] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:50:30.883] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:50:31.072] [main] [INFO ] o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+[2020-03-06 14:50:31.339] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-8888"]
+[2020-03-06 14:50:31.841] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+[2020-03-06 14:50:31.851] [main] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8888 (https) 8080 (http) with context path ''
+[2020-03-06 14:50:31.854] [main] [INFO ] com.centerm.fud_demo.FudDemoApplication - Started FudDemoApplication in 3.448 seconds (JVM running for 4.337)
+[2020-03-06 14:50:35.883] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:50:35.884] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:50:40.884] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:50:40.884] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:50:45.885] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:50:45.885] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:50:50.885] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:50:50.886] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:50:55.886] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:50:55.886] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:51:00.887] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:51:00.887] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:51:05.887] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:51:05.888] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:51:10.888] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:51:10.888] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:51:15.889] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:51:15.889] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:51:20.890] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:51:20.890] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:51:21.754] [SpringContextShutdownHook] [INFO ] o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+[2020-03-06 14:51:24.561] [main] [INFO ] com.centerm.fud_demo.FudDemoApplication - Starting FudDemoApplication on sheva-laptop with PID 24911 (/home/sheva/IdeaProjects/fud_demo-1-master/target/classes started by sheva in /home/sheva/IdeaProjects/fud_demo-1-master)
+[2020-03-06 14:51:24.564] [main] [INFO ] com.centerm.fud_demo.FudDemoApplication - No active profile set, falling back to default profiles: default
+[2020-03-06 14:51:25.535] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'shiroConfig' of type [com.centerm.fud_demo.shiro.conf.ShiroConfig$$EnhancerBySpringCGLIB$$a2d2e4e7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:25.636] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'hashedCredentialsMatcher' of type [org.apache.shiro.authc.credential.HashedCredentialsMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:25.661] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dataSourceConfig' of type [com.centerm.fud_demo.config.DataSourceConfig$$EnhancerBySpringCGLIB$$7fe7a018] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:25.702] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dataSource' of type [com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:25.958] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sqlSessionFactory' of type [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:25.961] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userDao' of type [org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:25.962] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userDao' of type [com.sun.proxy.$Proxy63] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:25.964] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userServiceImpl' of type [com.centerm.fud_demo.service.Impl.UserServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:25.965] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'shiroRealm' of type [com.centerm.fud_demo.shiro.UserRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:26.097] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'ehCacheManager' of type [org.apache.shiro.cache.ehcache.EhCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:26.098] [main] [INFO ] org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+[2020-03-06 14:51:26.099] [main] [INFO ] org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+[2020-03-06 14:51:26.102] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionListener' of type [com.centerm.fud_demo.listener.Listener] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:26.105] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionIdCookie' of type [org.apache.shiro.web.servlet.SimpleCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:26.108] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionIdGenerator' of type [org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:26.109] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionDAO' of type [org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:26.111] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionManager' of type [org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:26.113] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'securityManager' of type [org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:26.115] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'getMethodInvokingFactoryBean' of type [org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:26.117] [main] [INFO ] org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [shiro-activeSessionCache]
+[2020-03-06 14:51:26.118] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'kickoutSessionControlFilter' of type [com.centerm.fud_demo.filter.KickoutSessionControllerFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:26.142] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:51:26.457] [main] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8888 (https) 8080 (http)
+[2020-03-06 14:51:26.466] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-8888"]
+[2020-03-06 14:51:26.466] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+[2020-03-06 14:51:26.472] [main] [INFO ] org.apache.catalina.core.StandardService - Starting service [Tomcat]
+[2020-03-06 14:51:26.472] [main] [INFO ] org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.29]
+[2020-03-06 14:51:26.539] [main] [INFO ] o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+[2020-03-06 14:51:26.539] [main] [INFO ] org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1883 ms
+[2020-03-06 14:51:26.554] [main] [INFO ] com.centerm.fud_demo.config.DruidConfig - druid初始化完成
+[2020-03-06 14:51:26.638] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:51:26.639] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:51:26.832] [main] [INFO ] o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+[2020-03-06 14:51:27.094] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-8888"]
+[2020-03-06 14:51:27.581] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+[2020-03-06 14:51:27.590] [main] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8888 (https) 8080 (http) with context path ''
+[2020-03-06 14:51:27.594] [main] [INFO ] com.centerm.fud_demo.FudDemoApplication - Started FudDemoApplication in 3.519 seconds (JVM running for 4.256)
+[2020-03-06 14:51:31.639] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:51:31.640] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:51:36.640] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:51:36.640] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:51:41.641] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:51:41.641] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:51:46.641] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:51:46.642] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:51:51.642] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:51:51.642] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:51:56.643] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:51:56.643] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:52:01.643] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:52:01.644] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:52:06.644] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:52:06.645] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:52:11.645] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:52:11.645] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:52:16.646] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:52:16.646] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:52:21.646] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:52:21.646] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:52:26.647] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:52:26.647] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:52:31.647] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:52:31.648] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:52:36.648] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:52:36.648] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:52:41.649] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:52:41.649] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:52:46.649] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:52:46.650] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:52:51.650] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:52:51.650] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:52:56.651] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:52:56.651] [Thread-10] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:52:57.517] [SpringContextShutdownHook] [INFO ] o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+[2020-03-06 14:53:01.659] [main] [INFO ] com.centerm.fud_demo.FudDemoApplication - Starting FudDemoApplication on sheva-laptop with PID 25074 (/home/sheva/IdeaProjects/fud_demo-1-master/target/classes started by sheva in /home/sheva/IdeaProjects/fud_demo-1-master)
+[2020-03-06 14:53:01.664] [main] [INFO ] com.centerm.fud_demo.FudDemoApplication - No active profile set, falling back to default profiles: default
+[2020-03-06 14:53:02.571] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'shiroConfig' of type [com.centerm.fud_demo.shiro.conf.ShiroConfig$$EnhancerBySpringCGLIB$$70850cfe] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:02.665] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'hashedCredentialsMatcher' of type [org.apache.shiro.authc.credential.HashedCredentialsMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:02.684] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dataSourceConfig' of type [com.centerm.fud_demo.config.DataSourceConfig$$EnhancerBySpringCGLIB$$4d99c82f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:02.711] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dataSource' of type [com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:02.884] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sqlSessionFactory' of type [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:02.887] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userDao' of type [org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:02.888] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userDao' of type [com.sun.proxy.$Proxy63] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:02.889] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userServiceImpl' of type [com.centerm.fud_demo.service.Impl.UserServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:02.889] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'shiroRealm' of type [com.centerm.fud_demo.shiro.UserRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:02.989] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'ehCacheManager' of type [org.apache.shiro.cache.ehcache.EhCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:02.989] [main] [INFO ] org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+[2020-03-06 14:53:02.990] [main] [INFO ] org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+[2020-03-06 14:53:02.993] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionListener' of type [com.centerm.fud_demo.listener.Listener] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:02.995] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionIdCookie' of type [org.apache.shiro.web.servlet.SimpleCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:02.997] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionIdGenerator' of type [org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:02.998] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionDAO' of type [org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:03.001] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionManager' of type [org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:03.003] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'securityManager' of type [org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:03.004] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'getMethodInvokingFactoryBean' of type [org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:03.006] [main] [INFO ] org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [shiro-activeSessionCache]
+[2020-03-06 14:53:03.008] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'kickoutSessionControlFilter' of type [com.centerm.fud_demo.filter.KickoutSessionControllerFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:03.031] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:53:03.353] [main] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8888 (https) 8080 (http)
+[2020-03-06 14:53:03.361] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-8888"]
+[2020-03-06 14:53:03.362] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+[2020-03-06 14:53:03.366] [main] [INFO ] org.apache.catalina.core.StandardService - Starting service [Tomcat]
+[2020-03-06 14:53:03.367] [main] [INFO ] org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.29]
+[2020-03-06 14:53:03.431] [main] [INFO ] o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+[2020-03-06 14:53:03.431] [main] [INFO ] org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1705 ms
+[2020-03-06 14:53:03.442] [main] [INFO ] com.centerm.fud_demo.config.DruidConfig - druid初始化完成
+[2020-03-06 14:53:03.506] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:53:03.507] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:53:03.683] [main] [INFO ] o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+[2020-03-06 14:53:03.946] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-8888"]
+[2020-03-06 14:53:04.424] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+[2020-03-06 14:53:04.436] [main] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8888 (https) 8080 (http) with context path ''
+[2020-03-06 14:53:04.439] [main] [INFO ] com.centerm.fud_demo.FudDemoApplication - Started FudDemoApplication in 3.16 seconds (JVM running for 3.926)
+[2020-03-06 14:53:08.507] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:53:08.507] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:53:13.508] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:53:13.508] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:53:16.396] [SpringContextShutdownHook] [INFO ] o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+[2020-03-06 14:54:00.805] [main] [INFO ] com.centerm.fud_demo.FudDemoApplication - Starting FudDemoApplication on sheva-laptop with PID 25213 (/home/sheva/IdeaProjects/fud_demo-1-master/target/classes started by sheva in /home/sheva/IdeaProjects/fud_demo-1-master)
+[2020-03-06 14:54:00.809] [main] [INFO ] com.centerm.fud_demo.FudDemoApplication - No active profile set, falling back to default profiles: default
+[2020-03-06 14:54:01.662] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'shiroConfig' of type [com.centerm.fud_demo.shiro.conf.ShiroConfig$$EnhancerBySpringCGLIB$$924c4af1] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:01.754] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'hashedCredentialsMatcher' of type [org.apache.shiro.authc.credential.HashedCredentialsMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:01.773] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dataSourceConfig' of type [com.centerm.fud_demo.config.DataSourceConfig$$EnhancerBySpringCGLIB$$6f610622] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:01.801] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dataSource' of type [com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:01.989] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sqlSessionFactory' of type [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:01.992] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userDao' of type [org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:01.993] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userDao' of type [com.sun.proxy.$Proxy63] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:01.994] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userServiceImpl' of type [com.centerm.fud_demo.service.Impl.UserServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:01.994] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'shiroRealm' of type [com.centerm.fud_demo.shiro.UserRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:02.094] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'ehCacheManager' of type [org.apache.shiro.cache.ehcache.EhCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:02.094] [main] [INFO ] org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+[2020-03-06 14:54:02.095] [main] [INFO ] org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+[2020-03-06 14:54:02.097] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionListener' of type [com.centerm.fud_demo.listener.Listener] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:02.099] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionIdCookie' of type [org.apache.shiro.web.servlet.SimpleCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:02.101] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionIdGenerator' of type [org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:02.102] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionDAO' of type [org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:02.104] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionManager' of type [org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:02.106] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'securityManager' of type [org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:02.108] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'getMethodInvokingFactoryBean' of type [org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:02.110] [main] [INFO ] org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [shiro-activeSessionCache]
+[2020-03-06 14:54:02.112] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'kickoutSessionControlFilter' of type [com.centerm.fud_demo.filter.KickoutSessionControllerFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:02.134] [main] [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2020-03-06 14:54:02.464] [main] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8888 (https) 8080 (http)
+[2020-03-06 14:54:02.472] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-8888"]
+[2020-03-06 14:54:02.473] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+[2020-03-06 14:54:02.478] [main] [INFO ] org.apache.catalina.core.StandardService - Starting service [Tomcat]
+[2020-03-06 14:54:02.479] [main] [INFO ] org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.29]
+[2020-03-06 14:54:02.537] [main] [INFO ] o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+[2020-03-06 14:54:02.537] [main] [INFO ] org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1634 ms
+[2020-03-06 14:54:02.547] [main] [INFO ] com.centerm.fud_demo.config.DruidConfig - druid初始化完成
+[2020-03-06 14:54:02.614] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:54:02.615] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:54:02.794] [main] [INFO ] o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+[2020-03-06 14:54:03.069] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-8888"]
+[2020-03-06 14:54:03.563] [main] [INFO ] org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+[2020-03-06 14:54:03.573] [main] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8888 (https) 8080 (http) with context path ''
+[2020-03-06 14:54:03.576] [main] [INFO ] com.centerm.fud_demo.FudDemoApplication - Started FudDemoApplication in 3.169 seconds (JVM running for 3.95)
+[2020-03-06 14:54:07.615] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer start...
+[2020-03-06 14:54:07.615] [Thread-9] [INFO ] com.centerm.fud_demo.listener.FileListener - Observer finished...
+[2020-03-06 14:54:11.405] [SpringContextShutdownHook] [INFO ] o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'

@@ -1,0 +1,29 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.centerm.fud_demo.dao.SuperVipDao">
+    <insert id="becomeAdmin" parameterType="long">
+        UPDATE fud.user
+        SET fud.user.role_id=2
+        WHERE fud.user.id=#{userId}
+    </insert>
+    <update id="removeAdmin" parameterType="long">
+        UPDATE fud.user
+        SET fud.user.role_id=1
+        WHERE fud.user.id=#{userId}
+    </update>
+    <delete id="removeUser" parameterType="long">
+        DELETE FROM fud.user
+        WHERE user.id=#{userId}
+    </delete>
+    <select id="getUserRoles" parameterType="long" resultType="long">
+        SELECT fud.user.role_id
+        FROM fud.user
+        WHERE fud.user.id=#{userId}
+    </select>
+    <select id="getAllUserExceptSuperVIP" resultType="com.centerm.fud_demo.entity.User">
+        SELECT u.id, u.username, date_format(u.create_time, '%Y-%m-%d') AS createTime, u.state, u.role_id AS roleId
+        FROM fud.user u
+        WHERE u.role_id!=3
+        ORDER BY u.id
+    </select>
+</mapper>
