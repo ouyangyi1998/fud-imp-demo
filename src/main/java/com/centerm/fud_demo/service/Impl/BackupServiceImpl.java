@@ -21,21 +21,19 @@ public class BackupServiceImpl implements BackupService {
     @Autowired
     private FileDao fileDao;
 
-
-
     @Override
     public void backupFile(String copyFrom, String copyTo, String fileName) {
         log.info("backup start...");
         long start = System.currentTimeMillis();
         File source = new File(copyFrom);
-        File target = new File(copyTo + File.separator + fileName);
+        File target = new File(copyTo + "/" + fileName);
         File targetFolder = new File(copyTo);
         FileInputStream in = null;
         FileOutputStream out = null;
         if (!source.exists() || !source.isFile()){
             log.error("Source doesn't exists or source isn't a file...");
         }
-        if (targetFolder.exists()){
+        if (target.exists()){
             log.info("File is already backup...");
             return;
         }

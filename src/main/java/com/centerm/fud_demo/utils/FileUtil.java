@@ -117,8 +117,8 @@ public class FileUtil {
 
     public static void deleteDirectory(String sPath){
         log.info("Start deleting directory....");
-        if (!sPath.endsWith(File.separator)){
-            sPath = sPath + File.separator;
+        if (!sPath.endsWith("/")){
+            sPath = sPath + "/";
         }
         File dirFile = new File(sPath);
         if (!dirFile.exists() || !dirFile.isDirectory()){

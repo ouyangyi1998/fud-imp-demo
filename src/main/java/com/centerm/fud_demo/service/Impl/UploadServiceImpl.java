@@ -109,9 +109,9 @@ public class UploadServiceImpl implements UploadService {
         String fileName = form.getName();
         String size = form.getSize();
         String suffix = fileName.substring(fileName.lastIndexOf('.'));
-        String tempDirectory = uploadPath + "temp" + File.separator + uuid;
-        String saveDirectory = uploadPath + "real" + File.separator + userId + File.separator + uuid;
-        String filePath = saveDirectory + File.separator + fileName;
+        String tempDirectory = uploadPath + "temp/" + uuid;
+        String saveDirectory = uploadPath + "real/"+ userId + "/" + uuid;
+        String filePath = saveDirectory + "/" + fileName;
         //验证路径是否存在，不存在则创建目录
         File tempPath = new File(tempDirectory);
         if (!tempPath.exists()){
@@ -207,7 +207,7 @@ public class UploadServiceImpl implements UploadService {
         int index = Integer.valueOf(form.getIndex());
         String partMd5 = form.getPartMd5();
         int total = Integer.valueOf(form.getTotal());
-        String tempDirectory = uploadPath + "temp" + File.separator + uuid;
+        String tempDirectory = uploadPath + "temp/" + uuid;
         //验证路径是否存在，不存在则创建目录
         File path = new File(tempDirectory);
         if (!path.exists()){
