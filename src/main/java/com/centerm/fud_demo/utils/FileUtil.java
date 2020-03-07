@@ -94,15 +94,6 @@ public class FileUtil {
         return bi.toString();
     }
 
-    public static byte[] hexToByte(String str){
-        byte[] bytes = new byte[str.length() / 2];
-        for (int i = 0; i < str.length() / 2; i++) {
-            String subStr = str.substring(i * 2, i * 2 + 2);
-            bytes[i] = (byte) Integer.parseInt(subStr, 16);
-        }
-        return bytes;
-    }
-
     public static void deleteLocalFile(String localUrl) {
         try{
             log.info("Start deleting local file: " + localUrl);

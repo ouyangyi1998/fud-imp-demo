@@ -7,9 +7,6 @@
     <link rel="stylesheet" th:href="@{/css/sweetalert2.min.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
     <link rel="stylesheet" th:href="@{/css/NProgress.css}">
-    <script src="https://code.jquery.com/jquery-1.12.2.js"
-            integrity="sha256-VUCyr0ZXB5VhBibo2DkTVhdspjmxUgxDGaLQx7qb7xY="
-            crossorigin="anonymous"></script>
     <script th:src="@{/js/jquery.js}"></script>
     <script th:src="@{/js/upload/aes.js}"></script>
     <script th:src="@{/js/upload/pad-zeropadding.js}"></script>
@@ -17,7 +14,6 @@
     <script th:src="@{/js/upload/Base64.js}"></script>
     <script th:src="@{/js/upload/sweetalert2.js}"></script>
     <script th:src="@{/js/upload/NProgress.js}"></script>
-    <script th:src="@{/js/upload/jsencrypt.js}"></script>
     <script type="text/javascript">
 
         function buf2hex(buffer) { // buffer is an ArrayBuffer
@@ -36,14 +32,14 @@
         }
         //随机生成字符串
         function randomString(len) {
-            len = len || 32;
-            var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
-            var maxPos = $chars.length;
-            var pwd = '';
-            for (var w= 0; w < len; w++) {
-                pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
-            }
-            return pwd;
+             　　len = len || 32;
+             　　var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
+             　　var maxPos = $chars.length;
+             　　var pwd = '';
+             　　for (var w= 0; w < len; w++) {
+                　　　　pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+                 　　}
+            　　return pwd;
         }
         // 对字符串进行编码
         function encode(str){
@@ -57,15 +53,15 @@
         var i = -1;
         var shardSize =  512 * 1024;    //以512KB为一个分片
         var succeed = 0; //目前完成进度
-        /* var dataBegin;  //开始时间
-         var dataEnd;    //结束时间*/
+       /* var dataBegin;  //开始时间
+        var dataEnd;    //结束时间*/
         var action = false;
         var page = {
             init: function () {
                 $("#upload").click(function () {
                     /*dataBegin = new Date();*/
                     var file = $("#i-file")[0].files[0];  //文件对象
-                    if (file == null)
+                    if (file==null)
                     {
                         swal({
                             text: "No File",
@@ -100,16 +96,15 @@
                     contentType: false,  //很重要，指定为false才能形成正确的Content-Type
                     success: function(data){
                         var uuid = data.uuid;
-                        var rsaKey = data.RsaPublicKey;
                         if (data.flag == "0") {
                             //没有上传过文件
-                            realUpload(file, uuid, md5, data.date, rsaKey);
+                            realUpload(file,uuid,md5,data.date);
                         } else if(data.flag == "1") {
                             //已经上传部分
-                            realUpload(file, uuid, md5, data.date, rsaKey);
+                            realUpload(file,uuid,md5,data.date);
                         } else if(data.flag == "2") {
                             //文件已经上传过
-                            /* alert("文件已经上传过,秒传了！！");*/
+                           /* alert("文件已经上传过,秒传了！！");*/
                             swal({
                                 text: "Already Uploaded",
                                 type: "success",
@@ -128,12 +123,12 @@
                 })
             })
         };
-
-        function realUpload(file, uuid, md5, date, rsaKey) {
-            var name = file.name;
-            var  size = file.size;
+        
+        function realUpload(file, uuid, md5, date) {
+          var name = file.name;
+          var  size = file.size;
             var shardCount = Math.ceil(size / shardSize);  //总片数
-            NProgress.start();
+         NProgress.start();
             if (i > shardCount) {
                 return;
             } else {
@@ -149,12 +144,7 @@
             if (!action) {
                 form.append("action", "check");  //检测分片是否上传
             } else {
-                var key = encode(randomString(16));
-                console.log("本次生成的key： " + key);
-                var RsaEncrypt = new JSEncrypt();
-                RsaEncrypt.setPublicKey(rsaKey);
-                var rsaEncrypted = RsaEncrypt.encrypt(key);
-                console.log("RSA加密后的key： " + rsaEncrypted);
+                var key=encode(randomString(16));
                 var temp=file.slice(start,end);
                 var reader = new FileReader();
 
@@ -165,7 +155,7 @@
                     var encrypt = Encrypt(hex, key);
 
                     form.append("fileEncrypt", encrypt);
-                    form.append("key", rsaEncrypted);
+                    form.append("key", key);
                     form.append("action", "upload");  //直接上传分片
                 };
             }
@@ -208,14 +198,14 @@
                                 ++succeed;
                                 NProgress.set(succeed/shardCount);
                             }
-                            realUpload(file, uuid, md5, date, rsaKey);
+                            realUpload(file, uuid, md5, date);
                         } else {
                             ++succeed;
                             NProgress.set(succeed/shardCount);
                             //服务器返回分片是否上传成功
                             if (succeed  == shardCount) {
-                                /* dataEnd = new Date();*/
-                                NProgress.done();
+                               /* dataEnd = new Date();*/
+                               NProgress.done();
                                 i=-1;
                                 succeed=0;
                                 action=false;
@@ -245,19 +235,19 @@
 <body>
 
 <div class="container" align="center">
-    <div class="form-group">
-        <div class="col-sm-4 control-label">选择文件</div>
-        <div class="col-sm-6">
-            <div class="input-group">
-                <input id='location' class="form-control" onclick="$('#i-file').click();">
-                <label class="input-group-btn">
-                    <input type="button" id="i-check" value="浏览文件" class="btn btn-primary" onclick="$('#i-file').click();">
-                </label>
-            </div>
+<div class="form-group">
+    <div class="col-sm-4 control-label">选择文件</div>
+    <div class="col-sm-6">
+        <div class="input-group">
+            <input id='location' class="form-control" onclick="$('#i-file').click();">
+            <label class="input-group-btn">
+                <input type="button" id="i-check" value="浏览文件" class="btn btn-primary" onclick="$('#i-file').click();">
+            </label>
         </div>
-        <input type="file" name="file" id='i-file'  onchange="$('#location').val($('#i-file').val());" style="display: none">
     </div>
-    <button type="button" class="btn btn-primary" id="upload">文件上传</button>
+    <input type="file" name="file" id='i-file'  onchange="$('#location').val($('#i-file').val());" style="display: none">
+</div>
+<button type="button" class="btn btn-primary" id="upload">文件上传</button>
 </div>
 </body>
 </html>

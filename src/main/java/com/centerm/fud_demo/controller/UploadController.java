@@ -8,6 +8,7 @@ import com.centerm.fud_demo.service.FileService;
 import com.centerm.fud_demo.service.UploadService;
 import com.centerm.fud_demo.utils.AesUtil;
 import com.centerm.fud_demo.utils.GetDateUtil;
+import com.centerm.fud_demo.utils.RsaUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockMultipartFile;
@@ -37,6 +38,8 @@ public class UploadController {
     private FileService fileService;
     @Autowired
     private DownloadService downloadService;
+
+    private static Map<Integer, String> keyMap = new HashMap<>();
     /**
      * 跳转到上传界面
      * @return
@@ -48,10 +51,18 @@ public class UploadController {
 
     @PostMapping("isUpload")
     @ResponseBody
-    public Map<String, Object> isUpload(@Valid FileForm form, HttpServletRequest request){
+    public Map<String, Object> isUpload(@Valid FileForm form, HttpServletRequest request) throws Exception{
         currUser = (User)request.getSession().getAttribute("user");
         log.info("需要上传的md5为： " + form.getMd5());
-        return uploadService.findByFileMd5(form.getMd5(), currUser.getId());
+        Map<String, Object> map = new HashMap<>();
+        map = uploadService.findByFileMd5(form.getMd5(), currUser.getId());
+        if (2 != (int) map.get("flag")){
+            keyMap = RsaUtil.genKeyPair();
+            log.info("Public Key: " + keyMap.get(0));
+            log.info("Private Key: " + keyMap.get(1));
+            map.put("RsaPublicKey", keyMap.get(0));
+        }
+        return map;
     }
 
     @PostMapping("/upload")
@@ -59,7 +70,7 @@ public class UploadController {
     public Map<String, Object> upload(@Valid FileForm form, HttpServletRequest request,
                                       @RequestParam(value = "fileEncrypt", required = false)String fileEncrypt,
                                       @RequestParam(value = "key", required = false)String key
-                                      )throws Exception{
+                                      ){
         currUser = (User)request.getSession().getAttribute("user");
         Map<String, Object> map = null;
         try{
@@ -67,7 +78,9 @@ public class UploadController {
                 map = uploadService.check(form);
             }
             if (Constants.UPLOAD.equals(form.getAction())){
-                log.info("key = " + key);
+                log.info("rsa加密后的key：" + key);
+                key = RsaUtil.decrypt(key, keyMap.get(1));
+                log.info("解密后的key： " + key);
                 String decrypt = AesUtil.decrypt(fileEncrypt, key);
                 InputStream inputStream = new ByteArrayInputStream(AesUtil.hexToByte(decrypt));
                 MultipartFile file = new MockMultipartFile(form.getName(), inputStream);

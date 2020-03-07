@@ -1,10 +1,6 @@
-
 package com.centerm.fud_demo.utils;
-
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import sun.misc.BASE64Decoder;
-
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.spec.SecretKeySpec;
