@@ -23,7 +23,7 @@ public class FileRecord {
     private Long downloadTimes;
     private Long userId;
     private String md5;
-    private Timestamp createTime;
+    private String createTime;
     private String suffix;
     private String backupUrl;
     private Integer status;

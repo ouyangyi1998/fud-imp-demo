@@ -1269,4 +1269,3 @@ window.sweetAlert = window.swal = sweetAlert;
   }
 })();
 
-module.exports = sweetAlert;

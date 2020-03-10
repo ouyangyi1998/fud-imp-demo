@@ -101,6 +101,7 @@ public class UserController {
         Long uploadTimesByCurrUser = uploadService.getUploadTimesByCurrUser(currUserId);
         List<FileRecord> latestDownloaded = downloadService.getLatestDownloaded(currUserId);
         List<FileRecord> latestUploaded = uploadService.getLatestUploaded(currUserId);
+
         model.addAttribute("mostDownloaded", mostDownloaded);
         model.addAttribute("downloadTimesByCurrUser", downloadTimesByCurrUser);
         model.addAttribute("uploadTimesByCurrUser", uploadTimesByCurrUser);
@@ -116,6 +117,11 @@ public class UserController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         AjaxReturnMsg msg = new AjaxReturnMsg();
+        if (null == username || null == password || "" == username || "" == password)
+        {
+            log.warn("Neither username or password inputted...");
+            throw new AuthenticationException();
+        }
         User user = new User(username,password);
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());
@@ -132,6 +138,7 @@ public class UserController {
         }
         return msg;
     }
+
     @PostMapping("register")
     @ResponseBody
     public AjaxReturnMsg register(HttpServletRequest request)throws Exception

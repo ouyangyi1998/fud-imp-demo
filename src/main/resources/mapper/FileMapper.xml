@@ -12,8 +12,8 @@
     </update>
     <update id="updateFileRecord">
         UPDATE fud.file
-        SET fud.file.md5=#{fileMd5}, fud.file.size=#{fileSize}, fud.file.backup_url=#{backupPath}
-        WHERE fud.file.id=#{fileId}
+        SET fud.file.md5=#{param3}, fud.file.size=#{param2}, fud.file.backup_url=#{param4}
+        WHERE fud.file.id=#{param1}
     </update>
     <select id="getFileByUserId" parameterType="long" resultType="com.centerm.fud_demo.entity.FileRecord">
         SELECT file.id, file.name, file.size, file.suffix, date_format(fud.file.create_time,'%Y-%m-%d') AS createTime
@@ -59,19 +59,19 @@
         VALUES(#{name}, #{localUrl}, #{size}, #{userId}, #{md5}, #{suffix}, #{backupUrl})
     </insert>
     <select id="getFileById" parameterType="long" resultType="com.centerm.fud_demo.entity.FileRecord">
-        SELECT file.id, file.name, file.md5, file.local_url localUrl, file.create_time createTime
+        SELECT file.id, file.name, file.md5, file.local_url localUrl, date_format(fud.file.create_time,'%Y-%m-%d') AS createTime
         FROM fud.file
         WHERE id = #{id}
         ORDER BY fud.file.create_time DESC
     </select>
     <select id="getAllFile" resultType="com.centerm.fud_demo.entity.FileRecord">
-        SELECT file.id, file.name, file.size, file.suffix, file.create_time createTime
+        SELECT file.id, file.name, file.size, file.suffix, date_format(fud.file.create_time,'%Y-%m-%d %H:%i:%S') AS createTime
         FROM fud.file
         ORDER BY fud.file.create_time DESC
     </select>
 
     <select id="getMostDownloadRecordById" resultType="com.centerm.fud_demo.entity.FileRecord" parameterType="long">
-        SELECT file.name, file.size, file.suffix,  date_format(fud.file.create_time,'%Y-%m-%d') AS createTime, file.download_times downloadTimes
+        SELECT file.name, file.size, file.suffix,  date_format(fud.file.create_time,'%Y-%m-%d %H:%i:%S') AS createTime, file.download_times downloadTimes
         FROM fud.file
         WHERE fud.file.user_id=#{id}
         ORDER BY download_times DESC

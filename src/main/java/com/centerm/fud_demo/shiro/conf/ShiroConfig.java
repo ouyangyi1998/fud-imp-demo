@@ -49,6 +49,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/user/toLogin");
         shiroFilterFactoryBean.setUnauthorizedUrl("/user/toLogin");
         filterMap.put("/user/login","kickout,anon");
+        filterMap.put("/file/**","authc");
         filterMap.put("/config/**", "anon");
         filterMap.put("/css/**", "anon");
         filterMap.put("/js/**", "anon");

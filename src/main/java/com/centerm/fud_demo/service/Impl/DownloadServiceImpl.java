@@ -58,7 +58,7 @@ public class DownloadServiceImpl implements DownloadService {
     }
 
     @Override
-    public void downloadFile(Long id, HttpServletResponse response) {
+    public void downloadFile(Long id, HttpServletResponse response) throws Exception{
         FileRecord downloadFile = fileDao.getFileById(id);
         File file = new File(downloadFile.getLocalUrl());
         if (!file.exists()){
@@ -68,7 +68,7 @@ public class DownloadServiceImpl implements DownloadService {
         response.setContentType("application/octet-stream");
         response.setCharacterEncoding("utf-8");
         response.setContentLength((int) file.length());
-        response.setHeader("Content-Disposition", "attachment;filename=" + file.getName());
+        response.setHeader("Content-Disposition", "attachment;filename=" +new String( file.getName().getBytes("gb2312"), "ISO8859-1" ));
         try(BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file))){
             log.info("Start downloading: " + downloadFile.getName());
             byte[] buff = new byte[1024];

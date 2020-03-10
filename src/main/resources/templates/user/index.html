@@ -9,19 +9,19 @@
     <meta name="author" content="">
     <title>用户界面</title>
 
-    <link th:href="@{/css/util/bootstrap.css}" rel="stylesheet">
-    <link th:href="@{/css/index/perfect-scrollbar.css}" rel="stylesheet">
+    <link th:href="@{/css/utils/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/index/perfect-scrollbar.min.css}" rel="stylesheet">
     <link th:href="@{/css/index/morris.css}" rel="stylesheet">
     <link th:href="@{/css/index/c3.min.css}" rel="stylesheet">
     <link th:href="@{/css/index/style.css}" rel="stylesheet">
-    <link th:href="@{/css/index/dashboard1.css}" rel="stylesheet">
+    <link th:href="@{/css/index/dashboard.css}" rel="stylesheet">
     <link th:href="@{/css/index/default.css}" id="theme" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/utils/font-awesome/css/font-awesome.css}">
     <link rel="stylesheet" th:href="@{/css/index/spinners.css}">
-    <link th:href="@{/css/util/sweetalert2.min.css}" rel="stylesheet"/>
-
-    <script th:src="@{/js/sweetalert2.js}"></script>
-    <script th:src="@{/js/jquery.js}"></script>
+    <link th:href="@{/css/utils/sweetalert2.min.css}" rel="stylesheet"/>
+    
+    <script th:src="@{/js/utils/sweetalert2.js}"></script>
+    <script th:src="@{/js/utils/jquery.js}"></script>
     <script type="text/javascript">
        $(document).ready(function () {
            var a1=document.getElementById("a1"); getColor(a1);
@@ -78,7 +78,7 @@
     </script>
 </head>
 
-<body class="fix-header fix-sidebar card-no-border">
+<body class="fix-header card-no-border fix-sidebar">
 <div class="preloader">
     <div class="loader">
         <div class="loader__figure"></div>
@@ -229,9 +229,9 @@
                 <div class="col-md-12 col-lg-12 col-sm-12 ">
                     <div class="card">
                         <div class="card-body">
-                            <h3 align="center">用户文件被下载次数</h3>
-                            <div class="table-responsive m-t-20 no-wrap">
-                                <table class="table vm no-th-brd pro-of-month">
+                            <h3 class="card-title">用户文件被下载次数</h3>
+                            <div class="table-responsive ">
+                                <table class="table ">
                                     <thead>
                                     <tr>
                                         <th colspan="2">文件名</th>
@@ -436,27 +436,18 @@
     </div>
 </div>
 
-<script th:src="@{/js/jquery.js}"></script>
-<!-- Bootstrap popper Core JavaScript -->
+<script th:src="@{/js/utils/jquery.js}"></script>
 <script th:src="@{/js/index/popper.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
-<!-- slimscrollbar scrollbar JavaScript -->
+<script th:src="@{/js/utils/bootstrap.min.js}"></script>
 <script th:src="@{/js/index/perfect-scrollbar.jquery.min.js}"></script>
-<!--Wave Effects -->
 <script th:src="@{/js/index/waves.js}"></script>
-<!--Menu sidebar -->
 <script th:src="@{/js/index/sidebarmenu.js}"></script>
-<!--Custom JavaScript -->
 <script th:src="@{/js/index/custom.min.js}"></script>
-<!-- ============================================================== -->
-<!--morris JavaScript -->
 <script th:src="@{/js/index/raphael-min.js}"></script>
 <script th:src="@{/js/index/morris.min.js}"></script>
-<!--c3 JavaScript -->
 <script th:src="@{/js/index/d3.min.js}"></script>
 <script th:src="@{/js/index/c3.min.js}"></script>
-<!-- Chart JS -->
-<script th:src="@{/js/index/dashboard1.js}"></script>
+<script th:src="@{/js/index/dashboard.js}"></script>
 </body>
 
 </html>

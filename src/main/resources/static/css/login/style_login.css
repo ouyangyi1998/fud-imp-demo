@@ -305,7 +305,6 @@ html,body{
 .signin.signup.popup-up {padding: 48px 0;}
 .signin.popup-in,.signin.signup.popup-up{
     position: relative;
-    background: url(../images/popupsignin.png)no-repeat;
     background-size: cover;
     background-position: center;
     z-index: 1;

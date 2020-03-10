@@ -18,7 +18,7 @@ public interface DownloadService {
      * @param id　　文件id
      * @param response　　
      */
-    void downloadFile(Long id, HttpServletResponse response);
+    void downloadFile(Long id, HttpServletResponse response) throws Exception;
 
     /**
      * 添加下载记录

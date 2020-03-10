@@ -49,9 +49,9 @@ File: scss
 /******************* 
 Global Styles 
 *******************/
-@import url(../scss/icons/font-awesome/css/font-awesome.min.css);
-@import url(../css/spinners.css);
-@import url(../css/animate.css);
+@import url(../utils/font-awesome/css/font-awesome.css);
+@import url(../index/spinners.css);
+@import url(../utils/animate.css);
 * {
   outline: none; }
 

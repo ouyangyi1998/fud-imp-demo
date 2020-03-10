@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 public class DownloadRecord {
     private Long id;
-    private Timestamp createTime;
+    private String createTime;
     private Long userId;
     private Long fileId;
 

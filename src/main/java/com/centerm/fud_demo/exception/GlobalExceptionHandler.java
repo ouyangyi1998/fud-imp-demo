@@ -62,8 +62,8 @@ public class GlobalExceptionHandler {
     {
         AjaxReturnMsg msg=new AjaxReturnMsg();
         msg.setFlag(0);
-        msg.setMsg("未输入用户名和密码");
-        log.warn("IP"+request.getRemoteAddr()+" 登录失败"+",原因：未输入用户名和密码");
+        msg.setMsg("未输入用户名或密码");
+        log.warn("IP"+request.getRemoteAddr()+" 登录失败"+",原因：未输入用户名或密码");
         return msg;
     }
     @ExceptionHandler(value = PasswordNotEqualsRetypePasswordException.class)

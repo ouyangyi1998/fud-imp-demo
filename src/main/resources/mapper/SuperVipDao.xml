@@ -21,7 +21,7 @@
         WHERE fud.user.id=#{userId}
     </select>
     <select id="getAllUserExceptSuperVIP" resultType="com.centerm.fud_demo.entity.User">
-        SELECT u.id, u.username, date_format(u.create_time, '%Y-%m-%d') AS createTime, u.state, u.role_id AS roleId
+        SELECT u.id, u.username, date_format(u.create_time, '%Y-%m-%d %H:%i:%S') AS createTime, u.state, u.role_id AS roleId
         FROM fud.user u
         WHERE u.role_id!=3
         ORDER BY u.id

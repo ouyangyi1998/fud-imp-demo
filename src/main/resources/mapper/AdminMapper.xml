@@ -18,12 +18,12 @@
        WHERE fud.user.id=#{userId}
     </update>
     <select id="getUserExceptAdminAndSuperVIP" resultType="com.centerm.fud_demo.entity.User" parameterType="long">
-        SELECT user.id, user.username, user.password, user.create_time AS createTime, user.state, user.role_id
+        SELECT user.id, user.username, user.password, date_format(fud.user.create_time,'%Y-%m-%d %H:%i:%S') AS createTime, user.state, user.role_id
         FROM fud.user
         WHERE fud.user.role_id!=2 AND fud.user.role_id!=3
     </select>
     <select id="getUserLikeContents" parameterType="string" resultType="com.centerm.fud_demo.entity.User">
-        SELECT fud.user.*
+        SELECT  user.id, user.username, user.password, date_format(fud.user.create_time,'%Y-%m-%d %H:%i:%S') AS createTime, user.state, user.role_id
         FROM fud.user
         WHERE user.username LIKE #{contents} AND fud.user.role_id!=3 AND fud.user.role_id!=2
         ORDER BY fud.user.id

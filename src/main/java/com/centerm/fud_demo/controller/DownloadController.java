@@ -36,7 +36,7 @@ public class DownloadController {
      * @return
      */
     @GetMapping("toDownload")
-    public String toDownload(Long id, HttpServletResponse response, HttpServletRequest request){
+    public String toDownload(Long id, HttpServletResponse response, HttpServletRequest request) throws Exception{
         currUser = (User) request.getSession().getAttribute("user");
         log.info("User: " + currUser.getUsername() + "  is downloading file(id)： " + id);
         downloadService.downloadFile(id, response);

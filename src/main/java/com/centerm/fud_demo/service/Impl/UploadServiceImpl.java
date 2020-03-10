@@ -60,7 +60,7 @@ public class UploadServiceImpl implements UploadService {
     public Map<String, Object> findByFileMd5(String md5, Long currUserId) {
         userId = currUserId;
         FileRecord uploadFile = fileDao.findFileByFileMd5(md5, userId);
-        System.out.println(uploadFile==null);
+
         log.info("uploadFile: " + uploadFile);
         Map<String, Object> map = null;
         if (null == uploadFile){
@@ -71,7 +71,8 @@ public class UploadServiceImpl implements UploadService {
             map.put("date", sdf.format(new Date()));
         }else{
             //上传过该文件，判断文件还是否存在
-            File file = new File(uploadPath + "real/" + userId + "/" + uploadFile.getUuid() + "/" + uploadFile.getName() + "." + uploadFile.getSuffix());
+            File file = new File(uploadPath + "real/" + userId + "/" + uploadFile.getUuid() + "/" + uploadFile.getName() + uploadFile.getSuffix());
+            System.out.println(uploadPath + "real/" + userId + "/" + uploadFile.getUuid() + "/" + uploadFile.getName() + "." + uploadFile.getSuffix());
             System.out.println(file.exists());
             if (file.exists()){
                 log.info("findByFileMd5: file already exists..." );

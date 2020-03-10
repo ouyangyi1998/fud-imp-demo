@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 
 <head>
@@ -7,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>管理员界面</title>
 
-    <link th:href="@{/css/util/bootstrap.css}" rel="stylesheet">
-    <link th:href="@{/css/index/perfect-scrollbar.css}" rel="stylesheet">
+    <link th:href="@{/css/utils/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/index/perfect-scrollbar.min.css}" rel="stylesheet">
     <link th:href="@{/css/index/morris.css}" rel="stylesheet">
     <link th:href="@{/css/index/c3.min.css}" rel="stylesheet">
     <link th:href="@{/css/index/style.css}" rel="stylesheet">
-    <link th:href="@{/css/index/dashboard1.css}" rel="stylesheet">
+    <link th:href="@{/css/index/dashboard.css}" rel="stylesheet">
     <link th:href="@{/css/index/default.css}" id="theme" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/utils/font-awesome/css/font-awesome.css}">
+    <link th:href="@{/css/utils/sweetalert2.min.css}" rel="stylesheet"/>
     <link rel="stylesheet" th:href="@{/css/index/spinners.css}">
-    <link th:href="@{/css/util/sweetalert2.min.css}" rel="stylesheet"/>
 
-    <script th:src="@{/js/sweetalert2.js}"></script>
-    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/utils/sweetalert2.js}"></script>
+    <script th:src="@{/js/utils/jquery.js}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             var a1=document.getElementById("a1"); getColor(a1);
@@ -264,6 +263,7 @@
                                 <table class="table vm no-th-brd pro-of-month">
                                     <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th colspan="2">文件名</th>
                                         <th>文件类型</th>
                                         <th>文件上传日期</th>
@@ -272,9 +272,11 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each="file:${fileList}">
-                                        <td style="width:50px;"><span class="round" th:text="${#strings.substring(file.name,0,1)}" th:id="a+${fileStat.index+1}"></span></td>
+                                        <td th:text="${fileStat.count}"></td>
+                                        <td style="width:50px;">
+                                            <span class="round" th:id="a+${fileStat.index+1}" th:text="${#strings.substring(file.name,0,1)}" ></span></td>
                                         <td>
-                                            <h6 th:text="${#strings.substring(file.name, 0, file.name.lastIndexOf('.'))}"></h6><small class="text-muted" th:text="${file.size}"></small>
+                                            <h6 th:text="${file.name}"></h6><small class="text-muted" th:text="${file.size}"></small>
                                         </td>
                                         <td th:text="${file.suffix}"></td>
                                         <td th:text="${file.createTime}"></td>
@@ -292,9 +294,9 @@
     </div>
 </div>
 
-<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/utils/jquery.js}"></script>
 <script th:src="@{/js/index/popper.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/utils/bootstrap.min.js}"></script>
 <script th:src="@{/js/index/perfect-scrollbar.jquery.min.js}"></script>
 <script th:src="@{/js/index/waves.js}"></script>
 <script th:src="@{/js/index/sidebarmenu.js}"></script>
