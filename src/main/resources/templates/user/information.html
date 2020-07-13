@@ -97,13 +97,10 @@
         }
     </script>
 </head>
-
 <body class="fix-header card-no-border fix-sidebar">
 
-
 <div id="main-wrapper">
-
-    <header class="topbar ">
+    <header class="topbar">
         <nav class="navbar top-navbar navbar-expand-md">
             <div class="navbar-header">
                 <a class="navbar-brand" href="http://www.github.com"/>
@@ -112,7 +109,6 @@
                     </span>
             </div>
             <div class="navbar-collapse">
-
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="fa fa-bars"></i></a> </li>
                     <li class="nav-item hidden-xs-down search-box"> <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="fa fa-search"></i></a>
@@ -144,7 +140,8 @@
                     <li>
                         <a class="waves-effect waves-dark" th:href="@{/user/index}" aria-expanded="false"><i class="fa fa-bar-chart" style="color: #51b2fd"></i><span class="hide-menu" >数据分析</span></a>
                     </li>
-                    <li class="active"> <a class="waves-effect waves-dark" th:href="@{/user/information}" aria-expanded="false"><i class="fa fa-user-circle-o" style="color: #fdca56"></i><span class="hide-menu">个人信息</span></a>
+                    <li class="active">
+                        <a class="waves-effect waves-dark" th:href="@{/user/information}" aria-expanded="false"><i class="fa fa-user-circle-o" style="color: #fdca56"></i><span class="hide-menu">个人信息</span></a>
                     </li>
                     <li>
                         <a class="waves-effect waves-dark" th:href="@{/user/download}" aria-expanded="false"><i class="fa fa-chevron-circle-down" style="color: #aa61fd"></i><span class="hide-menu">我的文件下载</span></a>
@@ -152,9 +149,6 @@
                     <li>
                         <a class="waves-effect waves-dark" th:href="@{/user/toUpload}" aria-expanded="false"><i class="fa fa-chevron-circle-up" style="color: #5a84fd"></i><span class="hide-menu">文件上传</span></a>
                     </li>
-<!--                    <li>-->
-<!--                        <a class="waves-effect waves-dark" th:href="@{/user/toUser_hotFile}" aria-expanded="false"><i class="fa fa-heart" style="color: #fd5e6f"></i><span class="hide-menu">查看热门文件</span></a>-->
-<!--                    </li>-->
                     <li>
                         <a class="waves-effect waves-dark" th:href="@{/user/filemanager}" aria-expanded="false"><i class="fa fa-reorder" style="color: #a1fd94"></i><span class="hide-menu">已上传文件管理</span></a>
                     </li>
@@ -164,21 +158,16 @@
                         </li>
                     </shiro:hasAnyRoles>
                 </ul>
-
             </nav>
             <!-- End Sidebar navigation -->
         </div>
         <!-- End Sidebar scroll-->
     </aside>
-
     <div class="page-wrapper">
         <!-- ============================================================== -->
         <!-- Container fluid  -->
         <!-- ============================================================== -->
         <div class="container-fluid">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
                     <h3 class="text-themecolor">个人信息</h3>
