@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 @ResponseBody
 @Slf4j
 @RequestMapping("download")
-public class DownloadController {
+public class DownloadController{
     private   User currUser = null;
     @Autowired
     private DownloadService downloadService;

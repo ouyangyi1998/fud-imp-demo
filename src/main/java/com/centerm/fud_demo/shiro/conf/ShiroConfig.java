@@ -61,6 +61,7 @@ public class ShiroConfig {
         filterMap.put("/user/register","anon");
         filterMap.put("/user/**","user,kickout");
         filterMap.put("/user/logout","logout");
+        filterMap.put("/","authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }

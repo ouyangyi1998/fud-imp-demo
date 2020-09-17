@@ -11,7 +11,7 @@
     <groupId>com.centerm</groupId>
     <artifactId>fud_demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>fud_demo</name>
     <description>Demo project for Spring Boot</description>
 
