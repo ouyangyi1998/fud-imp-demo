@@ -3,6 +3,9 @@ HELP.md
 /.mvn
 /.idea
 !**/src/main/**
+mvnw
+mvnw.cmd
+
 
 
 
