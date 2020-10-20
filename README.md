@@ -20,38 +20,29 @@
   - 基于echache实现权限，登录信息缓存，利用自定义shiro filter实现单点登录
 
 
-
 ## 2.技术要求
 
 - Apache Shiro开发
 
   - 后台shiro注解开发
-   - Spring Boot中集成shiro需要两个类：一个是shiroConfig类，一个是CustomRealm类
+   - Spring Boot中集成shiro需要两个类：一个是shiroConfig类，另一个是CustomRealm类
    - shiroConfig配置shiro过滤链，注解开发，密码加密等
    - CustomRealm继承`AuthorizingRealm`。并且重写父类中的`doGetAuthorizationInfo`（权限相关）、doGetAuthenticationInfo`（身份认证）这两个方法
-    - 在shiroConfig之中加入authorizationAttributeSourceAdvisor方法与defaultAdvisorAutoProxyCreator代理实现注解开发
+   - 在shiroConfig之中加入authorizationAttributeSourceAdvisor方法与defaultAdvisorAutoProxyCreator代理实现注解开发
 
   - 前台shiro隐藏拦截
    - 导入thymeleaf-extras-shiro包，这个组件需要thymeleaf3.0+版本，spring Boot2.0符合要求
-   - 在ShiroConfig加入ShiroDialect组件，前台加入xmlns:shiro="http://wbasePackageww.pollix.at/thymeleaf/shiro"实现注解开发
+   - 在ShiroConfig加入ShiroDialect组件，前台加入xmlns:shiro="http://wbasePackageww.pollix.at/thymeleaf/shiro" 实现注解开发
 
 - Spring Boot2.0异常全局处理
   - 建立异常处理类
    - 通过注解方法实现异常类@ControllerAdvice实现全局异常控制和全局数据绑定
    - 通过在ShiroConfig中注册HandlerExceptionResolver也可以实现全局异常处理
-  - 建立自定义异常(包括注册账号重复，登录账号或者密码未输入等自定义异常)
-  - 表单提交通过Ajax访问后台，当发生目标异常情况 throw new exception(),在异常处理之后再返还给前台显示。在之前写的项目中抛出异常直接页面跳转，用户体验不佳，通过Ajax回写方式防止了页面异常跳转可能出现的用户体验度太低的问题。。。
-  - fd对于常见Http状态码（404,405,500等）异常捕获之后直接跳转到指定的404/405/500页面
-  - 对于自定义异常捕获之后，返还给前台ajax：succes，利用SweetAlert2.css显示具体信息
+   - 建立自定义异常(包括注册账号重复，登录账号或者密码未输入等自定义异常)
+   - 对于常见Http状态码（404,405,500等）异常捕获之后直接跳转到指定的404/405/500页面
+   - 对于自定义异常捕获之后，返还给前台ajax：succes，利用SweetAlert2.css显示具体信息
 - SimpleHash工具与Shiro加密模块
-  - 在注册表单提交之后，信息调用到后端提交给数据库，先进行md5或者其他形式的加密，再duiy输出到数据库存储。通过new SimpleHash（）可以实现撒盐，选择加密算法，选择迭代次数的操作。。。
-  - 在登录的时候。。。Shiro源代码阅读
-   - 在controller调用Subject subject=SecurityUtils();  subject.login();
-   - Subject subject=this.securityManager.login(this.token)登录过程交给SecurityManager来代理
-   - 调用authenticate(token)方法，SecurityManager将authenticate()代理给Authenticator去实现，
-   - 接着由ModularRealmAuthenticator（实现类）实现doAuthenticate()
-   - doAuthenticate()调用doSingleRealmAuthentication方法，再由其中的Realm来调用getAuthenticationInfo()方法
-   - 我们继承的AuthenticatingRealm对getAuthenticationInfo()做了实现，并且回调我们的doGetAuthenticationInfo
+  - 在注册表单提交之后，信息调用到后端提交给数据库，先进行md5或者其他形式的加密，再duiy输出到数据库存储。通过new SimpleHash（）可以实现撒盐，选择加密算法，选择迭代次数的操作
   - HashedCredentialsMatcher 继承自 SimpleCredentialsMatcher并进行了扩展
    - 支持Hash算法：md5，sha256。。支持多次迭代
    - 在ShiroConfig注册即可在doGetAuthenticationInfo，调用new SimpleAuthenticationInfo()进行相应次数的哈希加密检验
@@ -94,15 +85,11 @@
     - 一种是单纯的提示，比如说登录成功或者失败提示
 
 
-
 - 基于echache实现权限，登录信息缓存，利用自定义shiro filter实现单点登录
   - pom添加依赖 shiro-ehcache 版本号与shiro-core同步
   - 在ShiroConfig添加缓存管理器-ehcacheManager
   - 在config中构造ehcache-shiro.xml缓存，这里分为default与authentication/authorization
   - 将缓存管理器添加到securityManager中，再在shirofilter配置securityManager，完成缓存注册
-  - 利用自定义filter实现session队列，以及多用户在线踢下线功能，通过重写isAccessAllowed和onAccessDenied方法实现
-   - isAccessAllowed表示是否允许访问，返回true表示允许，这里可以处理多次请求登录的业务场景
-   - onAccessDenied表示访问拒绝时是否自己处理，在这里构造一个用户队列，实现单点踢下线
   - 在sessionListener实现简单的记录在线人数，记录session的创建与销毁
   - shiro-ehcache核心业务场景
    - 用户多开页面导致的多账号同时登录的问题
