@@ -3,9 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.centerm.fud_demo.dao.UserDao">
     <select id="findByUsername" resultType="com.centerm.fud_demo.entity.User" parameterType="string">
-        SELECT fud.user.*
-        FROM fud.user
-        WHERE fud.user.username=#{username}
+        SELECT id,username,password,create_time as createTime,state,head_picture as headPicture
+        FROM user
+        WHERE user.username=#{username}
     </select>
     <insert id="createUser" useGeneratedKeys="true" keyProperty="id" parameterType="com.centerm.fud_demo.entity.User">
         INSERT INTO fud.user(username,password,create_time,state,role_id)
@@ -20,5 +20,10 @@
       SELECT r.role_name
       FROM fud.role r, fud.user u
       WHERE u.username=#{username} AND u.role_id=r.id
+    </select>
+    <select id="findById" resultType="com.centerm.fud_demo.entity.User" parameterType="int">
+        SELECT id,username,create_time as createTime,state,head_picture as headPicture
+        FROM user
+        WHERE user.id=#{userId}
     </select>
 </mapper>

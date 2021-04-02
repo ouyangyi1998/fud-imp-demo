@@ -32,4 +32,11 @@ public interface UserDao {
      * @param user
      */
     Boolean updateUser(User user);
+
+    /**
+     * 通过id查找用户
+     * @param userId
+     * @return
+     */
+    User findById(int userId);
 }

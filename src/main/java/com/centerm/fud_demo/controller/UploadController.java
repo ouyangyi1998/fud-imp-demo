@@ -84,6 +84,7 @@ public class UploadController {
                 String decrypt = AesUtil.decrypt(fileEncrypt, key);
                 InputStream inputStream = new ByteArrayInputStream(AesUtil.hexToByte(decrypt));
                 MultipartFile file = new MockMultipartFile(form.getName(), inputStream);
+
                 map = uploadService.realUpload(form, file, currUser.getId());
             }
         }catch (Exception e){

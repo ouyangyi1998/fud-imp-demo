@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><!--引入thymeleaf-->
+<meta name="referrer" content="no-referrer" />
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>内容发布平台</title>
+    <link rel="stylesheet" href="/css/blog/bootstrap.css"/>
+    <link rel="stylesheet" href="/css/blog/publish.css"/>
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="/css/blog/bootstrap-theme.css">
+    <link th:href="@{/css/utils/sweetalert2.min.css}" rel="stylesheet"/>
+    <script th:src="@{/js/utils/sweetalert2.js}"></script>
+    <script src="/js/blog/community.js" type="application/javascript"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="/js/blog/bootstrap.js"></script>
+    <!--editor.md相关-->
+    <link rel="stylesheet" href="/css/blog/editormd.css">
+    <script src="/js/blog/editormd.js"></script>
+    <script type="application/javascript">
+    function checkForm(form) {
+        if(document.getElementById("title").value === ""){
+            swal({
+                text: "标题不能为空",
+                type: "warning",
+                confirm:'ok',
+                confirmButtonColor: '#e6c43c',
+            });
+            return false;
+        }
+        if(document.getElementById("description").value === ""){
+            swal({
+                text: "描述不能为空",
+                type: "warning",
+                confirm:'ok',
+                confirmButtonColor: '#e6c43c',
+            });
+            return false;
+        }
+        if(document.getElementById("tag").value === ""){
+            swal({
+                text: "Tag不能为空",
+                type: "warning",
+                confirm:'ok',
+                confirmButtonColor: '#e6c43c',
+            });
+            return false;
+        }
+            return true;
+    }
+    </script>
+</head>
+<body class="body">
+<!--导入导航栏-->
+<div th:insert="~{blog/navigation :: copy}"></div>
+<!--展示问题发布页面-->
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-ss-12">
+            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 发起问题 </h2>
+            <hr>
+            <form action="/publish" method="post" onsubmit="return checkForm(this);">
+                <!--通过隐藏标签判断是创建问题还是编辑问题-->
+                <input type="hidden" name="id" th:value="${id}">
+                <div class="form-group">
+                    <label for="title">问题标题</label>
+                    <input type="text" class="form-control" th:value="${title}" id="title" name="title" autocomplete="off" >
+                </div>
+                <div class="form-group" id="question-editor">
+                    <label for="description">问题补充</label>
+                    <textarea class="form-control" name="description" id="description" th:text="${description}"
+                              cols="20" rows="15" style="display:none;"></textarea>
+                </div>
+                <!--editor.md相关-->
+                <script type="text/javascript">
+                    $(function() {
+                        var editor = editormd("question-editor", {
+                            width  : "100%",
+                            height : 600,
+                            path   : "/js/blog/lib/",
+                            // watch : false
+                        });
+                    });
+                </script>
+
+                <div class="form-group" >
+                    <label for="tag">添加标签</label>
+                    <input type="text" class="form-control" id="tag" autocomplete="off"
+                           th:value="${tag}" name="tag" onclick="showSelectTag()">
+                </div>
+                <!--标签页-->
+                <div id="select-tags" style="display: none">
+                    <ul class="nav nav-tabs" role="tablist">
+
+                        <li role="presentation" th:each="category,status:${tags}" th:class="${status.first ? 'active':''}">
+                            <a th:href="@{'#'+${category.categoryName}}" aria-controls="home"
+                               role="tab" data-toggle="tab" th:text="${category.categoryName}">
+                            </a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content" style="padding-top: 15px;">
+                        <div role="tabpanel" th:each="category,status:${tags}"
+                             th:class="${status.first ? 'active tab-pane':'tab-pane'}" th:id="${category.categoryName}">
+                            <span class="label label-info" onclick="selectTag(this)"
+                                  th:each="selectTags:${category.tags}" th:text="${selectTags}" th:data-tag="${selectTags}"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success success" style="float: right">提交</button>
+            </form>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-ss-12">
+            <h3>发起问题指南</h3>
+            <h4>问题标题：请用简洁的标题描述发布的问题</h4>
+            <h4>问题补充：详细描述问题的内容</h4>
+            <h4>选择标签：选择一个或多个合适的标签</h4>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -77,14 +77,12 @@ public class UploadServiceImpl implements UploadService {
             if (file.exists()){
                 log.info("findByFileMd5: file already exists..." );
                 if (uploadFile.getStatus() == 1){
-                    System.out.println("1");
                     log.info("File is not complete...");
                     map = new HashMap<>();
                     map.put("flag", 1);
                     map.put("uuid", uploadFile.getUuid());
                     map.put("date", sdf.format(new Date()));
                 }else if(uploadFile.getStatus() == 2){
-                    System.out.println("2");
                     log.info("File is complete...");
                     map = new HashMap<>();
                     map.put("flag", 2);
@@ -109,7 +107,10 @@ public class UploadServiceImpl implements UploadService {
         int total = Integer.valueOf(form.getTotal());
         String fileName = form.getName();
         String size = form.getSize();
-        String suffix = fileName.substring(fileName.lastIndexOf('.'));
+        String suffix = null;
+        if (fileName.contains(".")) {
+            suffix = fileName.substring(fileName.lastIndexOf('.'));
+        }
         String tempDirectory = uploadPath + "temp/" + uuid;
         String saveDirectory = uploadPath + "real/"+ userId + "/" + uuid;
         String filePath = saveDirectory + "/" + fileName;
@@ -139,7 +140,9 @@ public class UploadServiceImpl implements UploadService {
         if (path.isDirectory()){
             File[] fileArray = tempPath.listFiles();
             if (fileArray != null){
+                System.out.println(tempPath+"   "+total);
                 if (fileArray.length == total){
+                    System.out.println("123");
                     //分块全部上传完毕，合并
                     log.info("开始合并...");
                     File newFile = new File(saveDirectory, fileName);
@@ -186,10 +189,9 @@ public class UploadServiceImpl implements UploadService {
                     //第一个分片上传时记录到数据库
                     FileRecord uploadFile = new FileRecord();
                     uploadFile.setMd5(md5);
-                    String name = fileName.substring(0, fileName.lastIndexOf("."));
                     uploadFile.setUuid(uuid);
                     uploadFile.setStatus(1);
-                    uploadFile.setName(name);
+                    uploadFile.setName(fileName.substring(0, fileName.lastIndexOf(".")));
                     uploadFile.setSuffix(suffix);
                     uploadFile.setLocalUrl(filePath);
                     uploadFile.setSize(FileUtil.getFormatSize(Double.valueOf(size)));

@@ -31,10 +31,10 @@
                     dataType:"json",
                     data:{
                         username:$("#username").val(),
-                        password:$("#password").val(),
+                        password:$("#password").val()
                     },
                     success:function(data){
-                        if(data.flag == 1){
+                        if(data.flag === 1){
                             swal({
                                 text: "Signed in successfully",
                                 type: "success",

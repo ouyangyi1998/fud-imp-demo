@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><!--引入thymeleaf-->
+<meta name="referrer" content="no-referrer"/>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title th:text="${sectionName}"></title>
+    <link rel="stylesheet" href="/css/blog/bootstrap.css"/>
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="/css/blog/bootstrap-theme.css">
+    <link rel="stylesheet" href="/css/blog/index.css">
+    <script src="/js/blog/community.js" type="application/javascript"></script>
+    <script src="/js/blog/moment.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body class="body">
+<!--导入导航栏-->
+<div th:insert="~{blog/navigation :: copy}"></div>
+<!--个人中心的页面布局-->
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-ss-12">
+            <h2><span th:text="${sectionName}"></span></h2>
+            <hr>
+            <!--我的问题-->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-ss-12" th:if="${section}=='questions'">
+                <div class="media" th:each="question:${pagination.data}">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object img-circle picset"
+                                 th:src="${question.user.headPicture}">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <a th:href="@{'/question/'+${question.id}}" th:text="${question.title}"></a>
+                        </h4>
+                        <span>
+                        <a th:text="${question.description}" th:href="@{'/question/'+${question.id}}"></a>
+                    </span>
+                        <br>
+                        <span class="common-list"><span th:text="${question.commentCount}"/> 个评论 • <span
+                                th:text="${question.viewCount}"/> 次浏览 • <span th:text="${question.likeCount}"/>个点赞 <span
+                                th:text="${#dates.format(question.createTime,'dd MMMM yyyy')}"></span></span>
+                    </div>
+                </div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li th:if="${pagination.showFirst}">
+                            <a th:href="@{'/personal/'+${section}(page=${1})}" aria-label="Previous">
+                                <span aria-hidden="true">&lt;&lt;</span>
+                            </a>
+                        </li>
+                        <li th:if="${pagination.showPre}">
+                            <a th:href="@{'/personal/'+${section}(page=${pagination.page - 1})}" aria-label="Previous">
+                                <span aria-hidden="true">&lt;</span>
+                            </a>
+                        </li>
+                        <li th:each="page:${pagination.pages}" th:class="${pagination.page==page}? 'active' : ''">
+                            <a th:href="@{'/personal/'+${section}(page=${page})}" th:text="${page}"></a>
+                        </li>
+                        <li th:if="${pagination.showNext}">
+                            <a th:href="@{'/personal/'+${section}(page=${pagination.page + 1})}" aria-label="Next">
+                                <span aria-hidden="true">&gt;</span>
+                            </a>
+                        </li>
+                        <li th:if="${pagination.showLast}">
+                            <a th:href="@{'/personal/'+${section}(page=${pagination.totalPage})}" aria-label="Next">
+                                <span aria-hidden="true">&gt;&gt;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!--我的消息-->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-ss-12" th:if="${section}=='information'">
+                <div class="media" th:each="notification:${notifications.data}">
+                    <span th:text="${notification.notifier.username}"></span>
+                    <span th:if="${notification.type==1}">回复了你的评论</span>
+                    <span th:if="${notification.type==2}">回复了你的问题</span>
+                    <a th:href="@{'/notification/'+${notification.id}}">
+                        <span th:text="${notification.outerContent}"></span>
+                    </a>
+                    <span class="label label-danger" th:if="${notification.status==0}">未读</span>
+                    <br>
+                    <span th:text="${#dates.format(notification.createTime,'yyyy-MM-dd')}"></span>
+                    <hr>
+                </div>
+                <!--页码-->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li th:if="${notifications.showFirst}">
+                            <a th:href="@{'/personal/'+${section}(page=${1})}" aria-label="Previous">
+                                <span aria-hidden="true">&lt;&lt;</span>
+                            </a>
+                        </li>
+                        <li th:if="${notifications.showPre}">
+                            <a th:href="@{'/personal/'+${section}(page=${notifications.page - 1})}" aria-label="Previous">
+                                <span aria-hidden="true">&lt;</span>
+                            </a>
+                        </li>
+                        <li th:each="page:${notifications.pages}" th:class="${notifications.page==page}? 'active' : ''">
+                            <a th:href="@{'/personal/'+${section}(page=${page})}" th:text="${page}"></a>
+                        </li>
+                        <li th:if="${notifications.showNext}">
+                            <a th:href="@{'/personal/'+${section}(page=${notifications.page + 1})}" aria-label="Next">
+                                <span aria-hidden="true">&gt;</span>
+                            </a>
+                        </li>
+                        <li th:if="${notifications.showLast}">
+                            <a th:href="@{'/personal/'+${section}(page=${notifications.totalPage})}" aria-label="Next">
+                                <span aria-hidden="true">&gt;&gt;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+        <!--右侧的导航栏-->
+        <div class="col-lg-3 col-md-12 col-sm-12 col-ss-12">
+            <div class="list-group personal">
+                <a href="/personal/questions" th:class="${section=='questions'}?'list-group-item active' : 'list-group-item' ">
+                    我的问题
+                </a>
+                <a href="/personal/information" th:class="${section=='information'}?'list-group-item active' : 'list-group-item' ">
+                    我的消息
+                    <span class="badge" th:text="${session.unreadNum}"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="/js/blog/bootstrap.js"></script>
+</body>
+</html>

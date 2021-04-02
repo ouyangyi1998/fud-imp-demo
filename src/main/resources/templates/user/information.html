@@ -152,6 +152,8 @@
                     <li>
                         <a class="waves-effect waves-dark" th:href="@{/user/filemanager}" aria-expanded="false"><i class="fa fa-reorder" style="color: #a1fd94"></i><span class="hide-menu">已上传文件管理</span></a>
                     </li>
+                    <li> <a class="waves-effect waves-dark" th:href="@{/index}" aria-expanded="false"><i class="fa fa-globe" style="color: #14277d"></i><span class="hide-menu">论坛社区</span></a>
+                    </li>
                     <shiro:hasAnyRoles name="SUPERVIP,ADMIN">
                         <li>
                             <a class="waves-effect waves-dark" th:href="@{/admin/index}" aria-expanded="false"><i class="fa fa-user-plus" style="color: #fd55af"></i><span class="hide-menu">管理员中心</span></a>
