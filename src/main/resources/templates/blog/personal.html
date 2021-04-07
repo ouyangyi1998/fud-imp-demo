@@ -41,8 +41,8 @@
                     </span>
                         <br>
                         <span class="common-list"><span th:text="${question.commentCount}"/> 个评论 • <span
-                                th:text="${question.viewCount}"/> 次浏览 • <span th:text="${question.likeCount}"/>个点赞 <span
-                                th:text="${#dates.format(question.createTime,'dd MMMM yyyy')}"></span></span>
+                                th:text="${question.viewCount}"/> 次浏览 • <span th:text="${question.likeCount}"/>个点赞 • <span
+                                th:text="${#dates.format(question.createTime,'yyyy MMMM dd')}"></span></span>
                     </div>
                 </div>
                 <nav aria-label="Page navigation">

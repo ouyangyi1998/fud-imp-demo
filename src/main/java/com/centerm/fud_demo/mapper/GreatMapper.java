@@ -50,7 +50,6 @@ public interface GreatMapper {
      * 查询之前用户是否点赞
      * @param questionId
      * @param commentId
-     * @param userId
      * @return
      */
     @Select("select count(1) from great where question_id = #{questionId} and comment_id = #{commentId} and user_id = #{userId}")

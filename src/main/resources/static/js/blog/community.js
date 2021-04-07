@@ -61,7 +61,7 @@ function secondComment(e) {
 
                     var timeElement = $("<span/>", {
                         "style": "float: right",
-                        html: moment(comment.createTime).format('YYYY-MM-DD HH:mmf')
+                        html: moment(comment.createTime).format('YYYY-MM-DD HH:mm')
                     });
                     var questionmenuElement = $("<div/>", {
                         "class": "question-menu"
@@ -193,6 +193,7 @@ function searchQuestion() {
         });
     }
 }
+//点赞
 function increaseGreat(e) {
    var commentId = e.id;
    var questionId = document.getElementById("question-id").innerHTML;

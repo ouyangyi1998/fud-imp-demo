@@ -33,9 +33,9 @@ public class NotificationController {
         if(type == NotificationEnum.NOTIFICATION_QUESTION.getType()){
             questionId = outerId;
         }else {
-            questionId = commentMapper.getParentIdById(id);
+            int fatherCommentId = commentMapper.getParentIdById(id);
+            questionId = commentMapper.getParentIdById(fatherCommentId);
         }
-        System.out.println(questionId);
         return "redirect:/question/"+questionId;
     }
 }

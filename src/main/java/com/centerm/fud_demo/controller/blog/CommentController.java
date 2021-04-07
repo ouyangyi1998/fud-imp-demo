@@ -97,16 +97,12 @@ public class CommentController {
         List<Comment> comments = commentMapper.getCommentById(id,2);
         List<CommentDTO> commentDto=new ArrayList<>();
 
-        //找到User
-        User user = (User)request.getSession().getAttribute("user");
-        int userId = user.getId().intValue();
-        User userToFront = userDao.findById(userId);
-
         //把二级评论和对应的User写进每个CommentDto集合中
         for (Comment comment:comments){
             CommentDTO dto=new CommentDTO();
             BeanUtils.copyProperties(comment,dto);
-            dto.setUser(userToFront);
+            User user=userDao.findById(comment.getCommentor());
+            dto.setUser(user);
             commentDto.add(dto);
         }
         ResultDTO resultDto=new ResultDTO();

@@ -23,7 +23,7 @@ public interface CommentMapper {
      * @param id
      * @return
      */
-    @Select("select id,parent_id as parentId,type,commentor,create_time as createTime,like_count as likeCount,content,comment_count as commentCount from comment where parent_id=#{id} order by create_time desc")
+    @Select("select id,parent_id as parentId,type,commentor,create_time as createTime,like_count as likeCount,content,comment_count as commentCount from comment where parent_id=#{id} order by create_time")
     List<Comment> getById(int id);
 
     /**
@@ -32,7 +32,7 @@ public interface CommentMapper {
      * @param type
      * @return
      */
-    @Select("select id,parent_id as parentId,type,commentor,create_time as createTime,like_count as likeCount,content,comment_count as commentCount from comment where parent_id=#{id} and type=#{type} order by create_time desc")
+    @Select("select id,parent_id as parentId,type,commentor,create_time as createTime,like_count as likeCount,content,comment_count as commentCount from comment where parent_id=#{id} and type=#{type} order by create_time")
     List<Comment> getCommentById(@Param("id") int id, @Param("type") int type);
 
     /**

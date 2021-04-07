@@ -71,6 +71,7 @@ public class QuestionService {
             //把第一个对象的所有属性拷贝到第二个对象中
             BeanUtils.copyProperties(question, questionDto);
             questionDto.setUser(user);
+            questionDto.setLikeCount(greatMapper.getAllGreatByQuestion(question.getId()));
             questionDTOList.add(questionDto);
         }
         pageDto.setData(questionDTOList);

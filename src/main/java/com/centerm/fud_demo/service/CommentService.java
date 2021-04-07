@@ -34,12 +34,11 @@ public class CommentService {
         for(Comment comment:comments){
             //找到回复人
             User user=userDao.findById(comment.getCommentor());
-            System.out.println(user);
             CommentDTO commentDto=new CommentDTO();
             //将第一个元素复制到第二个元素中
             BeanUtils.copyProperties(comment,commentDto);
             commentDto.setUser(user);
-            int great = greatMapper.selectGreatbyQuestionAndComment(id,comment.getId(),user.getId().intValue());
+            int great = greatMapper.getGreatByQuestionAndComment(id,comment.getId());
             commentDto.setLikeCount(great);
             lists.add(commentDto);
         }
