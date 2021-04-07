@@ -1,63 +1,42 @@
-DROP SCHEMA IF EXISTS `fud`;
-
-CREATE SCHEMA IF NOT EXISTS `fud` DEFAULT CHARACTER SET utf8;
-
-USE `fud`;
-
-
-DROP TABLE IF EXISTS `fud`.`role`;
-CREATE TABLE IF NOT EXISTS `fud`.`role`(
-                                           `id` INT NOT NULL AUTO_INCREMENT COMMENT '角色id',
-                                           `role_name` VARCHAR(16) NOT NULL COMMENT '角色名称',
-                                           PRIMARY KEY(`id`)
-)ENGINE = InnoDB DEFAULT CHARSET utf8 COMMENT '角色信息表';
-
-INSERT INTO `fud`.`role`(role_name) VALUES('USER');
-INSERT INTO `fud`.`role`(role_name) VALUES('ADMIN');
-INSERT INTO `fud`.`role`(role_name) VALUES('SUPERVIP');
-
-DROP TABLE IF EXISTS `fud`.`user`;
-CREATE TABLE IF NOT EXISTS `fud`.`user`(
-                                           `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '用户id',
-                                           `username` VARCHAR(50) NOT NULL COMMENT '用户名',
-                                           `password` VARCHAR(255) NOT NULL COMMENT '密码',
-                                           `create_time` DATETIME NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
-                                           `state` TINYINT(4) DEFAULT 0 COMMENT '状态',
-                                           `role_id` INT COMMENT '角色id',
-                                           PRIMARY KEY(`id`)
-)ENGINE = InnoDB DEFAULT CHARSET utf8 COMMENT '用户信息表';
-
-INSERT INTO `fud`.`user`(username, password, create_time, state, role_id) VALUES('admin', '4b252ef32f83fdec9ce52366a161dbc0', '2020-02-12 17:01:15', 0, 3);
-
-DROP TABLE IF EXISTS `fud`.`file`;
-CREATE TABLE IF NOT EXISTS `fud`.`file`(
-                                           `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '文件id',
-                                           `name` VARCHAR(255) NOT NULL COMMENT '文件名',
-                                           `local_url` VARCHAR(255) NOT NULL COMMENT '文件地址',
-                                           `size` VARCHAR(50) NOT NULL COMMENT '文件大小',
-                                           `download_times` BIGINT NOT NULL DEFAULT 0 COMMENT '下载次数',
-                                           `user_id` BIGINT NOT NULL COMMENT '用户id',
-                                           `create_time` DATETIME NOT NULL DEFAULT current_timestamp COMMENT '创建日期',
-                                           `md5` VARCHAR(50) DEFAULT '' COMMENT 'md5值',
-                                           `suffix` varchar(25) DEFAULT ''COMMENT '文件后缀',
-                                           `backup_url` varchar(255) NOT NULL COMMENT '备份路径',
-                                           `uuid` varchar(32) DEFAULT '' COMMENT 'uuid',
-                                           `status` int(11) DEFAULT 2 COMMENT '文件状态',
-                                           PRIMARY KEY(`id`)
-)ENGINE = InnoDB DEFAULT CHARSET utf8 COMMENT '文件信息表';
-
-DROP TABLE IF EXISTS `fud`.`download`;
-CREATE TABLE IF NOT EXISTS `fud`.`download`(
-                                               `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '下载id',
-                                               `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-                                               `user_id` BIGINT NOT NULL COMMENT '用户id',
-                                               `file_id` BIGINT NOT NULL COMMENT '文件id',
-                                               PRIMARY KEY(`id`)
-)ENGINE = InnoDB DEFAULT CHARSET utf8 COMMENT '下载信息表';
-
-
-
-
-
-
-
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (1, 2, 1, 1, 1614417167175, 0, 'fsdf', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (2, 2, 1, 1, 1614417180296, 0, 'JKFJ', 1);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (3, 2, 1, 1, 1614418240037, 0, 'afa', 2);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (4, 1, 1, 1, 1614418345988, 0, '你好啊', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (5, 3, 2, 1, 1614506700500, 0, 'as', 1);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (6, 2, 2, 1, 1614508713406, 0, '范德萨发生', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (7, 3, 2, 1, 1614508726560, 0, '发生的范德萨', 4);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (8, 7, 2, 1, 1614510396613, 0, 'we', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (9, 3, 1, 1, 1614510880703, 0, 'sfa', 1);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (10, 3, 1, 1, 1614510886484, 0, 'vcxnvkz', 1);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (11, 7, 2, 1, 1614511027502, 0, 'assd', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (12, 5, 2, 1, 1614511036906, 0, 'qwee', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (13, 10, 2, 1, 1614591060803, 0, 'woaini', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (14, 7, 2, 1, 1614591239325, 0, 'asdf', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (15, 4, 1, 1, 1614670052930, 0, 'asd', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (16, 12, 1, 1, 1614679884554, 0, '哈哈哈哈哈', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (17, 14, 1, 1, 1614913651431, 0, 'qw', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (18, 14, 1, 1, 1615042005405, 0, 'as
+', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (19, 13, 1, 1, 1615042035262, 0, 'qw', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (20, 13, 1, 1, 1615042040729, 0, 'as', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (21, 14, 1, 1, 1615044625652, 0, 'az
+', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (22, 14, 1, 1, 1615044629025, 0, 'zxc', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (23, 14, 1, 1, 1615044632900, 0, 'ccvx', 1);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (24, 9, 2, 1, 1617590293253, 0, '你好', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (25, 23, 2, 1, 1617590872249, 0, 'cnm', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (26, 3, 1, 1, 1617592047656, 0, 'sdk', 1);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (27, 26, 2, 3, 1617593206488, 0, 'wer', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (28, 3, 1, 3, 1617593365890, 0, 'qwe
+', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (29, 14, 1, 1, 1617608879392, 0, '威尔', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (30, 3, 1, 3, 1617609081909, 0, '123', 1);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (31, 7, 2, 3, 1617609926991, 0, 'ssd', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (32, 2, 1, 1, 1617615604553, 0, 'wwer', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (33, 2, 1, 1, 1617615646838, 0, 'bjk', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (34, 3, 1, 3, 1617615671887, 0, '123', 2);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (35, 34, 2, 3, 1617615679055, 0, '123', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (36, 34, 2, 3, 1617615740237, 0, 'hkkj', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (37, 30, 2, 3, 1617615748520, 0, 'ee', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (38, 9, 1, 1, 1617616778437, 0, 'we', 0);
+INSERT INTO fud.comment (id, parent_id, type, commentor, create_time, like_count, content, comment_count) VALUES (39, 15, 1, 1, 1617618109347, 0, '为', 0);
