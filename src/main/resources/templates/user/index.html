@@ -13,13 +13,13 @@
     <link th:href="@{/css/index/perfect-scrollbar.min.css}" rel="stylesheet">
     <link th:href="@{/css/index/morris.css}" rel="stylesheet">
     <link th:href="@{/css/index/c3.min.css}" rel="stylesheet">
+    <link th:href="@{/css/index/default.css}" id="theme" rel="stylesheet">
     <link th:href="@{/css/index/style.css}" rel="stylesheet">
     <link th:href="@{/css/index/dashboard.css}" rel="stylesheet">
-    <link th:href="@{/css/index/default.css}" id="theme" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/utils/font-awesome/css/font-awesome.css}">
     <link rel="stylesheet" th:href="@{/css/index/spinners.css}">
     <link th:href="@{/css/utils/sweetalert2.min.css}" rel="stylesheet"/>
-
+    <script type="text/javascript" th:src="@{/js/utils/love.js}"></script>
     <script th:src="@{/js/utils/sweetalert2.js}"></script>
     <script th:src="@{/js/utils/jquery.js}"></script>
     <script type="text/javascript">
@@ -126,22 +126,28 @@
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav">
                 <ul id="sidebarnav">
-                    <li class="active"> <a class="waves-effect waves-dark" th:href="@{/user/index}" aria-expanded="false"><i class="fa fa-bar-chart" style="color: #51b2fd"></i><span class="hide-menu" >数据分析</span></a>
+                    <li class="active">
+                        <a class="waves-effect waves-dark" th:href="@{/user/index}" aria-expanded="false"><i class="fa fa-bar-chart" style="color: #51b2fd"></i><span class="hide-menu" >数据分析</span></a>
                     </li>
-                    <li> <a class="waves-effect waves-dark" th:href="@{/user/information}" aria-expanded="false"><i class="fa fa-user-circle-o" style="color: #fdca56"></i><span class="hide-menu">个人信息</span></a>
+                    <li >
+                        <a class="waves-effect waves-dark" th:href="@{/user/information}" aria-expanded="false"><i class="fa fa-user-circle-o" style="color: #ccbd53"></i><span class="hide-menu">个人信息</span></a>
                     </li>
-                    <li> <a class="waves-effect waves-dark" th:href="@{/user/download}" aria-expanded="false"><i class="fa fa-chevron-circle-down" style="color: #aa61fd"></i><span class="hide-menu">我的文件下载</span></a>
+                    <li>
+                        <a class="waves-effect waves-dark" th:href="@{/user/download}" aria-expanded="false"><i class="fa fa-cloud-download" style="color: #8acbb5"></i><span class="hide-menu">我的文件下载</span></a>
                     </li>
-                    <li> <a class="waves-effect waves-dark" th:href="@{/user/toUpload}" aria-expanded="false"><i class="fa fa-chevron-circle-up" style="color: #5a84fd"></i><span class="hide-menu">文件上传</span></a>
+                    <li>
+                        <a class="waves-effect waves-dark" th:href="@{/user/toUpload}" aria-expanded="false"><i class="fa fa-cloud-upload" style="color: #5e7acc"></i><span class="hide-menu">文件上传</span></a>
                     </li>
-<!--                    <li> <a class="waves-effect waves-dark" th:href="@{/user/hotfile}" aria-expanded="false"><i class="fa fa-heart" style="color: #fd5e6f"></i><span class="hide-menu">查看热门文件</span></a>-->
-<!--                    </li>-->
-                    <li> <a class="waves-effect waves-dark" th:href="@{/user/filemanager}" aria-expanded="false"><i class="fa fa-reorder" style="color: #a1fd94"></i><span class="hide-menu">已上传文件管理</span></a>
+                    <li> <a class="waves-effect waves-dark" th:href="@{#}" aria-expanded="false"><i class="fa fa-heart" style="color: #d73838"></i><span class="hide-menu">查看热门文件</span></a>
                     </li>
-                    <li> <a class="waves-effect waves-dark" th:href="@{/index}" aria-expanded="false"><i class="fa fa-globe" style="color: #14277d"></i><span class="hide-menu">论坛社区</span></a>
+                    <li>
+                        <a class="waves-effect waves-dark" th:href="@{/user/filemanager}" aria-expanded="false"><i class="fa fa-reorder" style="color: #272927"></i><span class="hide-menu">已上传文件管理</span></a>
+                    </li>
+                    <li> <a class="waves-effect waves-dark" th:href="@{/index}" aria-expanded="false"><i class="fa fa-globe" style="color: #c57d4f"></i><span class="hide-menu">论坛社区</span></a>
                     </li>
                     <shiro:hasAnyRoles name="SUPERVIP,ADMIN">
-                        <li> <a class="waves-effect waves-dark" th:href="@{/admin/index}" aria-expanded="false"><i class="fa fa-user-plus" style="color: #fd55af"></i><span class="hide-menu">管理员中心</span></a>
+                        <li>
+                            <a class="waves-effect waves-dark" th:href="@{/admin/index}" aria-expanded="false"><i class="fa fa-user-plus" style="color: #a056cb"></i><span class="hide-menu">管理员中心</span></a>
                         </li>
                     </shiro:hasAnyRoles>
                 </ul>
@@ -178,12 +184,12 @@
             <!-- ============================================================== -->
             <div class="row ">
                 <!-- Column -->
-                <div class="col-12">
+                <div class="col-8">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex no-block">
                                 <div>
-                                    <h5 class="card-title m-b-0">上传下载文件</h5>
+                                    <h4 class="card-title m-b-0"><span class="lstick"></span>上传下载文件</h4>
                                 </div>
                                 <div class="ml-auto">
                                     <ul class="list-inline text-center font-12">
@@ -197,41 +203,30 @@
                     </div>
                 </div>
                 <!-- Column -->
-               <!-- <div class="col-lg-4">
+                <div class="col-lg-4">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex m-b-30 no-block">
-                                <h5 class="card-title m-b-0 align-self-center">上传下载文件分类</h5>
-                                <div class="ml-auto">
-                                    <select class="custom-select b-0">
-                                        <option selected="">上传</option>
-                                        <option value="1">下载</option>
-                                    </select>
-                                </div>
+                                <h4 class="card-title m-b-0 align-self-center"><span class="lstick"></span>文件分类</h4>
+
                             </div>
                             <div id="files" style="height:260px; width:100%;"></div>
                             <ul class="list-inline m-t-30 text-center font-12">
-                                <li><i class="fa fa-circle text-purple"></i>文档</li>
-                                <li><i class="fa fa-circle text-success"></i>媒体</li>
-                                <li><i class="fa fa-circle text-info"></i>其他</li>
+                                <li><i class="fa fa-circle text-purple"></i>音频</li>
+                                <li><i class="fa fa-circle text-warning"></i>视频</li>
+                                <li><i class="fa fa-circle text-info"></i>文档</li>
+                                <li><i class="fa fa-circle text-success"></i>图片</li>
                             </ul>
                         </div>
                     </div>
-                </div>-->
+                </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Sales Chart -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Projects of the Month -->
-            <!-- ============================================================== -->
 
-            <!-- Column -->
             <div class="row">
                 <div class="col-md-12 col-lg-12 col-sm-12 ">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title">用户文件被下载次数</h3>
+                            <h3 class="card-title"><span class="lstick"></span>用户文件被下载次数</h3>
                             <div class="table-responsive ">
                                 <table class="table ">
                                     <thead>
@@ -260,14 +255,11 @@
                     </div>
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Projects of the Month -->
-            <!-- ============================================================== -->
             <div class="row">
                 <div class="col-lg-6 col-sm-6 col-xs-12">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="box-title">总下载次数</h3>
+                            <h3 class="box-title"><span class="lstick"></span>总下载次数</h3>
                             <ul class="list-inline two-part">
                                 <li>
                                     <div id="sparklinedash"></div>
@@ -281,7 +273,7 @@
                 <div class="col-lg-6 col-sm-6 col-xs-12">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="box-title">总上传次数</h3>
+                            <h3 class="box-title"><span class="lstick"></span>总上传次数</h3>
                             <ul class="list-inline two-part">
                                 <li>
                                     <div id="sparklinedash2"></div>
@@ -292,86 +284,14 @@
                         </div>
                     </div>
                 </div>
-              <!--  <div class="col-lg-4 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="box-title">总下载次数</h3>
-                            <ul class="list-inline two-part">
-                                <li>
-                                    <div id="sparklinedash3"></div>
-                                </li>
-                                <li class="text-right"><i class="fa fa-cloud-download fa-2x" style="color:rgba(161,79,253,0.68);"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span class="counter text-muted" style="font-size: 30px" th:text="${downloadTimes}"></span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>-->
             </div>
-          <!--  <div class="row">
-                <div class="col-lg-6 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="card-body" >
-                            <h3 class="box-title">总下载次数</h3>
-                            <ul class="list-inline two-part">
-                                <li>
-                                    <div id="sparklinedash"></div>
-                                </li>
-                                <li class="text-right">
-                                    <i class="fa fa-level-down fa-2x" style="color: greenyellow"></i>
-                                </li>
-                                <li class="text-left">
-                                    <h1 class="text-muted" th:text="${downloadTimesByCurrUser}"></h1>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="box-title">总上传次数</h3>
-                            <ul class="list-inline two-part">
-                                <li>
-                                    <div id="sparklinedash2"></div>
-                                </li>
-                                <li class="text-right">
-                                    <i class="fa fa-level-up fa-2x" style="color: deepskyblue"></i>
-                                </li>
-                                <li class="text-left">
-                                    <h1 class="text-muted" th:text="${uploadTimesByCurrUser}"></h1>
-                                </li>
-                            </ul>
-                        </div>　
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="box-title">被下载次数</h3>
-                            <ul class="list-inline two-part">
-                                <li>
-                                    <div id="sparklinedash3"></div>
-                                </li>
-                                <li class="text-right">
-                                    <i class="fa fa-line-chart fa-2x" style="color: #ff3245"></i>
-                                </li>
-                                <li class="text-left">
-                                    <h1 class="text-muted" th:text="${downloadTimesByCurrUser}"></h1>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-            <!-- ============================================================== -->
-            <!-- Notification And Feeds -->
-            <!-- ============================================================== -->
+
             <div class="row">
                 <!-- Start Notification -->
                 <div class="col-lg-6 col-md-12">
                     <div class="card ">
                         <div class="card-body">
-                            <h5 class="card-title">最新下载文件</h5>
+                            <h4 class="card-title"><span class="lstick"></span>最新下载文件</h4>
                             <div class="table-responsive m-t-20 no-wrap">
                             <table class="table vm no-th-brd pro-of-month">
                                 <thead>
@@ -404,7 +324,7 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">最新上传文件</h5>
+                            <h4 class="card-title"><span class="lstick"></span>最新上传文件</h4>
                             <div class="table-responsive m-t-20 no-wrap">
                                 <table class="table vm no-th-brd pro-of-month">
                                     <thead>

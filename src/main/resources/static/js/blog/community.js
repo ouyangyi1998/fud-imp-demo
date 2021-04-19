@@ -49,7 +49,7 @@ function secondComment(e) {
                 $.each(data.data.reverse(), function (index, comment) {
                     //对应<span th:text="${comment.user.name}"/>
                     var usernameElement = $("<span/>", {
-                        html: comment.user.username
+                        html: comment.user.username+"  回复  "+comment.commentorName
                     });
                     //对应<div style="font-size: 15px; margin-top:5px;"
                     //      th:text="${comment.content}">
@@ -63,12 +63,16 @@ function secondComment(e) {
                         "style": "float: right",
                         html: moment(comment.createTime).format('YYYY-MM-DD HH:mm')
                     });
+
                     var questionmenuElement = $("<div/>", {
                         "class": "question-menu"
                     }).append(timeElement);
+
                     var imgElement = $("<img/>", {
-                        "class": "media-object img-rounded picset",
-                        "src": comment.user.headPicture
+                        "class": "media-object img-circle picset",
+                        "src": "get/" + comment.user.headPicture
+                    }).bind("error",function () {
+                        this.src = 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimgqn.koudaitong.com%2Fupload_files%2F2015%2F03%2F15%2FFprrhVQiB__Y6bTLcKmtuDQK9Gl0.jpg&refer=http%3A%2F%2Fimgqn.koudaitong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620005599&t=8af3bffa5ff3893618cef3ac4395e184';
                     });
 
                     var medialeftElement = $("<div/>", {
@@ -197,6 +201,8 @@ function searchQuestion() {
 function increaseGreat(e) {
    var commentId = e.id;
    var questionId = document.getElementById("question-id").innerHTML;
+   var greatNumber = document.getElementById(commentId).innerHTML;
+   var number = Number(greatNumber);
     $.ajax({
         type: "post",
         url: "/increaseGreat",
@@ -207,8 +213,14 @@ function increaseGreat(e) {
         },
         success: function (data) {
             if (data.flag === 1) {
-                window.location.reload();
-            } else {
+              number++;
+                e.classList.add("active");
+              document.getElementById(commentId).innerHTML = number.toString();
+            } else if(data.flag === 2){
+                number--;
+                e.classList.remove("active");
+                document.getElementById(commentId).innerHTML = number.toString();
+            }else {
                 swal({
                     text: "出现了问题",
                     type: "warning",

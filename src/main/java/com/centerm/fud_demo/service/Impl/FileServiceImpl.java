@@ -66,4 +66,8 @@ public class FileServiceImpl implements FileService {
         return fileDao.getDownloadToMorrisJs(userId);
     }
 
+    @Override
+    public Integer getFileNumberById(Long userId) {
+        return fileDao.getFileNumberById(userId);
+    }
 }

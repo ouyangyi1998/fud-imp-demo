@@ -103,6 +103,7 @@ public class CommentController {
             BeanUtils.copyProperties(comment,dto);
             User user=userDao.findById(comment.getCommentor());
             dto.setUser(user);
+            dto.setCommentorName(userDao.findById(commentMapper.getParentById((comment.getParentId())).getCommentor()).getUsername());
             commentDto.add(dto);
         }
         ResultDTO resultDto=new ResultDTO();

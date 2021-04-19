@@ -170,4 +170,9 @@
         FROM fud.file
         WHERE file.md5=#{param1} AND file.user_id=#{param2}
     </select>
+    <select id="getFileNumberById" resultType="integer">
+        SELECT count(1)
+        FROM file
+        WHERE user_id = #{userId}
+    </select>
 </mapper>

@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import static com.centerm.fud_demo.constant.Constants.DECREASE_GREAT;
+import static com.centerm.fud_demo.constant.Constants.INCREASE_GREAT;
+
 /**
  * @author ouyangyi
  */
@@ -29,16 +32,16 @@ public class GreatController {
         User user = (User)request.getSession().getAttribute("user");
         //检查之前是否点赞过
         int res = greatMapper.selectGreatbyQuestionAndComment(questionId,commentId,user.getId().intValue());
-        System.out.println(res);
-        System.out.println(questionId+"  "+commentId);
-        if (res<=0){
+
+        if (res <= 0){
             //未点赞
             greatMapper.insertGreatByQuestionAndComment(questionId,commentId,user.getId().intValue());
+            msg.setFlag(INCREASE_GREAT);
         }else{
             //点赞了 取消点赞
             greatMapper.removeGreatByQuestionAndComment(questionId,commentId,user.getId().intValue());
+            msg.setFlag(DECREASE_GREAT);
         }
-        msg.setFlag(1);
         return msg;
     }
 }

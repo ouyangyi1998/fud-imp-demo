@@ -67,5 +67,11 @@ public interface FileService {
      * @return
      */
     List<Map<String, Object>> getUploadToMorrisJs(Long userId);
+
+    /**
+     * 获取用户上传的文件数目
+     * @return
+     */
+    Integer getFileNumberById(Long userId);
 }
 

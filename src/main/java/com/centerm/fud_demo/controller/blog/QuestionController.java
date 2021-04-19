@@ -7,6 +7,9 @@ import com.centerm.fud_demo.entity.dto.QuestionDTO;
 import com.centerm.fud_demo.mapper.NotificationMapper;
 import com.centerm.fud_demo.service.CommentService;
 import com.centerm.fud_demo.service.QuestionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -28,6 +33,8 @@ public class QuestionController {
     private CommentService commentService;
     @Resource
     private NotificationMapper notificationMapper;
+    @Autowired
+    private ResourceLoader resourceLoader;
 
     @GetMapping("/question/{id}")
     public String question(@PathVariable(name = "id")int id,
@@ -58,5 +65,19 @@ public class QuestionController {
         model.addAttribute("relativeQuestion",relativeQuestion);
 
         return "blog/question";
+    }
+
+    /**
+     * 用户图片传输
+     * @param dir1 图片路径
+     * @param dir2 图片路径
+     * @param filename 图片名称
+     * @return
+     */
+    @GetMapping("/question/get/{dir1}/{dir2}/{filename}")
+    public ResponseEntity get(@PathVariable String dir1, @PathVariable String dir2, @PathVariable String filename){
+        Path path = Paths.get(System.getProperty("user.dir") + "/src/main/resources/static/" + dir1 + "/" + dir2 , filename);
+        org.springframework.core.io.Resource resource = resourceLoader.getResource("file:" + path.toString());
+        return ResponseEntity.ok(resource);
     }
 }

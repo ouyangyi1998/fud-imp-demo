@@ -35,4 +35,17 @@ public interface UserService {
      */
     void changePassword(String username,String password);
 
+    /**
+     * 修改用户头像
+     * @param username
+     */
+    void updateHeadPicture(String username,String filePath);
+
+    /**
+     * 找到之前的头像文件
+     * @param username 用户名称
+     * @return
+     */
+    String selectHeadPcitureURL(String username);
+
 }

@@ -13,8 +13,8 @@
     <link th:href="@{/css/index/default.css}" id="theme" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/index/spinners.css}">
     <link rel="stylesheet" th:href="@{/css/utils/font-awesome/css/font-awesome.css}">
-    <link rel="stylesheet" th:href="@{/css/utils/animate.css}">
-
+    <link rel="stylesheet" th:href="@{/css/index/lc_switch.css}">
+    <script type="text/javascript" th:src="@{/js/utils/love.js}"></script>
     <script th:src="@{/js/utils/jquery.js}"></script>
     <script th:src="@{/js/upload/aes.js}"></script>
     <script th:src="@{/js/upload/pad-zeropadding.js}"></script>
@@ -23,6 +23,7 @@
     <script th:src="@{/js/utils/sweetalert2.js}"></script>
     <script th:src="@{/js/upload/NProgress.js}"></script>
     <script th:src="@{/js/upload/jsencrypt.js}"></script>
+    <script th:src="@{/js/upload/lc_switch.js}"></script>
     <script type="text/javascript">
     function search() {
         event.preventDefault();
@@ -35,9 +36,7 @@
             },
             success: function (data) {
                 if (data.flag == 1) {
-
                     window.location.href = "/user/search";
-
                 } else {
                     swal({
                         text: data.msg,
@@ -273,6 +272,13 @@
 </head>
 <body class="fix-header card-no-border fix-sidebar">
 
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">Loading</p>
+    </div>
+</div>
+
 <div id="main-wrapper">
     <header class="topbar">
         <nav class="navbar top-navbar navbar-expand-md">
@@ -315,22 +321,24 @@
                         <a class="waves-effect waves-dark" th:href="@{/user/index}" aria-expanded="false"><i class="fa fa-bar-chart" style="color: #51b2fd"></i><span class="hide-menu" >数据分析</span></a>
                     </li>
                     <li >
-                        <a class="waves-effect waves-dark" th:href="@{/user/information}" aria-expanded="false"><i class="fa fa-user-circle-o" style="color: #fdca56"></i><span class="hide-menu">个人信息</span></a>
+                        <a class="waves-effect waves-dark" th:href="@{/user/information}" aria-expanded="false"><i class="fa fa-user-circle-o" style="color: #ccbd53"></i><span class="hide-menu">个人信息</span></a>
                     </li>
                     <li>
-                        <a class="waves-effect waves-dark" th:href="@{/user/download}" aria-expanded="false"><i class="fa fa-chevron-circle-down" style="color: #aa61fd"></i><span class="hide-menu">我的文件下载</span></a>
+                        <a class="waves-effect waves-dark" th:href="@{/user/download}" aria-expanded="false"><i class="fa fa-cloud-download" style="color: #8acbb5"></i><span class="hide-menu">我的文件下载</span></a>
                     </li>
                     <li class="active">
-                        <a class="waves-effect waves-dark" th:href="@{/user/toUpload}" aria-expanded="false"><i class="fa fa-chevron-circle-up" style="color: #5a84fd"></i><span class="hide-menu">文件上传</span></a>
+                        <a class="waves-effect waves-dark" th:href="@{/user/toUpload}" aria-expanded="false"><i class="fa fa-cloud-upload" style="color: #5e7acc"></i><span class="hide-menu">文件上传</span></a>
+                    </li>
+                    <li> <a class="waves-effect waves-dark" th:href="@{#}" aria-expanded="false"><i class="fa fa-heart" style="color: #d73838"></i><span class="hide-menu">查看热门文件</span></a>
                     </li>
                     <li>
-                        <a class="waves-effect waves-dark" th:href="@{/user/filemanager}" aria-expanded="false"><i class="fa fa-reorder" style="color: #a1fd94"></i><span class="hide-menu">已上传文件管理</span></a>
+                        <a class="waves-effect waves-dark" th:href="@{/user/filemanager}" aria-expanded="false"><i class="fa fa-reorder" style="color: #0c0c0c"></i><span class="hide-menu">已上传文件管理</span></a>
                     </li>
-                    <li> <a class="waves-effect waves-dark" th:href="@{/index}" aria-expanded="false"><i class="fa fa-globe" style="color: #14277d"></i><span class="hide-menu">论坛社区</span></a>
+                    <li> <a class="waves-effect waves-dark" th:href="@{/index}" aria-expanded="false"><i class="fa fa-globe" style="color: #c57d4f"></i><span class="hide-menu">论坛社区</span></a>
                     </li>
                     <shiro:hasAnyRoles name="SUPERVIP,ADMIN">
                         <li>
-                            <a class="waves-effect waves-dark" th:href="@{/admin/index}" aria-expanded="false"><i class="fa fa-user-plus" style="color: #fd55af"></i><span class="hide-menu">管理员中心</span></a>
+                            <a class="waves-effect waves-dark" th:href="@{/admin/index}" aria-expanded="false"><i class="fa fa-user-plus" style="color: #a056cb"></i><span class="hide-menu">管理员中心</span></a>
                         </li>
                     </shiro:hasAnyRoles>
                 </ul>
@@ -366,11 +374,17 @@
                                                  <input id='location' class="form-control" onclick="$('#i-file').click();">
                                                  <label class="input-group-btn">
                                                      <input type="button" id="i-check" value="浏览文件" class="btn btn-primary" onclick="$('#i-file').click();"/>
-                                                            <button type="button" class="btn btn-primary" id="upload" >Upload</button>
+<!--                                                            <button type="button" class="btn btn-primary" id="upload" >Upload</button>-->
                                                  </label>
                                              </div>
                                          </div>
-                                         <input type="file" name="file" id='i-file'  onchange="$('#location').val($('#i-file').val());" style="display: none">
+                                         <input type="file" name="file" id='i-file' onchange="$('#location').val($('#i-file').val());" style="display: none">
+                                     <div>&nbsp;
+                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     <input type="checkbox" name="check-1" value="0" class="lcs_check" autocomplete="off">
+                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     <button type="button" class="btn btn-primary" id="upload" >Upload</button>
+                                     </div>
                                      </div>
                                  </div>
                              </div>
@@ -381,13 +395,33 @@
         </div>
     </div>
 </div>
-<script th:src="@{/js/utils/jquery.js}"></script>
 <script th:src="@{/js/index/popper.min.js}"></script>
 <script th:src="@{/js/utils/bootstrap.min.js}"></script>
 <script th:src="@{/js/index/perfect-scrollbar.jquery.min.js}"></script>
 <script th:src="@{/js/index/waves.js}"></script>
 <script th:src="@{/js/index/sidebarmenu.js}"></script>
 <script th:src="@{/js/index/custom.min.js}"></script>
+<script type="text/javascript">
+$(document).ready(function (e) {
+    $('input').lc_switch();
+    // triggered each time a field changes status
+    // $('body').delegate('.lcs_check', 'lcs-statuschange', function() {
+    //     var status = ($(this).is(':checked')) ? 'checked' : 'unchecked';
+    //     console.log('field changed status: '+ status );
+    // });
+    //
+    // // triggered each time a field is checked
+    // $('body').delegate('.lcs_check', 'lcs-on', function() {
+    //     console.log('field is checked');
+    // });
+    //
+    //
+    // // triggered each time a is unchecked
+    // $('body').delegate('.lcs_check', 'lcs-off', function() {
+    //     console.log('field is unchecked');
+    // });
+});
+</script>
 </body>
 
 </html>

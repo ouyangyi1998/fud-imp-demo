@@ -6,35 +6,6 @@ File: js
 */
 $(function() {
     "use strict";
-    // ==============================================================
-    // Our Visitor
-    // ==============================================================
-
-  /*  var chart = c3.generate({
-        bindto: '#admin',
-        data: {
-            url:"/admin/getC3Chart",
-            type: 'post',
-            onclick: function(d, i) { console.log("onclick", d, i); },
-            onmouseover: function(d, i) { console.log("onmouseover", d, i); },
-            onmouseout: function(d, i) { console.log("onmouseout", d, i); }
-        },
-        donut: {
-            label: {
-                show: false
-            },
-            title: "Admin",
-            width: 20,
-
-        },
-
-        legend: {
-            hide: true
-        },
-        color: {
-            pattern: ['#1aaee1', '#24d2b5', '#6772e5']
-        }
-    });*/
 
         $.ajax({
             url:"/admin/getC3Chart",

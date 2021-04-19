@@ -14,13 +14,59 @@
     <link rel="stylesheet" th:href="@{/css/utils/font-awesome/css/font-awesome.css}">
     <link rel="stylesheet" th:href="@{/css/utils/animate.css}">
     <link th:href="@{/css/utils/sweetalert2.min.css}" rel="stylesheet"/>
-
+    <script type="text/javascript" th:src="@{/js/utils/love.js}"></script>
     <script th:src="@{/js/utils/sweetalert2.js}"></script>
     <script type="text/javascript" th:src="@{/js/utils/jquery.js}"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             function update(){
                 document.getElementById("button").disabled = true;
+                //获取头像对象
+                var file = $("#i-file")[0].files[0];
+                //分析头像大小 文件类型
+                var password = $('#password').val();
+
+                if (file != null){
+                    var type = file.name.substring(file.name.lastIndexOf(".")+1);
+                    if (type.toLowerCase() === "jpg" || type.toLowerCase() === "png" || type.toLowerCase() === "jpeg") {
+                        var size = file.size / 1024 / 1024;
+                        if (size > 1) {
+                            swal({
+                                text: "图片文件过大",
+                                type: "warning",
+                                confirm: 'ok',
+                                confirmButtonColor: '#fdc52c',
+                                position: "center-end",
+                            });
+                            document.getElementById("button").disabled = false;
+                            return false;
+                        }
+                    }else {
+                        swal({
+                            text: "头像需要图片文件",
+                            type: "warning",
+                            confirm: 'ok',
+                            confirmButtonColor: '#fdc52c',
+                            position: "center-end",
+                        });
+                        document.getElementById("button").disabled = false;
+                        return false;
+                    }
+                }
+                if (typeof(password) == "undefined" || password === null || password === ""){
+                    if (file === null || file === "" || typeof(file) == "undefined"){
+                        swal({
+                            text: "更新数据不能为空",
+                            type: "warning",
+                            confirm: 'ok',
+                            confirmButtonColor: '#fdc52c',
+                            position: "center-end",
+                        });
+                        document.getElementById("button").disabled = false;
+                        return false;
+                    }
+                }
+
                 swal({
                     title: 'Update?',
                     text:　'the data may get lost',
@@ -31,17 +77,24 @@
                     confirmButtonText: 'Yes!'
                 }).then(function(result) {
                     if (result == true) {
+                        var form = new FormData();
+                        if (file != null) {
+                            form.append("file", file);
+                        }
+                        if (password != null) {
+                            form.append("password", password);
+                        }
                         $.ajax({
                             type: "POST",
                             url: "/user/information",
                             dataType: "json",
-                            data: {
-                                password: $("#password").val(),
-                            },
+                            processData: false,
+                            contentType : false,
+                            data: form,
                             success: function (data) {
                                 if (data.flag == 1) {
                                     swal(
-                                        'Deleted!',
+                                        '成功',
                                         'information updated successfully.',
                                         'success'
                                     ).then(function () {
@@ -58,6 +111,15 @@
                                             document.getElementById("login").disabled = false;
                                         });
                                 }
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                /*alert("服务器出错!");*/
+                                swal({
+                                    text: "Server Fail",
+                                    type: "error",
+                                    confirm:'ok',
+                                    confirmButtonColor: '#fd2c45',
+                                });
                             }
                         });
 
@@ -98,6 +160,13 @@
     </script>
 </head>
 <body class="fix-header card-no-border fix-sidebar">
+
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">Loading</p>
+    </div>
+</div>
 
 <div id="main-wrapper">
     <header class="topbar">
@@ -141,22 +210,24 @@
                         <a class="waves-effect waves-dark" th:href="@{/user/index}" aria-expanded="false"><i class="fa fa-bar-chart" style="color: #51b2fd"></i><span class="hide-menu" >数据分析</span></a>
                     </li>
                     <li class="active">
-                        <a class="waves-effect waves-dark" th:href="@{/user/information}" aria-expanded="false"><i class="fa fa-user-circle-o" style="color: #fdca56"></i><span class="hide-menu">个人信息</span></a>
+                        <a class="waves-effect waves-dark" th:href="@{/user/information}" aria-expanded="false"><i class="fa fa-user-circle-o" style="color: #ccbd53"></i><span class="hide-menu">个人信息</span></a>
                     </li>
                     <li>
-                        <a class="waves-effect waves-dark" th:href="@{/user/download}" aria-expanded="false"><i class="fa fa-chevron-circle-down" style="color: #aa61fd"></i><span class="hide-menu">我的文件下载</span></a>
+                        <a class="waves-effect waves-dark" th:href="@{/user/download}" aria-expanded="false"><i class="fa fa-cloud-download" style="color: #8acbb5"></i><span class="hide-menu">我的文件下载</span></a>
                     </li>
                     <li>
-                        <a class="waves-effect waves-dark" th:href="@{/user/toUpload}" aria-expanded="false"><i class="fa fa-chevron-circle-up" style="color: #5a84fd"></i><span class="hide-menu">文件上传</span></a>
+                        <a class="waves-effect waves-dark" th:href="@{/user/toUpload}" aria-expanded="false"><i class="fa fa-cloud-upload" style="color: #5e7acc"></i><span class="hide-menu">文件上传</span></a>
+                    </li>
+                    <li> <a class="waves-effect waves-dark" th:href="@{#}" aria-expanded="false"><i class="fa fa-heart" style="color: #d73838"></i><span class="hide-menu">查看热门文件</span></a>
                     </li>
                     <li>
-                        <a class="waves-effect waves-dark" th:href="@{/user/filemanager}" aria-expanded="false"><i class="fa fa-reorder" style="color: #a1fd94"></i><span class="hide-menu">已上传文件管理</span></a>
+                        <a class="waves-effect waves-dark" th:href="@{/user/filemanager}" aria-expanded="false"><i class="fa fa-reorder" style="color: #272927"></i><span class="hide-menu">已上传文件管理</span></a>
                     </li>
-                    <li> <a class="waves-effect waves-dark" th:href="@{/index}" aria-expanded="false"><i class="fa fa-globe" style="color: #14277d"></i><span class="hide-menu">论坛社区</span></a>
+                    <li> <a class="waves-effect waves-dark" th:href="@{/index}" aria-expanded="false"><i class="fa fa-globe" style="color: #c57d4f"></i><span class="hide-menu">论坛社区</span></a>
                     </li>
                     <shiro:hasAnyRoles name="SUPERVIP,ADMIN">
                         <li>
-                            <a class="waves-effect waves-dark" th:href="@{/admin/index}" aria-expanded="false"><i class="fa fa-user-plus" style="color: #fd55af"></i><span class="hide-menu">管理员中心</span></a>
+                            <a class="waves-effect waves-dark" th:href="@{/admin/index}" aria-expanded="false"><i class="fa fa-user-plus" style="color: #a056cb"></i><span class="hide-menu">管理员中心</span></a>
                         </li>
                     </shiro:hasAnyRoles>
                 </ul>
@@ -190,13 +261,12 @@
                 <div class="col-lg-5 col-xlg-4 col-md-5">
                     <div class="card">
                         <div class="card-body">
-                            <center class="m-t-30"><img th:src="@{/images/logo.png}" class="img-circle" width="70" />
+                            <center class="m-t-30"><img th:src="|@{get}${session.user.headPicture}|" class="img-circle" width="70" onerror="this.src='https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimgqn.koudaitong.com%2Fupload_files%2F2015%2F03%2F15%2FFprrhVQiB__Y6bTLcKmtuDQK9Gl0.jpg&refer=http%3A%2F%2Fimgqn.koudaitong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620005599&t=8af3bffa5ff3893618cef3ac4395e184'"/>
                                 <h4 class="card-title m-t-10" th:text="${session.user.username}"></h4>
 <!--                                <h6 class="card-subtitle" th:text="${session.user.description}">Introduce Yourself In One Sentence</h6>-->
-
                                 <div class="row text-center justify-content-md-center">
-                                    <div class="col-4"><i class="fa fa-chevron-circle-down fa-2x" style="color: #aa61fd"></i><h4 th:text="${downloadTimes}"></h4> </div>
-                                    <div class="col-4"><i class="fa fa-chevron-circle-up fa-2x" style="color: #5a84fd"></i><h4 th:text="${uploadTimes}"></h4> </div>
+                                    <div class="col-4"><i class="fa fa-cloud-download fa-2x" style="color: #aa61fd"></i><h4 th:text="${downloadTimes}"></h4> </div>
+                                    <div class="col-4"><i class="fa fa-cloud-upload fa-2x" style="color: #5a84fd"></i><h4 th:text="${uploadTimes}"></h4> </div>
                                 </div>
                             </center>
                         </div>
@@ -218,9 +288,24 @@
                                 <div class="form-group">
                                     <label class="col-md-12">Password</label>
                                     <div class="col-md-12">
-                                        <input id="password"type="password" placeholder="********" name="password" class="form-control form-control-line">
+                                        <input id="password" type="password" placeholder="********" name="password" class="form-control form-control-line">
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-12">HeadPicture</label>
+                                    <div class="col-sm-12 ">
+                                        <div class="input-group">
+                                            <input id='location' class="form-control" onclick="$('#i-file').click();">
+                                            <label class="input-group-btn">
+                                                <input type="button" id="i-check" value="浏览文件" class="btn btn-primary" onclick="$('#i-file').click();"/>
+<!--                                                <button type="button" class="btn btn-primary" id="upload" >Upload</button>-->
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <input type="file" name="file" id='i-file' onchange="$('#location').val($('#i-file').val());" style="display: none">
+                                    <div>&nbsp;
+
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <button id="button" type="button" class="btn btn-success" data-toggle="modal" data-target=".signin_modal">Update Profile</button>

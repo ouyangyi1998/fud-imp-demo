@@ -26,8 +26,8 @@ public class Constants {
      * 1 普通用户
      * 2 管理员
      */
-    public static final long USER = 1;
-    public static final long ADMIN = 2;
+    public static final Long USER = 1L;
+    public static final Long ADMIN = 2L;
     /**
      * 接受协议条款
      */
@@ -41,5 +41,17 @@ public class Constants {
      */
     public static final String UPLOAD = "upload";
     public static final String CHECK = "check";
+    /**
+     *  论坛点赞
+     */
+    public static final Integer INCREASE_GREAT = 1;
+    public static final Integer DECREASE_GREAT = 2;
+    /**
+     * 文件格式表
+     */
+    public static final String[] VEDIO_LIST = {"avi","mp4","mkv","flv","rm","mov","rmvb"};
+    public static final String[] AUDIO_LIST = {"wav","mp3","aac","flac","amr","midi"};
+    public static final String[] DOCUMENT_LIST = {"md","html","pdf","doc","txt","rtf"};
+    public static final String[] PICTURE_LIST = {"jpg","png","jif","jpeg","tif","bmp"};
 
 }

@@ -1,6 +1,7 @@
 package com.centerm.fud_demo.controller;
 import com.centerm.fud_demo.constant.Constants;
 import com.centerm.fud_demo.entity.FileRecord;
+import com.centerm.fud_demo.entity.UpdateForm;
 import com.centerm.fud_demo.entity.User;
 import com.centerm.fud_demo.entity.ajax.AjaxReturnMsg;
 import com.centerm.fud_demo.exception.NotAcceptTermsException;
@@ -18,13 +19,26 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.centerm.fud_demo.constant.Constants.*;
 
 /**
  * 用户控制类
@@ -44,6 +58,11 @@ public class UserController {
     private UploadService uploadService;
     @Autowired
     private FileService fileService;
+    @Autowired
+    private ResourceLoader resourceLoader;
+
+    @GetMapping("toView")
+    public String toView(){return "view";}
 
     @GetMapping("toRegister")
     public String toRegister(){return "register";}
@@ -61,6 +80,7 @@ public class UserController {
         Long downloadTimes = downloadService.getDownloadTimesByUserId(user.getId());
         request.setAttribute("downloadTimes", downloadTimes);
         request.setAttribute("uploadTimes", uploadTimes);
+        request.setAttribute("headPicutre",user.getHeadPicture());
         return "user/information";
     }
     @GetMapping("toLogin")
@@ -117,7 +137,7 @@ public class UserController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         AjaxReturnMsg msg = new AjaxReturnMsg();
-        if (null == username || null == password || "" == username || "" == password)
+        if (null == username || null == password || "".equals(username) || "".equals(password))
         {
             log.warn("Neither username or password inputted...");
             throw new AuthenticationException();
@@ -180,27 +200,53 @@ public class UserController {
 
     @PostMapping("information")
     @ResponseBody
-    public AjaxReturnMsg updateUser(HttpServletRequest request){
-        AjaxReturnMsg msg=new AjaxReturnMsg();
-        String password = request.getParameter("password");
-        String username=((User)request.getSession().getAttribute("user")).getUsername();
-        if ((null == password || ("").equals(password)))
+    public AjaxReturnMsg updateUser( HttpServletRequest request, UpdateForm form) throws IOException {
+        AjaxReturnMsg msg = new AjaxReturnMsg();
+        String password = form.getPassword();
+        String username = ((User)request.getSession().getAttribute("user")).getUsername();
+        MultipartFile headPicture = form.getFile();
+        //更新密码为空
+        if ((null == password) && (headPicture == null))
         {
             msg.setFlag(Constants.FAIL);
             msg.setMsg("No data submitted...");
             log.warn("No data submitted...");
             return msg;
         }
-        if (!(null == password || ("").equals(password)))
-        {
+        if (password != null && password.trim().length() != 0){
             userService.changePassword(username,password);
-            log.info("Password update successfully...");
+            log.info(username + " Password update successfully...");
         }
+        if (headPicture != null){
+            //配置文件名称
+            String fileName = username + "_" + System.currentTimeMillis() + headPicture.getOriginalFilename().substring(headPicture.getOriginalFilename().lastIndexOf("."));
+            //把文件输入到后端文件夹
+            String dirPath = System.getProperty("user.dir") + "/src/main/resources/static/images/headPictures/";
+            File dir = new File(dirPath);
+            if (!dir.exists()){
+                dir.mkdirs();
+            }
+            File dest = new File(dir,fileName);
+            headPicture.transferTo(dest);
+            //数据库录入
+            String filePath = "/images/headPictures/" + fileName;
+            //找到之前的文件删除
+            String oldHeadPicture = userService.selectHeadPcitureURL(username);
+            File old = new File(System.getProperty("user.dir")+ "/src/main/resources/static" + oldHeadPicture);
+            if (old.exists()){
+                old.delete();
+                System.out.println("头像删除成功");
+            }
+            userService.updateHeadPicture(username,filePath);
+            log.info(username + " HeadPicture update successfully...");
+        }
+
         DefaultWebSecurityManager securityManager = (DefaultWebSecurityManager) SecurityUtils.getSecurityManager();
         UserRealm userRealm = (UserRealm) securityManager.getRealms().iterator().next();
         userRealm.getAuthenticationCache().remove(((User) SecurityUtils.getSubject().getPrincipal()).getUsername());
         User user = userService.findByUsername(username);
         request.getSession().setAttribute("user",user);
+
         msg.setFlag(Constants.SUCCESS);
         msg.setMsg("Data update successfully...");
         return msg;
@@ -216,6 +262,7 @@ public class UserController {
         mv.setViewName("login");
         return mv;
     }
+
     @PostMapping("search")
     @ResponseBody
     public AjaxReturnMsg search(HttpServletRequest request)
@@ -234,6 +281,7 @@ public class UserController {
         msg.setFlag(Constants.SUCCESS);
         return msg;
     }
+
     @GetMapping("search")
     public String Search(HttpServletRequest request)
     {
@@ -241,6 +289,71 @@ public class UserController {
         List<FileRecord> fileList= fileService.getFileLikeContents((String) request.getSession().getAttribute("contents"),userId);
         request.setAttribute("fileList",fileList);
         return "user/search";
+    }
+
+    @PostMapping("getC3Chart")
+    @ResponseBody
+    public Map<String,Object> getC3Chart(HttpServletRequest request)
+    {
+        Long userId=((User)request.getSession().getAttribute("user")).getId();
+        Integer userFileNumber = fileService.getFileNumberById(userId);
+        log.info("file number is： " + userFileNumber);
+        List<FileRecord> userUploadFile = fileService.getFileByUserId(userId);
+
+        float vedioNumber = 0;
+        float audioNumber = 0;
+        float documentNumber = 0;
+        float pictureNumber = 0;
+
+        for (FileRecord fileRecord : userUploadFile){
+            String suffix = fileRecord.getSuffix();
+            for(String audioSuffix:AUDIO_LIST){
+                if (suffix.toLowerCase().contains(audioSuffix.toLowerCase())){
+                    audioNumber++;
+                    break;
+                }
+            }
+            for(String vedioSuffix:VEDIO_LIST){
+                if (suffix.contains(vedioSuffix)){
+                    vedioNumber++;
+                    break;
+                }
+            }
+            for(String documentSuffix:DOCUMENT_LIST){
+                if (suffix.contains(documentSuffix)){
+                    documentNumber++;
+                    break;
+                }
+            }
+            for(String pictureSuffix:PICTURE_LIST){
+                if (suffix.toLowerCase().contains(pictureSuffix.toLowerCase())){
+                    pictureNumber++;
+                    break;
+                }
+            }
+        }
+
+        Map<String,Object> map=new HashMap<>();
+        map.put("vedio",vedioNumber/userFileNumber);
+        map.put("audio",audioNumber/userFileNumber);
+        map.put("document",documentNumber/userFileNumber);
+        map.put("picture",pictureNumber/userFileNumber);
+        map.put("other",1-vedioNumber/userFileNumber-audioNumber/userFileNumber-documentNumber/userFileNumber-pictureNumber/userFileNumber);
+        return map;
+    }
+
+    /**
+     * 用户图片传输
+     * @param dir1 图片路径
+     * @param dir2 图片路径
+     * @param filename 图片名称
+     * @return
+     */
+    @GetMapping("/get/{dir1}/{dir2}/{filename}")
+    public ResponseEntity get(@PathVariable String dir1,@PathVariable String dir2,@PathVariable String filename){
+        Path path = Paths.get(System.getProperty("user.dir") + "/src/main/resources/static/" + dir1 + "/" + dir2 , filename);
+        Resource resource = resourceLoader.getResource("file:" + path.toString());
+        return ResponseEntity.ok(resource);
     }
 
 }

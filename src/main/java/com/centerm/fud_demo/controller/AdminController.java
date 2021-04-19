@@ -243,8 +243,8 @@ public class AdminController {
     @ResponseBody
     public Map<String,Object> getC3Chart()
     {
-        long allUserNumber = adminService.getAllUserNumber();
-        long adminNumber = adminService.getAdminNumber();
+        Long allUserNumber = adminService.getAllUserNumber();
+        Long adminNumber = adminService.getAdminNumber();
         log.info("Admin number is： " + adminNumber);
         Map<String,Object> map=new HashMap<>();
         map.put("user",((allUserNumber - adminNumber) * 100) / allUserNumber);

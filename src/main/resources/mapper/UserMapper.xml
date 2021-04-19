@@ -13,8 +13,8 @@
     </insert>
     <update id="updateUser" parameterType="com.centerm.fud_demo.entity.User">
         UPDATE fud.user
-        SET fud.user.password=#{password}
-        WHERE fud.user.id=#{id}
+        SET fud.user.password = #{password}
+        WHERE fud.user.id = #{id}
     </update>
     <select id="findRoles" resultType="string" parameterType="string">
       SELECT r.role_name
@@ -24,6 +24,16 @@
     <select id="findById" resultType="com.centerm.fud_demo.entity.User" parameterType="int">
         SELECT id,username,create_time as createTime,state,head_picture as headPicture
         FROM user
-        WHERE user.id=#{userId}
+        WHERE user.id = #{userId}
+    </select>
+    <update id="updateHeadPicture" parameterType="string">
+        UPDATE user
+        set user.head_picture = #{param2}
+        WHERE user.username = #{param1}
+    </update>
+    <select id="selectHeadPcitureURL" parameterType="string" resultType="string">
+        SELECT head_picture
+        FROM user
+        WHERE user.username = #{username}
     </select>
 </mapper>

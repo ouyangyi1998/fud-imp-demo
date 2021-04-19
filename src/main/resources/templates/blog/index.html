@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/blog/index.css"/>
     <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
     <link rel="stylesheet" href="/css/blog/bootstrap-theme.css">
+    <script type="text/javascript" th:src="@{/js/utils/love.js}"></script>
     <script src="/js/blog/community.js" type="application/javascript"></script>
     <script src="/js/blog/moment.js"></script>
     <script th:src="@{/js/utils/jquery.js}"></script>
@@ -28,7 +29,7 @@
                 <div class="media-left">
                     <a th:href="@{'/question/'+${question.id}}">
                         <img class="media-object img-circle picset"
-                             th:src="${question.user.headPicture}">
+                             th:src="|@{get}${question.user.headPicture}|" onerror="this.src='https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimgqn.koudaitong.com%2Fupload_files%2F2015%2F03%2F15%2FFprrhVQiB__Y6bTLcKmtuDQK9Gl0.jpg&refer=http%3A%2F%2Fimgqn.koudaitong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620005599&t=8af3bffa5ff3893618cef3ac4395e184'">
                     </a>
                 </div>
                 <div class="media-body">
@@ -75,13 +76,13 @@
         <div class="col-lg-3 col-md-12 col-sm-12 col-ss-12">
             <h3>站长</h3>
             <a href="https://github.com/OliverLiy">
-                <img class="adminicon" src="../img/GitHub.png">
+                <img class="adminicon" src="images/GitHub.png">
             </a>
             <a href="https://im.qq.com/">
-                <img class="adminicon" src="../img/qq.jpg"/>
+                <img class="adminicon" src="images/qq.jpg"/>
             </a>
             <a href="https://stackoverflow.com/">
-                <img class="adminicon" src="../img/StackOverFlow.png"/>
+                <img class="adminicon" src="images/StackOverFlow.png"/>
             </a>
             <hr>
             <h3>热门话题</h3>

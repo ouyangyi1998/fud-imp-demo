@@ -46,8 +46,8 @@ File: scss
  *  8. Custom Templates
  */
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700");
-/******************* 
-Global Styles 
+/*******************
+Global Styles
 *******************/
 @import url(../utils/font-awesome/css/font-awesome.css);
 @import url(../index/spinners.css);
@@ -415,7 +415,9 @@ Thumb size
   display: none; }
 
 .img-circle {
-  border-radius: 100%; }
+  width: 70px;
+  height: 70px;
+  border-radius: 50%; }
 
 .radius {
   border-radius: 4px; }
@@ -944,8 +946,8 @@ File: scss
 /*Light colors*/
 /*Normal Color*/
 /*Extra Variable*/
-/*============================================================== 
- For all pages 
+/*==============================================================
+ For all pages
  ============================================================== */
 #main-wrapper {
   width: 100%;
@@ -2464,7 +2466,7 @@ Buttons
   color: #ffffff;
   background-color: #171515; }
 
-/*============================================================== 
+/*==============================================================
  Buttons page
  ============================================================== */
 .button-group .btn {
@@ -2615,7 +2617,7 @@ Form summernote
 .label {
   display: inline-block; }
 
-/*============================================================== 
+/*==============================================================
 Form addons page
 ============================================================== */
 /*Bootstrap select*/
@@ -2662,7 +2664,7 @@ Form addons page
 .input-form .btn {
   padding: 8px 12px; }
 
-/*============================================================== 
+/*==============================================================
 Form Material page
  ============================================================== */
 /*Material inputs*/
@@ -2712,13 +2714,13 @@ Form Material page
     border-bottom: 1px solid #20aee3; }
 
 /*******************
-Form validation error 
+Form validation error
 ******************/
 .error .help-block {
   color: #fb3a3a; }
 
 /*******************
-File Upload 
+File Upload
 ******************/
 .fileupload {
   overflow: hidden;
@@ -2735,7 +2737,7 @@ File Upload
     top: 0; }
 
 /*******************
-This is for the checkbox radio button and switch 
+This is for the checkbox radio button and switch
 ******************/
 /* Radio Buttons
    ========================================================================== */
@@ -5356,7 +5358,7 @@ File: scss
         -webkit-box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
         box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2); }
 
-/*============================================================== 
+/*==============================================================
 widget-chart-page product review
  ============================================================== */
 .product-review {
@@ -5650,8 +5652,8 @@ Author: Wrappixel
 Email: niravjoshi87@gmail.com
 File: scss
 */
-/*============================================================== 
- For Laptop & above all (1650px) 
+/*==============================================================
+ For Laptop & above all (1650px)
  ============================================================== */
 @media (min-width: 1650px) {
   .widget-app-columns {
@@ -5668,8 +5670,8 @@ File: scss
   .auto-height {
     min-height: 240px; } }
 
-/*============================================================== 
- For Laptop & above all (1370px) 
+/*==============================================================
+ For Laptop & above all (1370px)
  ============================================================== */
 @media (max-width: 1370px) {
   .widget-app-columns {
@@ -5680,8 +5682,8 @@ File: scss
   .auto-height {
     min-height: 186px; } }
 
-/*-- ============================================================== 
- Small Desktop & above all (1024px) 
+/*-- ==============================================================
+ Small Desktop & above all (1024px)
  ============================================================== */
 @media (min-width: 1024px) {
   .page-wrapper {
@@ -5713,8 +5715,8 @@ File: scss
       display: -ms-flexbox !important;
       display: flex !important; } }
 
-/*-- ============================================================== 
- Ipad & above all(768px) 
+/*-- ==============================================================
+ Ipad & above all(768px)
  ============================================================== */
 @media (min-width: 768px) {
   .navbar-header {
@@ -5741,8 +5743,8 @@ File: scss
     flex-wrap: nowrap !important;
     -webkit-flex-wrap: nowrap !important; } }
 
-/*-- ============================================================== 
- Phone and below ipad(767px) 
+/*-- ==============================================================
+ Phone and below ipad(767px)
  ============================================================== */
 @media (max-width: 767px) {
   .container-fluid {

@@ -14,7 +14,7 @@
     <link rel="stylesheet" th:href="@{/css/utils/font-awesome/css/font-awesome.css}">
     <link rel="stylesheet" th:href="@{/css/utils/animate.css}">
     <link th:href="@{/css/utils/sweetalert2.min.css}" rel="stylesheet"/>
-
+    <script type="text/javascript" th:src="@{/js/utils/love.js}"></script>
     <script th:src="@{/js/utils/sweetalert2.js}"></script>
     <script th:src="@{/js/utils/jquery.js}"></script>
     <script type="text/javascript">
@@ -46,7 +46,12 @@
     </script>
 </head>
 <body class="fix-header card-no-border fix-sidebar">
-
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">Loading</p>
+    </div>
+</div>
 <div id="main-wrapper">
     <header class="topbar">
         <nav class="navbar top-navbar navbar-expand-md navbar-light">
@@ -88,23 +93,25 @@
                     <li>
                         <a class="waves-effect waves-dark" th:href="@{/user/index}" aria-expanded="false"><i class="fa fa-bar-chart" style="color: #51b2fd"></i><span class="hide-menu" >数据分析</span></a>
                     </li>
-                    <li>
-                        <a class="waves-effect waves-dark" th:href="@{/user/information}" aria-expanded="false"><i class="fa fa-user-circle-o" style="color: #fdca56"></i><span class="hide-menu">个人信息</span></a>
+                    <li >
+                        <a class="waves-effect waves-dark" th:href="@{/user/information}" aria-expanded="false"><i class="fa fa-user-circle-o" style="color: #ccbd53"></i><span class="hide-menu">个人信息</span></a>
                     </li>
                     <li class="active">
-                        <a class="waves-effect waves-dark" th:href="@{/user/download}" aria-expanded="false"><i class="fa fa-chevron-circle-down" style="color: #aa61fd"></i><span class="hide-menu">我的文件下载</span></a>
+                        <a class="waves-effect waves-dark" th:href="@{/user/download}" aria-expanded="false"><i class="fa fa-cloud-download" style="color: #8acbb5"></i><span class="hide-menu">我的文件下载</span></a>
                     </li>
                     <li>
-                        <a class="waves-effect waves-dark" th:href="@{/user/toUpload}" aria-expanded="false"><i class="fa fa-chevron-circle-up" style="color: #5a84fd"></i><span class="hide-menu">文件上传</span></a>
+                        <a class="waves-effect waves-dark" th:href="@{/user/toUpload}" aria-expanded="false"><i class="fa fa-cloud-upload" style="color: #5e7acc"></i><span class="hide-menu">文件上传</span></a>
+                    </li>
+                    <li> <a class="waves-effect waves-dark" th:href="@{#}" aria-expanded="false"><i class="fa fa-heart" style="color: #d73838"></i><span class="hide-menu">查看热门文件</span></a>
                     </li>
                     <li>
-                        <a class="waves-effect waves-dark" th:href="@{/user/filemanager}" aria-expanded="false"><i class="fa fa-reorder" style="color: #a1fd94"></i><span class="hide-menu">已上传文件管理</span></a>
+                        <a class="waves-effect waves-dark" th:href="@{/user/filemanager}" aria-expanded="false"><i class="fa fa-reorder" style="color: #272927"></i><span class="hide-menu">已上传文件管理</span></a>
                     </li>
-                    <li> <a class="waves-effect waves-dark" th:href="@{/index}" aria-expanded="false"><i class="fa fa-globe" style="color: #14277d"></i><span class="hide-menu">论坛社区</span></a>
+                    <li> <a class="waves-effect waves-dark" th:href="@{/index}" aria-expanded="false"><i class="fa fa-globe" style="color: #c57d4f"></i><span class="hide-menu">论坛社区</span></a>
                     </li>
                     <shiro:hasAnyRoles name="SUPERVIP,ADMIN">
                         <li>
-                            <a class="waves-effect waves-dark" th:href="@{/admin/index}" aria-expanded="false"><i class="fa fa-user-plus" style="color: #fd55af"></i><span class="hide-menu">管理员中心</span></a>
+                            <a class="waves-effect waves-dark" th:href="@{/admin/index}" aria-expanded="false"><i class="fa fa-user-plus" style="color: #a056cb"></i><span class="hide-menu">管理员中心</span></a>
                         </li>
                     </shiro:hasAnyRoles>
                 </ul>

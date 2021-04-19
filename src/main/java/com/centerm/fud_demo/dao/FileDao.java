@@ -214,4 +214,10 @@ public interface FileDao {
     * @return
     */
    Boolean updateFileMd5(Long fileId, String fileMd5, String backupPath);
+
+   /**
+    * 获取用户上传的文件数目
+    * @return
+    */
+   Integer getFileNumberById(Long userId);
 }

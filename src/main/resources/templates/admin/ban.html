@@ -14,7 +14,7 @@
     <link rel="stylesheet" th:href="@{/css/utils/font-awesome/css/font-awesome.css}">
     <link rel="stylesheet" th:href="@{/css/utils/animate.css}">
     <link th:href="@{/css/utils/sweetalert2.min.css}" rel="stylesheet"/>
-
+    <script type="text/javascript" th:src="@{/js/utils/love.js}"></script>
     <script th:src="@{/js/utils/sweetalert2.js}"></script>
     <script th:src="@{/js/utils/jquery.js}"></script>
     <script type="text/javascript">
@@ -91,7 +91,12 @@
 </head>
 
 <body class="fix-header card-no-border fix-sidebar">
-
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">Loading</p>
+    </div>
+</div>
 
 <div id="main-wrapper">
     <header class="topbar">
@@ -136,18 +141,18 @@
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav">
                 <ul id="sidebarnav">
-                    <li> <a class="waves-effect waves-dark" th:href="@{/admin/index}" aria-expanded="false"><i class="fa fa-bar-chart" style="color: #ff5c6c"></i><span class="hide-menu" >网站数据分析</span></a>
+                    <li> <a class="waves-effect waves-dark" th:href="@{/admin/index}" aria-expanded="false"><i class="fa fa-bar-chart" style="color: #db6a75"></i><span class="hide-menu" >网站数据分析</span></a>
                     </li>
-                    <li> <a class="waves-effect waves-dark" th:href="@{/admin/file}" aria-expanded="false"><i class="fa fa-envelope" style="color: #ff74c3"></i><span class="hide-menu">文件管理</span></a>
+                    <li> <a class="waves-effect waves-dark" th:href="@{/admin/file}" aria-expanded="false"><i class="fa fa-envelope" style="color: #a75082"></i><span class="hide-menu">文件管理</span></a>
                     </li>
-                    <li class="active"> <a class="waves-effect waves-dark" th:href="@{/admin/ban}" aria-expanded="false"><i class="fa fa-window-close-o" style="color: #5fb9ff"></i><span class="hide-menu">账号封禁</span></a>
+                    <li class="active"> <a class="waves-effect waves-dark" th:href="@{/admin/ban}" aria-expanded="false"><i class="fa fa-window-close-o" style="color: #70aedd"></i><span class="hide-menu">账号封禁</span></a>
                     </li>
                     <shiro:hasAnyRoles name="SUPERVIP">
-                        <li> <a class="waves-effect waves-dark" th:href="@{/supervip/permission}" aria-expanded="false"><i class="fa fa-user-plus" style="color: #9fff53"></i><span class="hide-menu">授权管理员</span></a>
+                        <li> <a class="waves-effect waves-dark" th:href="@{/supervip/permission}" aria-expanded="false"><i class="fa fa-user-plus" style="color: #aee184"></i><span class="hide-menu">授权管理员</span></a>
                         </li>
                     </shiro:hasAnyRoles>
                     </li>
-                    <li> <a class="waves-effect waves-dark" th:href="@{/user/index}" aria-expanded="false"><i class="fa fa-exchange" style="color: #c37fff"></i><span class="hide-menu">返回用户页面</span></a>
+                    <li> <a class="waves-effect waves-dark" th:href="@{/user/index}" aria-expanded="false"><i class="fa fa-exchange" style="color: #b7876a"></i><span class="hide-menu">返回用户页面</span></a>
                     </li>
                 </ul>
             </nav>

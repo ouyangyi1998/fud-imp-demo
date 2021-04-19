@@ -44,4 +44,13 @@ public class UserServiceImpl implements UserService {
         userDao.updateUser(user);
     }
 
+    @Override
+    public void updateHeadPicture(String username,String filePath) {
+        userDao.updateHeadPicture(username,filePath);
+    }
+
+    @Override
+    public String selectHeadPcitureURL(String username) {
+        return userDao.selectHeadPcitureURL(username);
+    }
 }

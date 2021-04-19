@@ -17,6 +17,7 @@
     <script th:src="@{/js/utils/jquery.js}"></script>
     <!--editor.md相关-->
     <link rel="stylesheet" href="/css/blog/editormd.preview.css">
+    <script type="text/javascript" th:src="@{/js/utils/love.js}"></script>
     <script src="/js/blog/editormd.js"></script>
     <script src="/js/blog/lib/marked.min.js"></script>
     <script src="/js/blog/lib/prettify.min.js"></script>
@@ -76,8 +77,8 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-ss-12" th:each="comment:${comments}" id="comment_content">
                 <div class="media">
                     <div class="media-left">
-                        <img class="media-object img-rounded picset"
-                             th:src="${comment.user.headPicture}">
+                        <img class="media-object img-circle picset"
+                             th:src="|@{get}${comment.user.headPicture}|" onerror="this.src='https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimgqn.koudaitong.com%2Fupload_files%2F2015%2F03%2F15%2FFprrhVQiB__Y6bTLcKmtuDQK9Gl0.jpg&refer=http%3A%2F%2Fimgqn.koudaitong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620005599&t=8af3bffa5ff3893618cef3ac4395e184'">
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading">
@@ -113,8 +114,8 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-ss-12" id="comment_section">
                 <div class="media" style="margin-bottom: 20px">
                     <div class="media-left">
-                        <img class="media-object img-rounded picset"
-                             th:src="${session.user.headPicture}">
+                        <img class="media-object img-circle picset"
+                             th:src="|@{get}${session.user.headPicture}|" onerror="this.src='https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimgqn.koudaitong.com%2Fupload_files%2F2015%2F03%2F15%2FFprrhVQiB__Y6bTLcKmtuDQK9Gl0.jpg&refer=http%3A%2F%2Fimgqn.koudaitong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620005599&t=8af3bffa5ff3893618cef3ac4395e184'">
                     </div>
                     <div class="media-body" style="padding-top:10px;">
                         <h4 class="media-heading">
@@ -137,7 +138,7 @@
                 <div class="media">
                     <div class="media-left">
                         <img class="media-object img-circle picset"
-                             th:src="${questionDTO.user.headPicture}">
+                             th:src="|@{get}${questionDTO.user.headPicture}|" onerror="this.src='https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimgqn.koudaitong.com%2Fupload_files%2F2015%2F03%2F15%2FFprrhVQiB__Y6bTLcKmtuDQK9Gl0.jpg&refer=http%3A%2F%2Fimgqn.koudaitong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620005599&t=8af3bffa5ff3893618cef3ac4395e184'">
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading">
