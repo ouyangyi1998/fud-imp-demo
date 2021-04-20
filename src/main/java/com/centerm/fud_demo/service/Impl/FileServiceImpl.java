@@ -70,4 +70,9 @@ public class FileServiceImpl implements FileService {
     public Integer getFileNumberById(Long userId) {
         return fileDao.getFileNumberById(userId);
     }
+
+    @Override
+    public List<FileRecord> getHotFile() {
+        return fileDao.getHotFile();
+    }
 }

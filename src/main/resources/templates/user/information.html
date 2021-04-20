@@ -132,6 +132,12 @@
             });
 
         })
+
+        function noFind() {
+            var img = event.srcElement;
+            img.src = "https://tse3-mm.cn.bing.net/th/id/OIP.3STly9x3rm6sLAn5beDCkwHaHa?pid=ImgDet&rs=1";
+            img.onerror=null;
+        }
         function search() {
             event.preventDefault();
             $.ajax({
@@ -218,7 +224,7 @@
                     <li>
                         <a class="waves-effect waves-dark" th:href="@{/user/toUpload}" aria-expanded="false"><i class="fa fa-cloud-upload" style="color: #5e7acc"></i><span class="hide-menu">文件上传</span></a>
                     </li>
-                    <li> <a class="waves-effect waves-dark" th:href="@{#}" aria-expanded="false"><i class="fa fa-heart" style="color: #d73838"></i><span class="hide-menu">查看热门文件</span></a>
+                    <li> <a class="waves-effect waves-dark" th:href="@{/user/hotFile}" aria-expanded="false"><i class="fa fa-heart" style="color: #d73838"></i><span class="hide-menu">查看热门文件</span></a>
                     </li>
                     <li>
                         <a class="waves-effect waves-dark" th:href="@{/user/filemanager}" aria-expanded="false"><i class="fa fa-reorder" style="color: #272927"></i><span class="hide-menu">已上传文件管理</span></a>
@@ -261,7 +267,7 @@
                 <div class="col-lg-5 col-xlg-4 col-md-5">
                     <div class="card">
                         <div class="card-body">
-                            <center class="m-t-30"><img th:src="|@{get}${session.user.headPicture}|" class="img-circle" width="70" onerror="this.src='https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimgqn.koudaitong.com%2Fupload_files%2F2015%2F03%2F15%2FFprrhVQiB__Y6bTLcKmtuDQK9Gl0.jpg&refer=http%3A%2F%2Fimgqn.koudaitong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620005599&t=8af3bffa5ff3893618cef3ac4395e184'"/>
+                            <center class="m-t-30"><img th:src="|@{get}${session.user.headPicture}|" class="img-circle" width="70" onerror="noFind();"/>
                                 <h4 class="card-title m-t-10" th:text="${session.user.username}"></h4>
 <!--                                <h6 class="card-subtitle" th:text="${session.user.description}">Introduce Yourself In One Sentence</h6>-->
                                 <div class="row text-center justify-content-md-center">

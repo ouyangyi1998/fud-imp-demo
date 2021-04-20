@@ -72,7 +72,7 @@ function secondComment(e) {
                         "class": "media-object img-circle picset",
                         "src": "get/" + comment.user.headPicture
                     }).bind("error",function () {
-                        this.src = 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimgqn.koudaitong.com%2Fupload_files%2F2015%2F03%2F15%2FFprrhVQiB__Y6bTLcKmtuDQK9Gl0.jpg&refer=http%3A%2F%2Fimgqn.koudaitong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620005599&t=8af3bffa5ff3893618cef3ac4395e184';
+                        this.src = "https://tse3-mm.cn.bing.net/th/id/OIP.3STly9x3rm6sLAn5beDCkwHaHa?pid=ImgDet&rs=1";
                     });
 
                     var medialeftElement = $("<div/>", {

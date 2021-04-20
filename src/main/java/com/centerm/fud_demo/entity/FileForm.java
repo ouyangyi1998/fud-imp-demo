@@ -19,5 +19,10 @@ public class FileForm {
     private String index;
     private String action;
     private String partMd5;
+    /**
+     * 0:私有
+     * 1:公有
+     */
+    private Integer scope;
 
 }

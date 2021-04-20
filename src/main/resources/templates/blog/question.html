@@ -21,6 +21,14 @@
     <script src="/js/blog/editormd.js"></script>
     <script src="/js/blog/lib/marked.min.js"></script>
     <script src="/js/blog/lib/prettify.min.js"></script>
+    <script>
+    function noFind() {
+        var img = event.srcElement;
+        img.src = "https://tse3-mm.cn.bing.net/th/id/OIP.3STly9x3rm6sLAn5beDCkwHaHa?pid=ImgDet&rs=1";
+        img.onerror=null;
+    }
+    </script>
+    </script>
 </head>
 <body class="body">
 <!--导入导航栏-->
@@ -78,7 +86,7 @@
                 <div class="media">
                     <div class="media-left">
                         <img class="media-object img-circle picset"
-                             th:src="|@{get}${comment.user.headPicture}|" onerror="this.src='https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimgqn.koudaitong.com%2Fupload_files%2F2015%2F03%2F15%2FFprrhVQiB__Y6bTLcKmtuDQK9Gl0.jpg&refer=http%3A%2F%2Fimgqn.koudaitong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620005599&t=8af3bffa5ff3893618cef3ac4395e184'">
+                             th:src="|@{get}${comment.user.headPicture}|" onerror="noFind();">
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading">
@@ -115,7 +123,7 @@
                 <div class="media" style="margin-bottom: 20px">
                     <div class="media-left">
                         <img class="media-object img-circle picset"
-                             th:src="|@{get}${session.user.headPicture}|" onerror="this.src='https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimgqn.koudaitong.com%2Fupload_files%2F2015%2F03%2F15%2FFprrhVQiB__Y6bTLcKmtuDQK9Gl0.jpg&refer=http%3A%2F%2Fimgqn.koudaitong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620005599&t=8af3bffa5ff3893618cef3ac4395e184'">
+                             th:src="|@{get}${session.user.headPicture}|" onerror="noFind();">
                     </div>
                     <div class="media-body" style="padding-top:10px;">
                         <h4 class="media-heading">
@@ -138,7 +146,7 @@
                 <div class="media">
                     <div class="media-left">
                         <img class="media-object img-circle picset"
-                             th:src="|@{get}${questionDTO.user.headPicture}|" onerror="this.src='https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimgqn.koudaitong.com%2Fupload_files%2F2015%2F03%2F15%2FFprrhVQiB__Y6bTLcKmtuDQK9Gl0.jpg&refer=http%3A%2F%2Fimgqn.koudaitong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620005599&t=8af3bffa5ff3893618cef3ac4395e184'">
+                             th:src="|@{get}${questionDTO.user.headPicture}|" onerror="noFind();">
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading">

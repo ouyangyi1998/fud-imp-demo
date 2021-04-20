@@ -22,12 +22,12 @@
         ORDER BY fud.file.create_time DESC
     </select>
     <insert id="saveFileBegin" parameterMap="FileRecord">
-        INSERT INTO file(name, local_url, size, user_id, md5, suffix, backup_url, uuid, status)
-        VALUES(#{name}, #{localUrl}, #{size}, #{userId}, #{md5}, #{suffix}, #{backupUrl}, #{uuid}, #{status})
+        INSERT INTO file(name, local_url, size, user_id, md5, suffix, backup_url, uuid, status,scope)
+        VALUES(#{name}, #{localUrl}, #{size}, #{userId}, #{md5}, #{suffix}, #{backupUrl}, #{uuid}, #{status},#{scope})
     </insert>
     <insert id="saveFileSmall" parameterMap="FileRecord">
-        INSERT INTO file(name, local_url, size, user_id, md5, suffix, backup_url, uuid, status)
-        VALUES(#{name}, #{localUrl}, #{size}, #{userId}, #{md5}, #{suffix}, #{backupUrl}, #{uuid}, #{status})
+        INSERT INTO file(name, local_url, size, user_id, md5, suffix, backup_url, uuid, status,scope)
+        VALUES(#{name}, #{localUrl}, #{size}, #{userId}, #{md5}, #{suffix}, #{backupUrl}, #{uuid}, #{status},#{scope})
     </insert>
     <update id="saveFileEnd" parameterMap="FileRecord">
         UPDATE fud.file
@@ -174,5 +174,12 @@
         SELECT count(1)
         FROM file
         WHERE user_id = #{userId}
+    </select>
+    <select id="getHotFile" resultType="com.centerm.fud_demo.entity.FileRecord">
+        SELECT f.id, f.name, f.size, f.suffix, date_format(f.create_time,'%Y-%m-%d %H:%i:%S') AS createTime
+        FROM file f
+        WHERE f.scope = 1
+        ORDER BY f.download_times DESC
+        LIMIT 10
     </select>
 </mapper>

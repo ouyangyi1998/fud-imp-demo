@@ -115,6 +115,7 @@ public class UploadController {
         msg.setFlag(Constants.SUCCESS);
         return msg;
     }
+
     @PostMapping("getChart")
     @ResponseBody
     public List<Map<String,Object>> getChart(HttpServletRequest request)

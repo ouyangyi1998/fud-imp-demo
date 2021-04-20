@@ -61,16 +61,16 @@ public class UserController {
     @Autowired
     private ResourceLoader resourceLoader;
 
-    @GetMapping("toView")
-    public String toView(){return "view";}
 
     @GetMapping("toRegister")
     public String toRegister(){return "register";}
+
     @GetMapping("toUpload")
     public String toUploading()
     {
         return "user/upload";
     }
+
     @GetMapping("information")
     public String userInformation(HttpServletRequest request)
     {
@@ -83,6 +83,7 @@ public class UserController {
         request.setAttribute("headPicutre",user.getHeadPicture());
         return "user/information";
     }
+
     @GetMapping("toLogin")
     public String toLogin()
     {
@@ -95,6 +96,7 @@ public class UserController {
             return "redirect:/user/index";
         }
     }
+
     @GetMapping("filemanager")
     public String userFileManager(Model model)
     {
@@ -109,6 +111,14 @@ public class UserController {
         List<FileRecord> fileRecordList = fileService.getFileByUserId(currUser.getId());
         model.addAttribute("fileList", fileRecordList);
         return "user/download";
+    }
+
+    @GetMapping("hotFile")
+    public String hotFile(Model model)
+    {
+        List<FileRecord> fileRecordList = fileService.getHotFile();
+        model.addAttribute("fileList", fileRecordList);
+        return "user/hotFile";
     }
 
     @GetMapping("index")
@@ -129,6 +139,7 @@ public class UserController {
         model.addAttribute("latestUploaded", latestUploaded);
         return "user/index";
     }
+
 
     @PostMapping(value = "login")
     @ResponseBody

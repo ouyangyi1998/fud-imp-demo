@@ -118,6 +118,13 @@
         $(r).load(function(e){
             var blob = e.target.result;
             var md5 = hex_md5(blob);
+            var status = ($(".lcs_check").is(':checked')) ? 'checked' : 'unchecked';
+            var scope =0;
+            if (status === "checked"){
+                scope = 1;
+            }else{
+                scope = 0;
+            }
             form.append("md5", md5);
             //Ajax提交
             $.ajax({
@@ -132,10 +139,10 @@
                     var rsaKey = data.RsaPublicKey;
                     if (data.flag == "0") {
                         //没有上传过文件
-                        realUpload(file, uuid, md5, data.date, rsaKey);
+                        realUpload(file, uuid, md5, data.date, rsaKey,scope);
                     } else if(data.flag == "1") {
                         //已经上传部分
-                        realUpload(file, uuid, md5, data.date, rsaKey);
+                        realUpload(file, uuid, md5, data.date, rsaKey,scope);
                     } else if(data.flag == "2") {
                         //文件已经上传过
                         /* alert("文件已经上传过,秒传了！！");*/
@@ -158,7 +165,7 @@
         })
     };
 
-    function realUpload(file, uuid, md5, date, rsaKey) {
+    function realUpload(file, uuid, md5, date, rsaKey,scope) {
         var name = file.name;
         var  size = file.size;
         var shardCount = Math.ceil(size / shardSize);  //总片数
@@ -206,6 +213,7 @@
         form.append("size", size);
         form.append("total", shardCount);  //总片数
         form.append("index", i+1);        //当前是第几片
+        form.append("scope",scope);
 
         var index = i+1;
         //按大小切割文件段　　
@@ -238,7 +246,7 @@
                             ++succeed;
                             NProgress.set(succeed/shardCount);
                         }
-                        realUpload(file, uuid, md5, date, rsaKey);
+                        realUpload(file, uuid, md5, date, rsaKey,scope);
                     } else {
                       /*  ++succeed;
                         NProgress.set(succeed/shardCount);*/
@@ -329,7 +337,7 @@
                     <li class="active">
                         <a class="waves-effect waves-dark" th:href="@{/user/toUpload}" aria-expanded="false"><i class="fa fa-cloud-upload" style="color: #5e7acc"></i><span class="hide-menu">文件上传</span></a>
                     </li>
-                    <li> <a class="waves-effect waves-dark" th:href="@{#}" aria-expanded="false"><i class="fa fa-heart" style="color: #d73838"></i><span class="hide-menu">查看热门文件</span></a>
+                    <li> <a class="waves-effect waves-dark" th:href="@{/user/hotFile}" aria-expanded="false"><i class="fa fa-heart" style="color: #d73838"></i><span class="hide-menu">查看热门文件</span></a>
                     </li>
                     <li>
                         <a class="waves-effect waves-dark" th:href="@{/user/filemanager}" aria-expanded="false"><i class="fa fa-reorder" style="color: #0c0c0c"></i><span class="hide-menu">已上传文件管理</span></a>
@@ -381,7 +389,7 @@
                                          <input type="file" name="file" id='i-file' onchange="$('#location').val($('#i-file').val());" style="display: none">
                                      <div>&nbsp;
                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                     <input type="checkbox" name="check-1" value="0" class="lcs_check" autocomplete="off">
+                                     <input type="checkbox" id="check" name="check" value="0" class="lcs_check" autocomplete="off"/>
                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                      <button type="button" class="btn btn-primary" id="upload" >Upload</button>
                                      </div>
@@ -404,22 +412,22 @@
 <script type="text/javascript">
 $(document).ready(function (e) {
     $('input').lc_switch();
-    // triggered each time a field changes status
-    // $('body').delegate('.lcs_check', 'lcs-statuschange', function() {
-    //     var status = ($(this).is(':checked')) ? 'checked' : 'unchecked';
-    //     console.log('field changed status: '+ status );
-    // });
-    //
-    // // triggered each time a field is checked
-    // $('body').delegate('.lcs_check', 'lcs-on', function() {
-    //     console.log('field is checked');
-    // });
-    //
-    //
-    // // triggered each time a is unchecked
-    // $('body').delegate('.lcs_check', 'lcs-off', function() {
-    //     console.log('field is unchecked');
-    // });
+// triggered each time a field changes status
+    $('body').delegate('.lcs_check', 'lcs-statuschange', function() {
+        var status = ($(this).is(':checked')) ? 'checked' : 'unchecked';
+        console.log('field changed status: '+ status );
+    });
+
+    // triggered each time a field is checked
+    $('body').delegate('.lcs_check', 'lcs-on', function() {
+        console.log('field is checked');
+    });
+
+
+    // triggered each time a is unchecked
+    $('body').delegate('.lcs_check', 'lcs-off', function() {
+        console.log('field is unchecked');
+    });
 });
 </script>
 </body>

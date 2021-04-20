@@ -14,6 +14,13 @@
     <script src="/js/blog/community.js" type="application/javascript"></script>
     <script src="/js/blog/moment.js"></script>
     <script th:src="@{/js/utils/jquery.js}"></script>
+    <script>
+    function noFind() {
+        var img = event.srcElement;
+        img.src = "https://tse3-mm.cn.bing.net/th/id/OIP.3STly9x3rm6sLAn5beDCkwHaHa?pid=ImgDet&rs=1";
+        img.onerror=null;
+    }
+    </script>
 </head>
 <body class="body">
 <!--导入navigation.html，内容是导航框-->
@@ -29,7 +36,7 @@
                 <div class="media-left">
                     <a th:href="@{'/question/'+${question.id}}">
                         <img class="media-object img-circle picset"
-                             th:src="|@{get}${question.user.headPicture}|" onerror="this.src='https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimgqn.koudaitong.com%2Fupload_files%2F2015%2F03%2F15%2FFprrhVQiB__Y6bTLcKmtuDQK9Gl0.jpg&refer=http%3A%2F%2Fimgqn.koudaitong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620005599&t=8af3bffa5ff3893618cef3ac4395e184'">
+                             th:src="|@{get}${question.user.headPicture}|" onerror="noFind();">
                     </a>
                 </div>
                 <div class="media-body">

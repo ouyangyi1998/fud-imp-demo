@@ -73,5 +73,11 @@ public interface FileService {
      * @return
      */
     Integer getFileNumberById(Long userId);
+
+    /**
+     * 获取热门文件
+     * @return
+     */
+    List<FileRecord> getHotFile();
 }
 

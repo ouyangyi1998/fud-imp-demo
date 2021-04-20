@@ -108,6 +108,7 @@ public class UploadServiceImpl implements UploadService {
         String fileName = form.getName();
         String size = form.getSize();
         String suffix = null;
+        int scope = Integer.valueOf(form.getScope());
         if (fileName.contains(".")) {
             suffix = fileName.substring(fileName.lastIndexOf('.'));
         }
@@ -174,6 +175,7 @@ public class UploadServiceImpl implements UploadService {
                         uploadFile.setSize(FileUtil.getFormatSize(Double.valueOf(size)));
                         uploadFile.setUserId(userId);
                         uploadFile.setBackupUrl(backupPath + md5);
+                        uploadFile.setScope(scope);
                         fileDao.saveFileSmall(uploadFile);
                     }else
                     {
@@ -197,6 +199,7 @@ public class UploadServiceImpl implements UploadService {
                     uploadFile.setSize(FileUtil.getFormatSize(Double.valueOf(size)));
                     uploadFile.setUserId(userId);
                     uploadFile.setBackupUrl(backupPath + md5);
+                    uploadFile.setScope(scope);
                     fileDao.saveFileBegin(uploadFile);
                 }
             }
@@ -239,6 +242,7 @@ public class UploadServiceImpl implements UploadService {
             map.put("uuid", uuid);
             return map;
         }
+        System.out.println("5");
         return map;
     }
 

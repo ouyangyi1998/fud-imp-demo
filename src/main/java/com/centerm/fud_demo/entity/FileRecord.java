@@ -27,10 +27,15 @@ public class FileRecord {
     private String suffix;
     private String backupUrl;
     private Integer status;
+    /**
+     * 0:私有
+     * 1:公有
+     */
+    private Integer scope;
 
     public FileRecord(){}
 
-    public FileRecord(String name, String localUrl, String size, Long userId, String md5, String suffix, String backupUrl) {
+    public FileRecord(String name, String localUrl, String size, Long userId, String md5, String suffix, String backupUrl,Integer scope) {
         this.name = name;
         this.localUrl = localUrl;
         this.size = size;
@@ -38,5 +43,6 @@ public class FileRecord {
         this.md5 = md5;
         this.suffix = suffix;
         this.backupUrl = backupUrl;
+        this.scope = scope;
     }
 }
