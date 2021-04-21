@@ -22,7 +22,7 @@
 
 
 ## 2.项目配置
-项目数据库放在sql文件里面，跑一下1.sql
-application-test.properties 数据库账号密码改成自己的
-applcation-test.properties 文件上传位置和备份位置基于自己需求进行修改
-启动SpringBoot项目
+- 项目数据库放在sql文件里面，跑一下1.sql
+- application-test.properties 数据库账号密码改成自己的
+- applcation-test.properties 文件上传位置和备份位置基于自己需求进行修改
+- 启动SpringBoot项目
