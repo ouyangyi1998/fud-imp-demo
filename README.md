@@ -48,12 +48,12 @@
 
 **论坛模块**
 
-论坛模块基于==https://github.com/OliverLiy/MyBlog== 论坛开发 感谢
+论坛模块基于 https://github.com/OliverLiy/MyBlog 论坛模块开发 感谢！
 ![论坛](https://github.com/ouyangyi1998/MyPostPicture/blob/master/picture/%E6%88%AA%E5%B1%8F2021-04-03%2011.31.47.png)
 
 ## License
 
-MIT License 
+  MIT License 
 
 
 
