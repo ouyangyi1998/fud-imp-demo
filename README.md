@@ -26,3 +26,7 @@
 - application-test.properties 数据库账号密码改成自己的
 - applcation-test.properties 文件上传位置和备份位置基于自己需求进行修改
 - 启动SpringBoot项目
+
+
+## 3.图片
+![登录](https://github.com/ouyangyi1998/MyPostPicture/blob/master/picture/%E6%88%AA%E5%B1%8F2021-04-02%2017.51.58.png)
