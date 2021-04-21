@@ -135,19 +135,20 @@ CREATE TABLE `file` (
   `backup_url` varchar(255) NOT NULL COMMENT '备份路径',
   `uuid` varchar(32) DEFAULT '' COMMENT 'uuid',
   `status` int(11) DEFAULT '2' COMMENT '文件状态',
+  `scope` tinyint DEFAULT '0' COMMENT '文件作用访问',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='文件信息表';
 
 LOCK TABLES `file` WRITE;
 /*!40000 ALTER TABLE `file` DISABLE KEYS */;
 
-INSERT INTO `file` (`id`, `name`, `local_url`, `size`, `download_times`, `user_id`, `create_time`, `md5`, `suffix`, `backup_url`, `uuid`, `status`)
+INSERT INTO `file` (`id`, `name`, `local_url`, `size`, `download_times`, `user_id`, `create_time`, `md5`, `suffix`, `backup_url`, `uuid`, `status`,`scope`)
 VALUES
-	(2,'wallhaven-mp1gwy','/Users/ouyangyi/Downloads/test/real/1/1614672993083430705/wallhaven-mp1gwy.jpg','645.06KB',1,1,'2021-03-02 16:16:33','276b52cd68c2bd6c019a00653ce16920','.jpg','/Users/ouyangyi/Downloads/test/backup/276b52cd68c2bd6c019a00653ce16920','1614672993083430705',2),
-	(6,'2.0','/Users/ouyangyi/Downloads/test/real/1/1614673656738443681/2.0.zip','5.11MB',0,1,'2021-03-02 16:27:37','41800e4f179497fd7625f023bb3432d1','.zip','/Users/ouyangyi/Downloads/test/backup/41800e4f179497fd7625f023bb3432d1','1614673656738443681',2),
-	(7,'xmppserver-4.2.0','/Users/ouyangyi/Downloads/test/real/1/1614916034538418735/xmppserver-4.2.0.jar','1.99MB',0,1,'2021-03-05 11:47:15','d32b46b92dc46653861d8c1d68a3659b','.jar','/Users/ouyangyi/Downloads/test/backup/d32b46b92dc46653861d8c1d68a3659b','1614916034538418735',2),
-	(9,'IDOCR.PubSdk.Linux.Centos.Ohter.Test-4.0.0','/Users/ouyangyi/Downloads/test/real/1/1614917985192533565/IDOCR.PubSdk.Linux.Centos.Ohter.Test-4.0.0.zip','1.06MB',0,1,'2021-03-05 12:19:45','fda974c75dfe30caaa8cc0817d6ad178','.zip','/Users/ouyangyi/Downloads/test/backup/fda974c75dfe30caaa8cc0817d6ad178','1614917985192533565',2),
-	(10,'wallhaven-3k6w76','/Users/ouyangyi/Downloads/test/real/1/1614918000136481912/wallhaven-3k6w76.png','6.71MB',0,1,'2021-03-05 12:20:00','37a835ebe657380954eeb68458aac554','.png','/Users/ouyangyi/Downloads/test/backup/37a835ebe657380954eeb68458aac554','1614918000136481912',2),
+	(2,'wallhaven-mp1gwy','/Users/ouyangyi/Downloads/test/real/1/1614672993083430705/wallhaven-mp1gwy.jpg','645.06KB',1,1,'2021-03-02 16:16:33','276b52cd68c2bd6c019a00653ce16920','.jpg','/Users/ouyangyi/Downloads/test/backup/276b52cd68c2bd6c019a00653ce16920','1614672993083430705',2,0),
+	(6,'2.0','/Users/ouyangyi/Downloads/test/real/1/1614673656738443681/2.0.zip','5.11MB',0,1,'2021-03-02 16:27:37','41800e4f179497fd7625f023bb3432d1','.zip','/Users/ouyangyi/Downloads/test/backup/41800e4f179497fd7625f023bb3432d1','1614673656738443681',2,0),
+	(7,'xmppserver-4.2.0','/Users/ouyangyi/Downloads/test/real/1/1614916034538418735/xmppserver-4.2.0.jar','1.99MB',0,1,'2021-03-05 11:47:15','d32b46b92dc46653861d8c1d68a3659b','.jar','/Users/ouyangyi/Downloads/test/backup/d32b46b92dc46653861d8c1d68a3659b','1614916034538418735',2,0),
+	(9,'IDOCR.PubSdk.Linux.Centos.Ohter.Test-4.0.0','/Users/ouyangyi/Downloads/test/real/1/1614917985192533565/IDOCR.PubSdk.Linux.Centos.Ohter.Test-4.0.0.zip','1.06MB',0,1,'2021-03-05 12:19:45','fda974c75dfe30caaa8cc0817d6ad178','.zip','/Users/ouyangyi/Downloads/test/backup/fda974c75dfe30caaa8cc0817d6ad178','1614917985192533565',2,0),
+	(10,'wallhaven-3k6w76','/Users/ouyangyi/Downloads/test/real/1/1614918000136481912/wallhaven-3k6w76.png','6.71MB',0,1,'2021-03-05 12:20:00','37a835ebe657380954eeb68458aac554','.png','/Users/ouyangyi/Downloads/test/backup/37a835ebe657380954eeb68458aac554','1614918000136481912',2,0),
 	(12,'客服系统测试开发文档','/Users/ouyangyi/Downloads/test/real/1/1614920370491873880/客服系统测试开发文档.pdf','2.65MB',0,1,'2021-03-05 12:59:31','fd9d6bbe596b3c9a316fca2e1ea27db9','.pdf','/Users/ouyangyi/Downloads/test/backup/fd9d6bbe596b3c9a316fca2e1ea27db9','1614920370491873880',2),
 	(13,'ithome_macos_7.65','/Users/ouyangyi/Downloads/test/real/1/1614928699509795479/ithome_macos_7.65.dmg','34.28MB',0,1,'2021-03-05 15:18:20','54e0343460d2776a7e102c8acb8c3371','.dmg','/Users/ouyangyi/Downloads/test/backup/54e0343460d2776a7e102c8acb8c3371','1614928699509795479',2),
 	(15,'wallhaven-mp1gwy','/Users/ouyangyi/Downloads/test/real/2/1616938736243797399/wallhaven-mp1gwy.jpg','645.06KB',1,2,'2021-03-28 21:38:56','276b52cd68c2bd6c019a00653ce16920','.jpg','/Users/ouyangyi/Downloads/test/backup/276b52cd68c2bd6c019a00653ce16920','1616938736243797399',2),
