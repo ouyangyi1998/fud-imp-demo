@@ -29,4 +29,5 @@
 
 
 ## 3.图片
-![登录](https://gitee.com/jerry_test_production/my_picture/raw/master/picture/%E6%88%AA%E5%B1%8F2021-04-02%2017.51.58.png)
+![登录](https://github.com/ouyangyi1998/MyPostPicture/blob/master/picture/%E6%88%AA%E5%B1%8F2021-04-02%2017.51.58.png)
+
