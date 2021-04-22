@@ -49,11 +49,20 @@
             });
             return false;
         }
+        swal({
+            text: "发表成功",
+            type: "success",
+            confirm: 'ok',
+            confirmButtonColor: '#5a84fd',
+        }).then(function (){
             return true;
+        });
+
     }
     </script>
 </head>
 <body class="body">
+
 <!--导入导航栏-->
 <div th:insert="~{blog/navigation :: copy}"></div>
 <!--展示问题发布页面-->
