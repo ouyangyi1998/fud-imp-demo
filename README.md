@@ -51,7 +51,14 @@
  - service 服务层级，在dao层与controller之间
  - shiro 项目登录权限控制模块
  - utils 工具类
--  
+- resources前端资源分为一下部分
+ - config 缓存配置信息
+ - mapper SQL语句
+ - static css/js/images/fonts 项目前端静态文件
+ - template 前端页面
+ - application.xml application-test.xml 项目配置信息
+ - logback.xml 项目日志文件配置
+ - pom.xml！！！项目maven文件配置
 
 
 ## 项目页面
