@@ -20,6 +20,11 @@
   - 利用font-awesome.css，animate.css，spinner.css，sweetalert2.css等开发前台页面
   - 基于Echache实现权限，登录信息缓存，利用自定义Shiro filter实现单点登录
 
+## 在线体验
+- https://www.ouyangyi.info 项目部署在阿里云服务器 可以进入体验
+- 超级管理员账号为admin 密码admin
+- 同时也可以注册自己的账号
+
 
 ## 启动配置
 - 推荐使用Intellij IDEA调试该项目(IDEA可以去官网通过学生邮箱注册学生账号，免费使用旗舰版，不要下载社区版）eclispe不会用。。。
