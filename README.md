@@ -37,28 +37,28 @@
 - 建议在二次开发项目之前系统学习SpringBoot，Apache Shiro与Mybatis基础知识！！！前端看看Jquery语法和Bootstrap用法！！
 - src-main-java中主要为后端代码 src-main-resources主要为前端代码与静态资源
 - java-com-centerm-fud_demo下面分为几个具体模块
- - controller 响应前端URL层
- - config 配置文件
- - cache 论坛主题缓存
- - constant 项目常量
- - dao 操作MySQL层
- - entity 实体类
- - enums 枚举类型
- - exception 自定义异常管理
- - filter 实现单点登录
- - listener 用户在线监听器
- - mapper 操作数据库
- - service 服务层级，在dao层与controller之间
- - shiro 项目登录权限控制模块
- - utils 工具类
+  - controller 响应前端URL层
+  - config 配置文件
+  - cache 论坛主题缓存
+  - constant 项目常量
+  - dao 操作MySQL层
+  - entity 实体类
+  - enums 枚举类型
+  - exception 自定义异常管理
+  - filter 实现单点登录
+  - listener 用户在线监听器
+  - mapper 操作数据库
+  - service 服务层级，在dao层与controller之间
+  - shiro 项目登录权限控制模块
+  - utils 工具类
 - resources前端资源分为一下部分
- - config 缓存配置信息
- - mapper SQL语句
- - static css/js/images/fonts 项目前端静态文件
- - template 前端页面
- - application.xml application-test.xml 项目配置信息
- - logback.xml 项目日志文件配置
- - pom.xml！！！项目maven文件配置
+  - config 缓存配置信息
+  - mapper SQL语句
+  - static css/js/images/fonts 项目前端静态文件
+  - template 前端页面
+  - application.xml application-test.xml 项目配置信息
+  - logback.xml 项目日志文件配置
+  - pom.xml！！！项目maven文件配置
 
 
 ## 项目页面
