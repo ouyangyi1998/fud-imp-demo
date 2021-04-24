@@ -56,7 +56,7 @@
   - service 服务层级，在dao层与controller之间
   - shiro 项目登录权限控制模块
   - utils 工具类
-- resources前端资源分为一下部分
+- resources前端资源分为以下部分
   - config 缓存配置信息
   - mapper SQL语句
   - static css/js/images/fonts 项目前端静态文件
