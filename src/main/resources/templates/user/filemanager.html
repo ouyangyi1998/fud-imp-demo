@@ -14,6 +14,7 @@
     <link rel="stylesheet" th:href="@{/css/utils/font-awesome/css/font-awesome.css}">
     <link rel="stylesheet" th:href="@{/css/utils/animate.css}">
     <link th:href="@{/css/utils/sweetalert2.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/index/lc_switch.css}">
     <script type="text/javascript" th:src="@{/js/utils/love.js}"></script>
     <script th:src="@{/js/utils/sweetalert2.js}"></script>
     <script type="text/javascript" th:src="@{/js/utils/jquery.js}"></script>
@@ -206,17 +207,19 @@
                                         <th>文件大小</th>
                                         <th>文件类型</th>
                                         <th>上传时间</th>
+                                        <th>文件权限</th>
                                         <th>文件下载</th>
                                         <th>文件删除</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="file:${fileList}">
+                                    <tr th:each="file:${fileList}" th:switch="${file.scope}">
                                         <td th:text="${fileStat.index+1}"></td>
                                         <td th:text="${file.name}"></td>
                                         <td th:text="${file.size}"></td>
                                         <td th:text="${file.suffix}"></td>
                                         <td th:text="${file.createTime}"></td>
+                                        <td> <input autocomplete="off" class="lcs_check" name="check" th:checked="${file.scope}==0?'false':'true'" th:id="'chexkbox'+${file.id}" type="checkbox"/></td>
                                         <td><a th:href="@{/download/toDownload(id=${file.id})}">下载</a></td>
                                         <td><a onclick="delFile(this)" href="javascript:;"  th:id="${file.id}">删除</a></td>
                                     </tr>
@@ -230,13 +233,120 @@
         </div>
     </div>
 </div>
-<script th:src="@{/js/utils/jquery.js}"></script>
 <script th:src="@{/js/index/popper.min.js}"></script>
 <script th:src="@{/js/utils/bootstrap.min.js}"></script>
 <script th:src="@{/js/index/perfect-scrollbar.jquery.min.js}"></script>
 <script th:src="@{/js/index/waves.js}"></script>
 <script th:src="@{/js/index/sidebarmenu.js}"></script>
 <script th:src="@{/js/index/custom.min.js}"></script>
+<script th:src="@{/js/upload/lc_switch.js}"></script>
+<script type="text/javascript">
+$(document).ready(function (e) {
+    $('.lcs_check').lc_switch();
+// triggered each time a field changes status
+    $('body').delegate('.lcs_check', 'lcs-statuschange', function() {
+        var status = ($(this).is(':checked')) ? 'checked' : 'unchecked';
+        console.log('field changed status: '+ status );
+    });
+
+    // triggered each time a field is checked
+    $('body').delegate('.lcs_check', 'lcs-on', function() {
+        var checkbox = $(this).attr("id");
+        var id = "#"+checkbox;
+        var fileId = checkbox.substring(8);
+        swal({
+            title: '文件范围改为公有?',
+            text:　'the information may be lost',
+            type: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+        }).then(function(result) {
+            if (result===false){
+                window.location.href = "/user/filemanager";
+            }
+            if (result===true) {
+                $.ajax({
+                    type: "POST",
+                    url: "/file/changeFileScopeToPublic",
+                    dataType: "json",
+                    data: {
+                        fileId:fileId,
+                    },
+                    success: function (data) {
+                        if (data.flag == 1) {
+                            swal(
+                                'Update!',
+                                'File scope update successfully.',
+                                'success'
+                            ).then(function () {
+                            });
+                        } else {
+                            swal({
+                                text: data.msg,
+                                type: "error",
+                                confirm: 'ok',
+                                confirmButtonColor: '#fd2c45',
+                            }).then(
+                                function () {
+                                });
+                        }
+                    }
+                });
+
+            }
+        });
+    });
+
+
+    // triggered each time a is unchecked
+    $('body').delegate('.lcs_check', 'lcs-off', function() {
+        var checkbox = $(this).attr("id");
+        var fileId = checkbox.substring(8);
+        swal({
+            title: '文件范围改为私有?',
+            text:　'the information may be lost',
+            type: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+        }).then(function(result) {
+            if (result===false){
+                window.location.href = "/user/filemanager";
+            }
+            if (result===true) {
+                $.ajax({
+                    type: "POST",
+                    url: "/file/changeFileScopeToPrivate",
+                    dataType: "json",
+                    data: {
+                        fileId:fileId,
+                    },
+                    success: function (data) {
+                        if (data.flag == 1) {
+                            swal(
+                                'Update!',
+                                'File scope update successfully.',
+                                'success'
+                            );
+                        } else {
+                            swal({
+                                text: data.msg,
+                                type: "error",
+                                confirm: 'ok',
+                                confirmButtonColor: '#fd2c45',
+                            });
+                        }
+                    }
+                });
+
+            }
+        });
+    });
+});
+</script>
 </body>
 
 </html>

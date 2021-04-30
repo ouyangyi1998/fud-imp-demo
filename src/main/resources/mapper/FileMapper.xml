@@ -16,7 +16,7 @@
         WHERE fud.file.id=#{param1}
     </update>
     <select id="getFileByUserId" parameterType="long" resultType="com.centerm.fud_demo.entity.FileRecord">
-        SELECT file.id, file.name, file.size, file.suffix, date_format(fud.file.create_time,'%Y-%m-%d') AS createTime
+        SELECT file.id, file.name, file.size, file.suffix, date_format(fud.file.create_time,'%Y-%m-%d') AS createTime,file.scope
         FROM fud.file
         WHERE fud.file.user_id=#{userId}
         ORDER BY fud.file.create_time DESC
@@ -175,6 +175,7 @@
         FROM file
         WHERE user_id = #{userId}
     </select>
+
     <select id="getHotFile" resultType="com.centerm.fud_demo.entity.FileRecord">
         SELECT f.id, f.name, f.size, f.suffix, date_format(f.create_time,'%Y-%m-%d %H:%i:%S') AS createTime
         FROM file f
@@ -182,4 +183,14 @@
         ORDER BY f.download_times DESC
         LIMIT 10
     </select>
+    <update id="changeFileScopeToPublic" parameterType="long">
+        UPDATE file
+        SET scope = 1
+        WHERE id = #{fileId}
+    </update>
+    <update id="changeFileScopeToPrivate" parameterType="long">
+        UPDATE file
+        SET scope = 0
+        WHERE id = #{fileId}
+    </update>
 </mapper>

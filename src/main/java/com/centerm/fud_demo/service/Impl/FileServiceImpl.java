@@ -75,4 +75,14 @@ public class FileServiceImpl implements FileService {
     public List<FileRecord> getHotFile() {
         return fileDao.getHotFile();
     }
+
+    @Override
+    public void changeFileScopeToPublic(Long fileId) {
+        fileDao.changeFileScopeToPublic(fileId);
+    }
+
+    @Override
+    public void changeFileScopeToPrivate(Long fileId) {
+        fileDao.changeFileScopeToPrivate(fileId);
+    }
 }

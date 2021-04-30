@@ -48,7 +48,8 @@ public class ShiroConfig {
 
         shiroFilterFactoryBean.setLoginUrl("/user/toLogin");
         shiroFilterFactoryBean.setUnauthorizedUrl("/user/toLogin");
-        filterMap.put("/user/login","kickout,anon");
+        shiroFilterFactoryBean.setSuccessUrl("/user/toLogin");
+        filterMap.put("/user/login","anon");
         filterMap.put("/file/**","authc");
         filterMap.put("/config/**", "anon");
         filterMap.put("/css/**", "anon");
@@ -59,7 +60,6 @@ public class ShiroConfig {
         filterMap.put("/admin/**","authc");
         filterMap.put("/user/toLogin/**","anon");
         filterMap.put("/user/toRegister/**","anon");
-        filterMap.put("/user/login","anon");
         filterMap.put("/question/**","authc");
         filterMap.put("/comment/**","authc");
         filterMap.put("/personal/**","authc");
@@ -67,9 +67,9 @@ public class ShiroConfig {
         filterMap.put("/notification/**","authc");
         filterMap.put("/index/**","authc");
         filterMap.put("/user/register","anon");
-        filterMap.put("/user/**","user,kickout");
+        filterMap.put("/user/**","authc");
         filterMap.put("/user/logout","logout");
-        filterMap.put("/","authc");
+        filterMap.put("/**","authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }

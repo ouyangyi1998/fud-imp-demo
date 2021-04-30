@@ -116,6 +116,31 @@ public class UploadController {
         return msg;
     }
 
+    @PostMapping("changeFileScopeToPublic")
+    @ResponseBody
+    public AjaxReturnMsg changeFileScopeToPublic(HttpServletRequest request) {
+        AjaxReturnMsg msg = new AjaxReturnMsg();
+        Long fileId=Long.parseLong(request.getParameter("fileId"));
+        log.info("Change file: " + fileId + " to public");
+        fileService.changeFileScopeToPublic(fileId);
+        msg.setFlag(Constants.SUCCESS);
+        msg.setMsg("文件范围修改为Public");
+        return msg;
+    }
+
+    @PostMapping("changeFileScopeToPrivate")
+    @ResponseBody
+    public AjaxReturnMsg changeFileScopeToPrivate(HttpServletRequest request) {
+        AjaxReturnMsg msg = new AjaxReturnMsg();
+        Long fileId=Long.parseLong(request.getParameter("fileId"));
+        log.info("Change file: " + fileId + " to private");
+        fileService.changeFileScopeToPrivate(fileId);
+        msg.setFlag(Constants.SUCCESS);
+        msg.setMsg("文件范围修改为Private");
+        return msg;
+    }
+
+
     @PostMapping("getChart")
     @ResponseBody
     public List<Map<String,Object>> getChart(HttpServletRequest request)

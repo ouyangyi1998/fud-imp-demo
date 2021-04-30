@@ -226,4 +226,15 @@ public interface FileDao {
     * @return
     */
    List<FileRecord> getHotFile();
+
+   /**
+    * 把文件范围修改到public
+    * @param fileId 文件id
+    */
+   void changeFileScopeToPublic(Long fileId);
+   /**
+    * 把文件范围修改到private
+    * @param fileId 文件id
+    */
+   void changeFileScopeToPrivate(Long fileId);
 }
