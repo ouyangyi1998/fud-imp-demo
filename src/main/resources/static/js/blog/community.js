@@ -69,7 +69,7 @@ function secondComment(e) {
                     }).append(timeElement);
 
                     var imgElement = $("<img/>", {
-                        "class": "media-object img-circle picset",
+                        "class": "adminicon",
                         "src": "get/" + comment.user.headPicture
                     }).bind("error",function () {
                         this.src = "https://tse3-mm.cn.bing.net/th/id/OIP.3STly9x3rm6sLAn5beDCkwHaHa?pid=ImgDet&rs=1";

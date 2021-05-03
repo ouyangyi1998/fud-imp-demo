@@ -35,7 +35,7 @@
             <div class="media" th:each="question:${pagination.data}" style="margin-top: 22px">
                 <div class="media-left">
                     <a th:href="@{'/question/'+${question.id}}">
-                        <img class="media-object img-circle picset"
+                        <img class="adminicon"
                              th:src="|@{get}${question.user.headPicture}|" onerror="noFind();">
                     </a>
                 </div>
