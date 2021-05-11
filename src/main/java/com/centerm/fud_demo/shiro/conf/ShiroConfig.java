@@ -69,7 +69,7 @@ public class ShiroConfig {
         filterMap.put("/user/register","anon");
         filterMap.put("/user/**","authc");
         filterMap.put("/user/logout","logout");
-        filterMap.put("/**","authc");
+        filterMap.put("/**","kickout,authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }
@@ -90,7 +90,8 @@ public class ShiroConfig {
         //同一个用户最大的会话数，默认1；比如2的意思是同一个用户允许最多同时两个人登录；
         kickoutSessionControlFilter.setMaxSession(1);
         //被踢出后重定向到的地址；
-        kickoutSessionControlFilter.setKickoutUrl("/user/toLogin");
+        kickoutSessionControlFilter.setKickoutUrl("/user/toLogin?kickout=1");
+
         return kickoutSessionControlFilter;
     }
 
@@ -198,6 +199,7 @@ public class ShiroConfig {
     public SessionIdGenerator sessionIdGenerator() {
         return new JavaUuidSessionIdGenerator();
     }
+
     /**
      * 配置核心安全事务管理器
      * @return
@@ -211,6 +213,7 @@ public class ShiroConfig {
         securityManager.setCacheManager(ehCacheManager());
         //配置自定义session管理，使用redis 参考博客：
         securityManager.setSessionManager(sessionManager());
+
         return securityManager;
     }
 
@@ -242,6 +245,7 @@ public class ShiroConfig {
         shiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         return shiroRealm;
     }
+
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher()
     {

@@ -23,7 +23,7 @@ import java.util.LinkedList;
  * @author jerry
  */
 @Slf4j
-public class KickoutSessionControllerFilter extends FormAuthenticationFilter {
+public class KickoutSessionControllerFilter extends AccessControlFilter {
     /** 踢出后到的地址 */
     private String kickoutUrl;
 
@@ -59,27 +59,7 @@ public class KickoutSessionControllerFilter extends FormAuthenticationFilter {
      */
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
-        if (isLoginRequest(request, response))
-        {
-            if (isLoginSubmission(request, response))
-            {
-                //本次用户登陆账号
-                String account = this.getUsername(request);
-
-                Subject subject = this.getSubject(request, response);
-                //之前登陆的用户
-                User user = (User) subject.getPrincipal();
-                //如果两次登陆的用户不一样，则先退出之前登陆的用户
-                if (account != null && user != null && !account.equals(user.getUsername()))
-                {
-                    System.out.println("233");
-                    subject.logout();
-                }
-            }
-        }
-
-        return super.isAccessAllowed(request, response, mappedValue);
-
+        return false;
     }
 
     /**
@@ -88,7 +68,7 @@ public class KickoutSessionControllerFilter extends FormAuthenticationFilter {
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         Subject subject = getSubject(request, response);
-        if(!subject.isAuthenticated() && !subject.isRemembered()) {
+        if(!subject.isAuthenticated()) {
             //如果没有登录，直接进行之后的流程
             return true;
         }
@@ -97,6 +77,7 @@ public class KickoutSessionControllerFilter extends FormAuthenticationFilter {
         //这里获取的User是实体 因为我在 自定义ShiroRealm中的doGetAuthenticationInfo方法中
         //new SimpleAuthenticationInfo(user, password, getName()); 传的是 User实体 所以这里拿到的也是实体,如果传的是userName 这里拿到的就是userName
         String username = ((User) subject.getPrincipal()).getUsername();
+
         Serializable sessionId = session.getId();
 
         // 初始化用户的队列放到缓存里

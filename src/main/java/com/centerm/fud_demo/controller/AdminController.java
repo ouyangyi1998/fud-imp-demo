@@ -45,21 +45,22 @@ public class AdminController {
     private DownloadService downloadService;
     @Autowired
     private UploadService uploadService;
-    @Autowired
-    private BackupService backupService;
+
 
     @GetMapping("file")
-    @RequiresRoles(value = {"ADMIN","SUPERVIP"},logical = Logical.OR)
+    @RequiresRoles("SUPERVIP")
     public String adminDownload(HttpServletRequest request)
     {
         List<FileRecord> fileList=fileService.getAllFile();
         request.setAttribute("fileList",fileList);
         return "admin/filelist";
     }
+
     @GetMapping("index")
     @RequiresRoles(value = {"ADMIN","SUPERVIP"},logical = Logical.OR)
     public String adminIndex(ServletRequest request)
     {
+        System.out.println("FSDFSAFSDFSDAFDSA");
         AtomicInteger userNum=Listener.sessionCount;
         long fileNums = uploadService.getUploadTimes();
         Long downloadTimes = downloadService.getDownloadTimes();
@@ -70,6 +71,7 @@ public class AdminController {
         request.setAttribute("fileList", fileRecordList);
         return "admin/index";
     }
+
     @GetMapping("ban")
     @RequiresRoles(value = {"ADMIN","SUPERVIP"},logical = Logical.OR)
     public String adminBan(HttpServletRequest request) {
@@ -90,8 +92,8 @@ public class AdminController {
         User target = userService.findByUsername(username);
         Integer userState = target.getState();
         Long userId=target.getId();
-       if(Constants.NORMAL.equals(userState))
-       {
+        if (Constants.NORMAL.equals(userState))
+        {
            //执行账号封禁
            Boolean isSuccess= adminService.banUser(userId);
            if (!isSuccess)
@@ -99,7 +101,7 @@ public class AdminController {
                throw new AccountBanException();
            }
            log.info("User: " + username + "　has been locked...");
-       }else {
+        } else {
            //执行账号解锁
            Boolean isSuccess = adminService.releaseUser(userId);
            if (!isSuccess)
@@ -121,6 +123,7 @@ public class AdminController {
      * @return
      */
     @PostMapping("toDelete")
+    @RequiresRoles(value = {"ADMIN","SUPERVIP"},logical = Logical.OR)
     @ResponseBody
     public AjaxReturnMsg toDelete(HttpServletRequest request) {
         AjaxReturnMsg msg = new AjaxReturnMsg();
@@ -158,14 +161,14 @@ public class AdminController {
     }
     @GetMapping("search")
     @RequiresRoles(value = {"ADMIN","SUPERVIP"},logical = Logical.OR)
-    public String Search(HttpServletRequest request)
+    public String toSearch(HttpServletRequest request)
     {
         List<User> userList = adminService.getUserLikeContents((String) request.getSession().getAttribute("contents"));
         request.setAttribute("userList",userList);
         return "admin/search";
     }
     @PostMapping("getChart")
-    @RequiresRoles(value = {"ADMIN","SUPERVIP"},logical = Logical.OR)
+    @RequiresRoles(value = {"ADMIN", "SUPERVIP"},logical = Logical.OR)
     @ResponseBody
     public List<Map<String,Object>> getChart(HttpServletRequest request)
     {
@@ -184,49 +187,49 @@ public class AdminController {
 
         for (Map<String, Object> m : uploadList)
         {
-            if(m.get("days").equals(map1.get("days"))){
+            if (m.get("days").equals(map1.get("days"))){
                 map1.put("upload",m.get("upload"));
             }
-            if(m.get("days").equals(map2.get("days"))){
+            if (m.get("days").equals(map2.get("days"))){
                 map2.put("upload",m.get("upload"));
             }
-            if(m.get("days").equals(map3.get("days"))){
+            if (m.get("days").equals(map3.get("days"))){
                 map3.put("upload",m.get("upload"));
             }
-            if(m.get("days").equals(map4.get("days"))){
+            if (m.get("days").equals(map4.get("days"))){
                 map4.put("upload",m.get("upload"));
             }
-            if(m.get("days").equals(map5.get("days"))){
+            if (m.get("days").equals(map5.get("days"))){
                 map5.put("upload",m.get("upload"));
             }
-            if(m.get("days").equals(map6.get("days"))){
+            if (m.get("days").equals(map6.get("days"))){
                 map6.put("upload",m.get("upload"));
             }
-            if(m.get("days").equals(map7.get("days"))){
+            if (m.get("days").equals(map7.get("days"))){
                 map7.put("upload",m.get("upload"));
             }
         }
         for (Map<String, Object> m : downloadList)
         {
-            if(m.get("days").equals(map1.get("days"))){
+            if (m.get("days").equals(map1.get("days"))){
                 map1.put("download",m.get("download"));
             }
-            if(m.get("days").equals(map2.get("days"))){
+            if (m.get("days").equals(map2.get("days"))){
                 map2.put("download",m.get("download"));
             }
-            if(m.get("days").equals(map3.get("days"))){
+            if (m.get("days").equals(map3.get("days"))){
                 map3.put("download",m.get("download"));
             }
-            if(m.get("days").equals(map4.get("days"))){
+            if (m.get("days").equals(map4.get("days"))){
                 map4.put("download",m.get("download"));
             }
-            if(m.get("days").equals(map5.get("days"))){
+            if (m.get("days").equals(map5.get("days"))){
                 map5.put("download",m.get("download"));
             }
-            if(m.get("days").equals(map6.get("days"))){
+            if (m.get("days").equals(map6.get("days"))){
                 map6.put("download",m.get("download"));
             }
-            if(m.get("days").equals(map7.get("days"))){
+            if (m.get("days").equals(map7.get("days"))){
                 map7.put("download",m.get("download"));
             }
         }
@@ -240,6 +243,7 @@ public class AdminController {
         return list;
     }
     @PostMapping("getC3Chart")
+    @RequiresRoles(value = {"ADMIN","SUPERVIP"},logical = Logical.OR)
     @ResponseBody
     public Map<String,Object> getC3Chart()
     {

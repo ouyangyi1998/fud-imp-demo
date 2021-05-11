@@ -219,7 +219,7 @@
                                         <td th:text="${file.size}"></td>
                                         <td th:text="${file.suffix}"></td>
                                         <td th:text="${file.createTime}"></td>
-                                        <td> <input autocomplete="off" class="lcs_check" name="check" th:checked="${file.scope}==0?'false':'true'" th:id="'chexkbox'+${file.id}" type="checkbox"/></td>
+                                        <td> <input autocomplete="off" class="lcs_check" name="check" style="zoom:30%" th:checked="${file.scope}==0?'false':'true'" th:id="'chexkbox'+${file.id}" type="checkbox"/></td>
                                         <td><a th:href="@{/download/toDownload(id=${file.id})}">下载</a></td>
                                         <td><a onclick="delFile(this)" href="javascript:;"  th:id="${file.id}">删除</a></td>
                                     </tr>

@@ -138,12 +138,18 @@
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav">
                 <ul id="sidebarnav">
+                    <shiro:hasAnyRoles name="ADMIN,SUPERVIP">
                     <li> <a class="waves-effect waves-dark" th:href="@{/admin/index}" aria-expanded="false"><i class="fa fa-bar-chart" style="color: #db6a75"></i><span class="hide-menu" >网站数据分析</span></a>
                     </li>
+                    </shiro:hasAnyRoles>
+                    <shiro:hasAnyRoles name="ADMIN,SUPERVIP">
                     <li class="active"> <a class="waves-effect waves-dark" th:href="@{/admin/file}" aria-expanded="false"><i class="fa fa-envelope" style="color: #a75082"></i><span class="hide-menu">文件管理</span></a>
                     </li>
+                    </shiro:hasAnyRoles>
+                    <shiro:hasAnyRoles name="ADMIN,SUPERVIP">
                     <li > <a class="waves-effect waves-dark" th:href="@{/admin/ban}" aria-expanded="false"><i class="fa fa-window-close-o" style="color: #70aedd"></i><span class="hide-menu">账号封禁</span></a>
                     </li>
+                    </shiro:hasAnyRoles>
                     <shiro:hasAnyRoles name="SUPERVIP">
                         <li> <a class="waves-effect waves-dark" th:href="@{/supervip/permission}" aria-expanded="false"><i class="fa fa-user-plus" style="color: #aee184"></i><span class="hide-menu">授权管理员</span></a>
                         </li>
@@ -161,6 +167,7 @@
     <!-- End Left Sidebar - style you can find in sidebar.scss  -->
     <!-- ============================================================== -->
     <div class="page-wrapper">
+        <shiro:hasAnyRoles name="SUPERVIP,ADMIN">
         <!-- ============================================================== -->
         <!-- Container fluid  -->
         <!-- ============================================================== -->
@@ -217,6 +224,7 @@
                 </div>
             </div>
         </div>
+        </shiro:hasAnyRoles>
     </div>
 </div>
 <script th:src="@{/js/utils/jquery.js}"></script>

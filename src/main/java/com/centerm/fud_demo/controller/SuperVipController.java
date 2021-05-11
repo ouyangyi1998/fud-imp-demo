@@ -76,5 +76,4 @@ public class SuperVipController {
         msg.setFlag(Constants.SUCCESS);
         return msg;
     }
-
 }

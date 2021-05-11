@@ -8,6 +8,9 @@ import com.centerm.fud_demo.entity.dto.PageDTO;
 import com.centerm.fud_demo.mapper.NotificationMapper;
 import com.centerm.fud_demo.service.NotificationService;
 import com.centerm.fud_demo.service.QuestionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * @author ouyangyi
@@ -29,6 +34,8 @@ public class PersonalController {
     private NotificationService notificationService;
     @Resource
     private NotificationMapper notificationMapper;
+    @Autowired
+    private ResourceLoader resourceLoader;
 
     @GetMapping("/personal/{action}")
     public String personal(@PathVariable(name = "action")String action,
@@ -53,5 +60,19 @@ public class PersonalController {
         }
 
         return "blog/personal";
+    }
+
+    /**
+     * 用户图片传输
+     * @param dir1 图片路径
+     * @param dir2 图片路径
+     * @param filename 图片名称
+     * @return
+     */
+    @GetMapping("/personal/get/{dir1}/{dir2}/{filename}")
+    public ResponseEntity get(@PathVariable String dir1, @PathVariable String dir2, @PathVariable String filename){
+        Path path = Paths.get(System.getProperty("user.dir") + "/src/main/resources/static/" + dir1 + "/" + dir2 , filename);
+        org.springframework.core.io.Resource resource = resourceLoader.getResource("file:" + path.toString());
+        return ResponseEntity.ok(resource);
     }
 }

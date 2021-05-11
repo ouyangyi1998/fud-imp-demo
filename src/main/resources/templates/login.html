@@ -22,6 +22,18 @@
     <script type="text/javascript" th:src="@{/js/utils/jquery.js}"></script>
     <script type="text/javascript">
         $(document).ready(function(){
+            kickout();
+            function kickout() {
+                var href = location.href;
+                if (href.indexOf("kickout")>0){
+                    swal({
+                        text: "您的账号在另一个地方登陆",
+                        type: "warning",
+                        confirm:'ok',
+                        confirmButtonColor: '#fdd32c',
+                    });
+                }
+            }
             function login(){
                 document.getElementById("login").disabled = true;
                 $.ajax({

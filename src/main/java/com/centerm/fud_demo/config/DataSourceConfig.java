@@ -16,16 +16,18 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+
 /**
  * 数据库配置类
- * @author jerry
+ * @author ouyangyi
+ * @date 2021.5.7
  */
 @Configuration
 @MapperScan(basePackages =DataSourceConfig.PACKAGE,sqlSessionFactoryRef = "sqlSessionFactory")
 public class DataSourceConfig {
 
-    static final String PACKAGE="com.centerm.fud_demo.dao";
-    static final String MAPPER_LOCATION="classpath:mapper/*.xml";
+    public static final String PACKAGE="com.centerm.fud_demo.dao";
+    public static final String MAPPER_LOCATION="classpath:mapper/*.xml";
 
     @Value("${spring.datasource.url}")
     private String url;
@@ -76,7 +78,10 @@ public class DataSourceConfig {
     @Value("${spring.datasource.maxPoolPreparedStatementPerConnectionSize}")
     private int maxPoolPreparedStatementPerConnectionSize;
 
-
+    /**
+     * 配置Druid数据库连接池
+     * @return 连接池
+     */
     @Bean(name = "dataSource")
     public DataSource dataSource()
     {
@@ -85,7 +90,6 @@ public class DataSourceConfig {
         dataSource.setUsername(username);
         dataSource.setPassword(password);
         dataSource.setDriverClassName(driverClassName);
-
         //具体配置
         dataSource.setInitialSize(initialSize);
         dataSource.setMinIdle(minIdle);
@@ -101,15 +105,17 @@ public class DataSourceConfig {
         dataSource.setMaxPoolPreparedStatementPerConnectionSize(maxPoolPreparedStatementPerConnectionSize);
         return dataSource;
     }
+
     @Bean
     public DataSourceTransactionManager dataSourceTransactionManager()
     {
         return new DataSourceTransactionManager(dataSource());
     }
+
     @Bean(name = "sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource")DataSource dataSource) throws Exception
     {
-        final SqlSessionFactoryBean sessionFactoryBean=new SqlSessionFactoryBean();
+        final SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
         sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(DataSourceConfig.MAPPER_LOCATION));
         Interceptor interceptor=new PageInterceptor();

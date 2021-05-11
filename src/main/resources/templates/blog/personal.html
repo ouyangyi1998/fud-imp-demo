@@ -14,6 +14,13 @@
     <script src="/js/blog/community.js" type="application/javascript"></script>
     <script src="/js/blog/moment.js"></script>
     <script th:src="@{/js/utils/jquery.js}"></script>
+    <script>
+    function noFind() {
+        var img = event.srcElement;
+        img.src = "https://tse3-mm.cn.bing.net/th/id/OIP.3STly9x3rm6sLAn5beDCkwHaHa?pid=ImgDet&rs=1";
+        img.onerror=null;
+    }
+    </script>
 </head>
 <body class="body">
 
@@ -30,8 +37,8 @@
                 <div class="media" th:each="question:${pagination.data}">
                     <div class="media-left">
                         <a href="#">
-                            <img class="media-object img-circle picset"
-                                 th:src="${question.user.headPicture}">
+                            <img class="adminicon"
+                                 onerror="noFind();" th:src="|@{get}${question.user.headPicture}|">
                         </a>
                     </div>
                     <div class="media-body">
