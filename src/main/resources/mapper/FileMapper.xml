@@ -16,7 +16,7 @@
         WHERE fud.file.id=#{param1}
     </update>
     <select id="getFileByUserId" parameterType="long" resultType="com.centerm.fud_demo.entity.FileRecord">
-        SELECT file.id, file.name, file.size, file.suffix, date_format(fud.file.create_time,'%Y-%m-%d') AS createTime,file.scope
+        SELECT file.id, file.name, file.size, file.suffix, date_format(fud.file.create_time,'%Y-%m-%d') AS createTime,file.scope,file.local_url AS localUrl
         FROM fud.file
         WHERE fud.file.user_id=#{userId}
         ORDER BY fud.file.create_time DESC

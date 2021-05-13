@@ -23,7 +23,8 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public List<FileRecord> getFileByUserId(Long userId) {
-        return fileDao.getFileByUserId(userId);
+        List<FileRecord> fileRecordList = fileDao.getFileByUserId(userId);
+        return fileRecordList;
     }
 
     @Override
