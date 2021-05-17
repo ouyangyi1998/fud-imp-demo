@@ -16,19 +16,25 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 项目异常类管理
+ * @author ouyangyi
+ */
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
     @ExceptionHandler(value = UnauthorizedException.class)
-    public String UnauthorizedExceptionHandler(HttpServletRequest request,UnauthorizedException ex)
+    public String unauthorizedExceptionHandler(HttpServletRequest request, UnauthorizedException ex)
     {
 
         log.warn("IP:"+request.getRemoteAddr()+" 无权限");
         return "/user/index";
     }
+
     @ExceptionHandler(value = UnknownAccountException.class)
     @ResponseBody
-    public AjaxReturnMsg UnknownAccountExceptionHandler(HttpServletRequest request,UnknownAccountException ex)
+    public AjaxReturnMsg unknownAccountExceptionHandler(HttpServletRequest request, UnknownAccountException ex)
     {
         AjaxReturnMsg msg=new AjaxReturnMsg();
         msg.setFlag(0);
@@ -36,9 +42,10 @@ public class GlobalExceptionHandler {
         log.warn("IP: "+request.getRemoteAddr()+" 登录失败"+",原因：用户名密码错误");
         return msg;
     }
+
     @ExceptionHandler(value = IncorrectCredentialsException.class)
     @ResponseBody
-    public AjaxReturnMsg IncorrectCredentialsExceptionHandler(HttpServletRequest request,IncorrectCredentialsException ex)
+    public AjaxReturnMsg incorrectCredentialsExceptionHandler(HttpServletRequest request, IncorrectCredentialsException ex)
     {
         AjaxReturnMsg msg=new AjaxReturnMsg();
         msg.setFlag(0);
@@ -46,9 +53,10 @@ public class GlobalExceptionHandler {
         log.warn("IP"+request.getRemoteAddr()+" 登录失败"+",原因：用户名密码有误");
         return msg;
     }
+
     @ExceptionHandler(value = LockedAccountException.class)
     @ResponseBody
-    public AjaxReturnMsg LockedAccountExceptionHandler(HttpServletRequest request,LockedAccountException ex)
+    public AjaxReturnMsg lockedAccountExceptionHandler(HttpServletRequest request, LockedAccountException ex)
     {
         AjaxReturnMsg msg=new AjaxReturnMsg();
         msg.setFlag(0);
@@ -56,9 +64,10 @@ public class GlobalExceptionHandler {
         log.warn("IP"+request.getRemoteAddr()+" 登录失败"+",原因：账号锁定");
         return msg;
     }
+
     @ExceptionHandler(value = AuthenticationException.class)
     @ResponseBody
-    public AjaxReturnMsg AuthenticationExceptionHandler(HttpServletRequest request,AuthenticationException ex)
+    public AjaxReturnMsg authenticationExceptionHandler(HttpServletRequest request, AuthenticationException ex)
     {
         AjaxReturnMsg msg=new AjaxReturnMsg();
         msg.setFlag(0);
@@ -66,9 +75,10 @@ public class GlobalExceptionHandler {
         log.warn("IP"+request.getRemoteAddr()+" 登录失败"+",原因：未输入用户名或密码");
         return msg;
     }
+
     @ExceptionHandler(value = PasswordNotEqualsRetypePasswordException.class)
     @ResponseBody
-    public AjaxReturnMsg PasswordNotEqualsRetypePasswordExceptionHandler(HttpServletRequest request, PasswordNotEqualsRetypePasswordException ex)
+    public AjaxReturnMsg passwordNotEqualsRetypePasswordExceptionHandler(HttpServletRequest request, PasswordNotEqualsRetypePasswordException ex)
     {
         AjaxReturnMsg msg=new AjaxReturnMsg();
         msg.setFlag(0);
@@ -76,9 +86,10 @@ public class GlobalExceptionHandler {
         log.warn("IP"+request.getRemoteAddr()+" 注册失败"+",原因：注册密码与重复输入不匹配");
         return msg;
     }
+
     @ExceptionHandler(value = NotAcceptTermsException.class)
     @ResponseBody
-    public AjaxReturnMsg NotAcceptTermsExceptionHandler(HttpServletRequest request, NotAcceptTermsException ex)
+    public AjaxReturnMsg notAcceptTermsExceptionHandler(HttpServletRequest request, NotAcceptTermsException ex)
     {
         AjaxReturnMsg msg=new AjaxReturnMsg();
         msg.setFlag(0);
@@ -86,9 +97,10 @@ public class GlobalExceptionHandler {
         log.warn("IP"+request.getRemoteAddr()+" 注册失败"+",原因：不同意我方license");
         return msg;
     }
+
     @ExceptionHandler(value = UsernameRepeatingException.class)
     @ResponseBody
-    public AjaxReturnMsg UsernameRepeatingExceptionHandler(HttpServletRequest request, UsernameRepeatingException ex)
+    public AjaxReturnMsg usernameRepeatingExceptionHandler(HttpServletRequest request, UsernameRepeatingException ex)
     {
         AjaxReturnMsg msg=new AjaxReturnMsg();
         msg.setFlag(0);
@@ -96,20 +108,23 @@ public class GlobalExceptionHandler {
         log.warn("IP"+request.getRemoteAddr()+" 注册失败"+",原因：用户名已注册");
         return msg;
     }
+
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public String HttpRequestMethodNotSupportedExceptionHandler(HttpServletRequest request)
+    public String httpRequestMethodNotSupportedExceptionHandler(HttpServletRequest request)
     {
         log.warn("用户 "+request.getRemoteAddr()+" 进行非法的请求访问");
         return "error/405";
     }
+
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public String HttpMediaTypeNotSupportedExceptionHandler(HttpServletRequest request)
+    public String httpMediaTypeNotSupportedExceptionHandler(HttpServletRequest request)
     {
         log.warn("用户 "+request.getRemoteAddr()+" 不支持媒体类型");
         return "error/415";
     }
+
     @ExceptionHandler(NoHandlerFoundException.class)
-    public String NoHandlerFoundExceptionHandler(HttpServletRequest request)
+    public String noHandlerFoundExceptionHandler(HttpServletRequest request)
     {
 
         log.warn("用户 "+request.getRemoteAddr()+" 操作未找到访问资源");

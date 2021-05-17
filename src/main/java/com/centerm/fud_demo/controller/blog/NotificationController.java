@@ -11,7 +11,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * 用户消息提醒模块
  * @author ouyangyi
+ * @time 2021.2.12
  */
 @Controller
 public class NotificationController {
@@ -21,6 +23,12 @@ public class NotificationController {
     @Resource
     private CommentMapper commentMapper;
 
+    /**
+     * 用户点击消息提醒处理
+     * @param id 消息提醒id
+     * @param request 请求参数
+     * @return 请求帖子页面
+     */
     @GetMapping("/notification/{action}")
     public String notification(@PathVariable("action")int id,
                                HttpServletRequest request){

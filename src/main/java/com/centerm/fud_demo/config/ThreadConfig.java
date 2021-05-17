@@ -6,13 +6,17 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.ThreadPoolExecutor;
 
+/**
+ * 配置SpringBoot线程池
+ * @author ouyangyi
+ */
 @Configuration
 public class ThreadConfig {
     @Bean
     public ThreadPoolTaskExecutor defaultThreadPool() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         //核心线程数目
-        executor.setCorePoolSize(16);
+        executor.setCorePoolSize(4);
         //指定最大线程数
         executor.setMaxPoolSize(300);
         //队列中最大的数目

@@ -5,23 +5,20 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 用户分页
+ * @author ouyangyi
+ */
 @Data
 public class PageDTO<T> {
-    //问题内容
+
     private List<T> data;
-    //是否展示前一页
     private Boolean showPre;
-    //是否展示后一页
     private Boolean showNext;
-    //是否展示第一页
     private Boolean showFirst;
-    //是否展示最后一页
     private Boolean showLast;
-    //当前页码
     private Integer page;
-    //当前展示的页码集合
     private List<Integer> pages = new ArrayList<>();
-    //所有页数
     private Integer totalPage;
 
     public void setPagination(int totalCount, int page, int size) {

@@ -9,6 +9,7 @@
 //import org.springframework.context.annotation.Configuration;
 //
 ///**
+// * 配置HTTPs
 // * @author Sheva
 // * @version 1.0
 // * @date 2020/1/23 下午2:45
@@ -32,6 +33,10 @@
 //        return tomcat;
 //    }
 //
+//    /**
+//     * 配置HTTPs端口映射
+//     * @return 连接器
+//     */
 //    @Bean
 //    public Connector httpConnector(){
 //        Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");

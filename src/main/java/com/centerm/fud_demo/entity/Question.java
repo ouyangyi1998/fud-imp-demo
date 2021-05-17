@@ -3,6 +3,7 @@ package com.centerm.fud_demo.entity;
 import lombok.Data;
 
 /**
+ * 用户帖子实体
  * @author ouyangyi
  */
 @Data

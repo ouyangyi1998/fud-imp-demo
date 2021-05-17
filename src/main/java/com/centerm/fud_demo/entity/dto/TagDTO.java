@@ -5,6 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
+ * 论坛Tag
  * @author ouyangyi
  */
 @Data

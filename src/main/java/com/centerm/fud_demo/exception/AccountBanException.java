@@ -1,16 +1,18 @@
 package com.centerm.fud_demo.exception;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 管理员对于账号封禁或解锁异常
- *
  * @author         Jerry
  * @date           20/01/20
  * @version       1.0
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class AccountBanException extends Exception {
+
     private String errorCode;
     private String errorMsg;
 

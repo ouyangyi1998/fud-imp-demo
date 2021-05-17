@@ -22,8 +22,14 @@ import javax.servlet.http.HttpServletRequest;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static com.centerm.fud_demo.constant.Constants.INFORMATION;
+import static com.centerm.fud_demo.constant.Constants.QUESTIONS;
+import static org.apache.coyote.http11.Constants.QUESTION;
+
 /**
+ * 用户个人信息处理
  * @author ouyangyi
+ * @time 2021.2.13
  */
 @Controller
 public class PersonalController {
@@ -37,6 +43,15 @@ public class PersonalController {
     @Autowired
     private ResourceLoader resourceLoader;
 
+    /**
+     * 个人消息问题处理
+     * @param action 个人消息类型
+     * @param model 模型
+     * @param request 请求参数
+     * @param page 分页数
+     * @param size 分页长度
+     * @return 页面
+     */
     @GetMapping("/personal/{action}")
     public String personal(@PathVariable(name = "action")String action,
                            Model model,
@@ -45,17 +60,17 @@ public class PersonalController {
                            @RequestParam(name = "size",defaultValue = "10")int size){
         User user = (User)request.getSession().getAttribute("user");
                     //获取未读的消息数量
-                    int unreadNum=notificationMapper.getUnreadCount(user.getId().intValue());
+                    int unreadNum = notificationMapper.getUnreadCount(user.getId().intValue());
                     request.getSession().setAttribute("unreadNum",unreadNum);
-        if (action.equals("questions")){
+        if (QUESTIONS.equals(action)){
             model.addAttribute("section","questions");
             model.addAttribute("sectionName","我的问题");
-            PageDTO<Question> pagination=questionService.list(user.getId().intValue(),page,size);
+            PageDTO<Question> pagination = questionService.list(user.getId().intValue(),page,size);
             model.addAttribute("pagination", pagination);
-        }else if (action.equals("information")){
+        }else if (INFORMATION.equals(action)){
             model.addAttribute("section","information");
             model.addAttribute("sectionName","我的消息");
-            PageDTO<NotificationDTO> notifications= notificationService.list(user.getId().intValue(),page,size);
+            PageDTO<NotificationDTO> notifications = notificationService.list(user.getId().intValue(),page,size);
             model.addAttribute("notifications",notifications);
         }
 
@@ -67,7 +82,7 @@ public class PersonalController {
      * @param dir1 图片路径
      * @param dir2 图片路径
      * @param filename 图片名称
-     * @return
+     * @return 照片信息
      */
     @GetMapping("/personal/get/{dir1}/{dir2}/{filename}")
     public ResponseEntity get(@PathVariable String dir1, @PathVariable String dir2, @PathVariable String filename){

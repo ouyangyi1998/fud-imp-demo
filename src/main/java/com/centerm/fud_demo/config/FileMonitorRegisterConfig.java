@@ -11,20 +11,24 @@ import javax.annotation.Resource;
 import java.io.File;
 
 /**
+ * 文件后台监听模块
  * @author Sheva
  * @version 1.0
  * @date 2020/2/15 上午10:59
  */
-
 @Component
 @Slf4j
 public class FileMonitorRegisterConfig {
 
     @Value("${filePath}")
     private String filePath;
+
     @Resource
     private FileListenerMonitorUtils fileListenerMonitorUtils;
 
+    /**
+     * 文件监听器在线注册模块
+     */
     @PostConstruct
     private void register(){
         File directory = new File(filePath + "real");

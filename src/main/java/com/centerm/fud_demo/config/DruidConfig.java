@@ -10,11 +10,16 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Druid连接池配置
- * @author jerry
+ * @author ouyangyi
+ * @time 2020.2.23
  */
 @Configuration
 @Slf4j
 public class DruidConfig {
+    /**
+     * 进行Druid登录账户 IP控制
+     * @return Durid登录模块控制
+     */
     @Bean
     public ServletRegistrationBean druidStatViewServlet()
     {
@@ -26,6 +31,11 @@ public class DruidConfig {
         servletRegistrationBean.addInitParameter("resetEnable","false");
         return servletRegistrationBean;
     }
+
+    /**
+     * 配置Druid URL过滤器
+     * @return Druid 过滤器
+     */
     @Bean
     public FilterRegistrationBean druidStatFilter()
     {

@@ -3,6 +3,7 @@ package com.centerm.fud_demo.entity;
 import lombok.Data;
 
 /**
+ * 文件分片实体
  * @author Sheva
  * @version 1.0
  * @date 2020/2/25 上午10:30

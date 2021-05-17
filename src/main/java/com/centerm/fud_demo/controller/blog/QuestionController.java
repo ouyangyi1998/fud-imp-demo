@@ -7,6 +7,9 @@ import com.centerm.fud_demo.entity.dto.QuestionDTO;
 import com.centerm.fud_demo.mapper.NotificationMapper;
 import com.centerm.fud_demo.service.CommentService;
 import com.centerm.fud_demo.service.QuestionService;
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +25,11 @@ import java.nio.file.Paths;
 import java.util.List;
 
 /**
+ * 用户帖子管理
  * @author ouyangyi
+ * @time 2021.2.12
  */
+@Slf4j
 @Controller
 public class QuestionController {
 
@@ -36,6 +42,13 @@ public class QuestionController {
     @Autowired
     private ResourceLoader resourceLoader;
 
+    /**
+     * 用户访问帖子
+     * @param id 帖子id
+     * @param model 模型
+     * @param request 请求参数
+     * @return
+     */
     @GetMapping("/question/{id}")
     public String question(@PathVariable(name = "id")int id,
                            Model model,
@@ -43,25 +56,25 @@ public class QuestionController {
         //查找cookies，观察是否有token存在
         User user = (User)request.getSession().getAttribute("user");
         //获取未读的消息数量
-        int unreadNum=notificationMapper.getUnreadCount(user.getId().intValue());
+        int unreadNum = notificationMapper.getUnreadCount(user.getId().intValue());
         request.getSession().setAttribute("unreadNum",unreadNum);
-        QuestionDTO questionDTO=questionService.getById(id);
+        QuestionDTO questionDTO = questionService.getById(id);
         //增加阅读数
         questionService.increaseView(id);
         model.addAttribute("questionDTO",questionDTO);
         //展示回复数据
-        List<CommentDTO> comments=commentService.getById(id);
+        List<CommentDTO> comments = commentService.getById(id);
         model.addAttribute("comments",comments);
         //相关问题
-        String[] tags=questionDTO.getTag().split(",");
-        StringBuilder msg=new StringBuilder();
-        for (String tag:tags){
+        String[] tags = questionDTO.getTag().split(",");
+        StringBuilder msg = new StringBuilder();
+        for (String tag : tags){
             msg.append(tag);
             msg.append("|");
         }
-        String result=msg.substring(0,msg.length()-1);
-        System.out.println(result);
-        List<Question> relativeQuestion =questionService.getByTag(id,result);
+        String result = msg.substring(0,msg.length()-1);
+        log.info(result);
+        List<Question> relativeQuestion = questionService.getByTag(id,result);
         model.addAttribute("relativeQuestion",relativeQuestion);
 
         return "blog/question";
@@ -72,7 +85,7 @@ public class QuestionController {
      * @param dir1 图片路径
      * @param dir2 图片路径
      * @param filename 图片名称
-     * @return
+     * @return 图片文件
      */
     @GetMapping("/question/get/{dir1}/{dir2}/{filename}")
     public ResponseEntity get(@PathVariable String dir1, @PathVariable String dir2, @PathVariable String filename){

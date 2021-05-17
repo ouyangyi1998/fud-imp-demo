@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
+ * 用户信息更新实体类
  * @author ouyangyi
  */
 @Data

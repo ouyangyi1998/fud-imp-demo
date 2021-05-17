@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 /**
- * 下载记录
+ * 下载记录实体
  * @author jerry
  */
 @Data

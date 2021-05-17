@@ -1,6 +1,7 @@
 package com.centerm.fud_demo.constant;
 
 /**
+ * 项目常量
  * @author Sheva
  * @version 1.0
  * @date 2020/2/11 下午1:25
@@ -53,5 +54,16 @@ public class Constants {
     public static final String[] AUDIO_LIST = {"wav","mp3","aac","flac","amr","midi"};
     public static final String[] DOCUMENT_LIST = {"md","html","pdf","doc","txt","rtf"};
     public static final String[] PICTURE_LIST = {"jpg","png","jif","jpeg","tif","bmp"};
+    /**
+     * 用户回复类型
+     */
+    public static final Integer REPLY_ANSWER = 2;
+    public static final Integer REPLY_QUESTION = 1;
+    /**
+     * 创建帖子
+     */
+    public static final Integer CREATE_QUESTION = -1;
 
+    public static final String QUESTIONS = "questions";
+    public static final String INFORMATION = "information";
 }

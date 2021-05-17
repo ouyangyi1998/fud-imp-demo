@@ -7,9 +7,16 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * 论坛Tag参数
  * @author ouyangyi
+ * @time 2021.2.23
  */
 public class TagCache {
+
+    /**
+     * 获取到论坛Tag表单
+     * @return Tag表单
+     */
     public List<TagDTO> getTags(){
         List<TagDTO> tags=new ArrayList<>();
 

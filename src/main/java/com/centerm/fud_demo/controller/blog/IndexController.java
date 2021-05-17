@@ -22,6 +22,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 /**
+ * 用户论坛主页控制
  * @author ouyangyi
  */
 @Controller
@@ -36,6 +37,14 @@ public class IndexController {
     @Autowired
     private ResourceLoader resourceLoader;
 
+    /**
+     * 跳转到用户论坛主页
+     * @param request 请求参数
+     * @param model 模型
+     * @param page 页数
+     * @param size 分页长度
+     * @return 用户主页
+     */
     @GetMapping("/index")
     public String index(HttpServletRequest request, Model model,
                         @RequestParam(name = "page", defaultValue = "1") int page,
@@ -44,22 +53,23 @@ public class IndexController {
         model.addAttribute("pagination", pagination);
 
         //获取阅读量最高的十篇问题
-        List<Question> questions= questionService.getTopTen();
+        List<Question> questions = questionService.getTopTen();
         model.addAttribute("topQuestion",questions);
 
         //获取到user
         User user = (User)request.getSession().getAttribute("user");
         //获取未读的消息数量
-        int unreadNum=notificationMapper.getUnreadCount(user.getId().intValue());
+        int unreadNum = notificationMapper.getUnreadCount(user.getId().intValue());
         request.getSession().setAttribute("unreadNum",unreadNum);
         return "blog/index";
     }
+
     /**
      * 用户图片传输
      * @param dir1 图片路径
      * @param dir2 图片路径
      * @param filename 图片名称
-     * @return
+     * @return 照片信息
      */
     @GetMapping("/get/{dir1}/{dir2}/{filename}")
     public ResponseEntity get(@PathVariable String dir1, @PathVariable String dir2, @PathVariable String filename){
