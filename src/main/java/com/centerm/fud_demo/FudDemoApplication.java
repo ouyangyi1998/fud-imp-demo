@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableCaching
 @SpringBootApplication
 @MapperScan(value = "com.centerm.fud_demo.mapper")
-public class FudDemoApplication extends SpringBootServletInitializer implements WebMvcConfigurer {
+public class FudDemoApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
@@ -26,13 +26,4 @@ public class FudDemoApplication extends SpringBootServletInitializer implements 
         SpringApplication.run(FudDemoApplication.class, args);
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:META-INF/resources/")
-                .addResourceLocations("classpath:/resources/")
-                .addResourceLocations("classpath:/public/")
-                .addResourceLocations("classpath:/static/")
-                .addResourceLocations("file:/Users/ouyangyi/Downloads/test/real/");
-    }
 }

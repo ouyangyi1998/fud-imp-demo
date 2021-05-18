@@ -137,6 +137,7 @@ public class UserController {
     {
         List<FileRecord> fileRecordList = fileService.getFileByUserId(currUser.getId());
         for(FileRecord fileRecord : fileRecordList){
+            fileRecord.setLocalUrl(fileRecord.getLocalUrl().substring(14));
             System.out.println(fileRecord.getLocalUrl());
         }
         model.addAttribute("fileList", fileRecordList);
