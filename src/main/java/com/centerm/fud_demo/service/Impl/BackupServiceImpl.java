@@ -18,9 +18,16 @@ import java.util.List;
 @Service
 @Slf4j
 public class BackupServiceImpl implements BackupService {
+
     @Autowired
     private FileDao fileDao;
 
+    /**
+     * 创建备份文件
+     * @param copyFrom 原地址
+     * @param copyTo 目标地址
+     * @param fileName 文件名
+     */
     @Override
     public void backupFile(String copyFrom, String copyTo, String fileName) {
         log.info("backup start...");
@@ -59,6 +66,11 @@ public class BackupServiceImpl implements BackupService {
         log.info("Backup lasts: " + (end - start) + "ms");
     }
 
+    /**
+     * 通过文件地址获取到文件备份地址
+     * @param filePath 文件地址
+     * @return 文件备份地址
+     */
     @Override
     public String getFileBackupPath(String filePath) {
         return fileDao.getFileBackupUrl(filePath);

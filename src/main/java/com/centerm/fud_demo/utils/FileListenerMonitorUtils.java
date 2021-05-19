@@ -12,10 +12,10 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 文件夹监听工具类
  * @author Sheva
  * @version 1.0
  * @date 2020/2/15 上午11:01
- * 文件夹监听工具类
  */
 @Component
 @Slf4j
@@ -23,6 +23,12 @@ public class FileListenerMonitorUtils {
     @Resource
     private FileListener fileListener;
 
+    /**
+     * 实现文件夹监听
+     * @param directory 文件目录
+     * @param intervalSeconds 当前时间
+     * @return
+     */
     public FileAlterationMonitor getMonitor(File directory, Long intervalSeconds){
         long interval = TimeUnit.SECONDS.toMillis(intervalSeconds);
         IOFileFilter directories = FileFilterUtils.and(FileFilterUtils.directoryFileFilter());

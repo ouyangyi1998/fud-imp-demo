@@ -12,15 +12,13 @@ import javax.crypto.spec.SecretKeySpec;
 @SuppressWarnings("restriction")
 public class AesUtil {
 
-
     /**
      * 算法PKCS5Padding
      */
     private static final String ALGORITHMSTR = "AES/ECB/PKCS5Padding";
 
-
     /**
-     * AES解密--并解密base 64 code
+     * AES解密--并解密base64 code
      * @param encryptStr 加密的字符
      * @param key 密钥
      * @return
@@ -44,8 +42,8 @@ public class AesUtil {
      * AES解密
      * @param encryptBytes 解密的字节流
      * @param key 密钥
-     * @return
-     * @throws Exception
+     * @return 解码结果
+     * @throws Exception 异常
      */
     private static String aesDecryptByBytes(byte[] encryptBytes,String key) throws Exception {
         KeyGenerator kgen = KeyGenerator.getInstance("AES");
@@ -56,6 +54,11 @@ public class AesUtil {
         return new String(decryptBytes, "utf-8");
     }
 
+    /**
+     * 把hex数据转化为byte
+     * @param str hex数据
+     * @return byte数据
+     */
     public static byte[] hexToByte(String str){
         byte[] bytes = new byte[str.length() / 2];
         for (int i = 0; i < str.length() / 2; i++) {

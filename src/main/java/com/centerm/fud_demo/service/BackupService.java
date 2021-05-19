@@ -1,6 +1,7 @@
 package com.centerm.fud_demo.service;
 
 /**
+ * 文件备份管理
  * @author Sheva
  * @version 1.0
  * @date 2020/2/4 上午10:31
@@ -18,7 +19,7 @@ public interface BackupService {
     /**
      * 获取文件的备份地址
      * @param filePath 文件地址
-     * @return
+     * @return 地址
      */
     String getFileBackupPath(String filePath);
 

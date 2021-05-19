@@ -6,16 +6,22 @@ import org.apache.shiro.util.ByteSource;
 
 /**
  * 用户密码操作工具类
+ * @author ouyangyi
  */
 public class PasswordHelper {
     /**
      * 定义算法 MD5
      */
-    private static String algorithmName = "MD5";
-    private final static int hashIterations = 5;
+    private static final String ALGORITHM_NAME = "MD5";
+    private final static int HASH_ITERATIONS = 5;
+
+    /**
+     * 加密用户密码
+     * @param user 用户
+     */
     public static void encryptPassword(User user)
     {
-        String newPassword = new SimpleHash(algorithmName,user.getPassword(), ByteSource.Util.bytes(user.getUsername()),hashIterations).toHex();
+        String newPassword = new SimpleHash(ALGORITHM_NAME,user.getPassword(), ByteSource.Util.bytes(user.getUsername()),HASH_ITERATIONS).toHex();
         user.setPassword(newPassword);
     }
 }

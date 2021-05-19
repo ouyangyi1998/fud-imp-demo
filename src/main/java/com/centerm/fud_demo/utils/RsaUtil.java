@@ -9,6 +9,9 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author ouyangyi
+ */
 public class RsaUtil {
     private final static int KEY_SIZE = 1024;
 
@@ -17,7 +20,7 @@ public class RsaUtil {
      * @throws NoSuchAlgorithmException
      */
     public static Map<Integer, String> genKeyPair() throws NoSuchAlgorithmException{
-        Map<Integer, String> keyMap = new HashMap<>();
+        Map<Integer, String> keyMap = new HashMap<>(2);
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
         keyPairGenerator.initialize(KEY_SIZE, new SecureRandom());
         KeyPair keyPair = keyPairGenerator.generateKeyPair();
@@ -37,7 +40,6 @@ public class RsaUtil {
         RSAPrivateKey priKey = (RSAPrivateKey) KeyFactory.getInstance("RSA").generatePrivate(new PKCS8EncodedKeySpec(decoded));
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.DECRYPT_MODE, priKey);
-        String outStr = new String(cipher.doFinal(inputByte));
-        return outStr;
+        return new String(cipher.doFinal(inputByte));
     }
 }

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 论坛用户提醒管理
  * @author ouyangyi
  */
 @Service
@@ -32,7 +33,13 @@ public class NotificationService {
     @Resource
     private CommentMapper commentMapper;
 
-    //返回一个PageDto
+    /**
+     * 获取用户提醒分页
+     * @param id 用户id
+     * @param page 页面数目
+     * @param size 页面长度
+     * @return 分页信息
+     */
     public PageDTO list(int id, int page, int size) {
         PageDTO pageDto = new PageDTO();
         int totalCount = notificationMapper.count(id);

@@ -30,10 +30,18 @@ import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import javax.servlet.Filter;
 import java.util.*;
 
+/**
+ * shiro配置
+ * @author ouyangyi
+ */
 @Configuration
 public class ShiroConfig {
 
-
+    /**
+     * 配置shiro过滤链
+     * @param securityManager 安全管理器
+     * @return
+     */
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier("securityManager") SecurityManager securityManager)
     {
@@ -76,7 +84,7 @@ public class ShiroConfig {
 
     /**
      * 并发登录控制
-     * @return
+     * @return 并发登录管理器
      */
     @Bean
     public KickoutSessionControllerFilter kickoutSessionControlFilter(){
@@ -97,26 +105,24 @@ public class ShiroConfig {
 
     /**
      * 配置session监听
-     * @return
+     * @return 监听器
      */
     @Bean("sessionListener")
     public Listener sessionListener(){
-        Listener sessionListener = new Listener();
-        return sessionListener;
+        return new Listener();
     }
 
     /**
      * 配置保存sessionId的cookie
      * 注意：这里的cookie 不是上面的记住我 cookie 记住我需要一个cookie session管理 也需要自己的cookie
      * 默认为: JSESSIONID 问题: 与SERVLET容器名冲突,重新定义为sid
-     * @return
+     * @return cookie配置器
      */
     @Bean("sessionIdCookie")
     public SimpleCookie sessionIdCookie(){
         //这个参数是cookie的名称
         SimpleCookie simpleCookie = new SimpleCookie("sid");
         //setcookie的httponly属性如果设为true的话，会增加对xss防护的安全系数。它有以下特点：
-
         //setcookie()的第七个参数
         //设为true后，只能通过http访问，javascript无法访问
         //防止xss读取cookie
@@ -130,19 +136,19 @@ public class ShiroConfig {
     /**
      * 让某个实例的某个方法的返回值注入为Bean的实例
      * Spring静态注入
-     * @return
+     * @return 工厂注入器
      */
     @Bean
     public MethodInvokingFactoryBean getMethodInvokingFactoryBean(){
         MethodInvokingFactoryBean factoryBean = new MethodInvokingFactoryBean();
         factoryBean.setStaticMethod("org.apache.shiro.SecurityUtils.setSecurityManager");
-        factoryBean.setArguments(new Object[]{securityManager()});
+        factoryBean.setArguments(securityManager());
         return factoryBean;
     }
 
     /**
      * 配置会话管理器，设定会话超时及保存
-     * @return
+     * @return session管理器
      */
     @Bean("sessionManager")
     public SessionManager sessionManager() {
@@ -177,7 +183,7 @@ public class ShiroConfig {
      * SessionDAO的作用是为Session提供CRUD并进行持久化的一个shiro组件
      * MemorySessionDAO 直接在内存中进行会话维护
      * EnterpriseCacheSessionDAO  提供了缓存功能的会话维护，默认情况下使用MapCache实现，内部使用ConcurrentHashMap保存缓存的会话。
-     * @return
+     * @return sessionDao
      */
     @Bean
     public SessionDAO sessionDAO() {
@@ -193,7 +199,7 @@ public class ShiroConfig {
 
     /**
      * 配置会话ID生成器
-     * @return
+     * @return 会话id生成器
      */
     @Bean
     public SessionIdGenerator sessionIdGenerator() {
@@ -202,7 +208,7 @@ public class ShiroConfig {
 
     /**
      * 配置核心安全事务管理器
-     * @return
+     * @return 安全管理器
      */
     @Bean(name="securityManager")
     public SecurityManager securityManager() {
@@ -219,7 +225,7 @@ public class ShiroConfig {
 
     /**
      * 配置Shiro生命周期处理器
-     * @return
+     * @return 注解配置
      */
     @Bean(name = "lifecycleBeanPostProcessor")
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
@@ -228,7 +234,7 @@ public class ShiroConfig {
 
     /**
      *  身份认证realm; (这个需要自己写，账号密码校验；权限等)
-     * @return
+     * @return 用户认证
      */
     @Bean
     public UserRealm shiroRealm(){
@@ -246,6 +252,10 @@ public class ShiroConfig {
         return shiroRealm;
     }
 
+    /**
+     * md5加密算法配置
+     * @return md5控制
+     */
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher()
     {
@@ -258,7 +268,7 @@ public class ShiroConfig {
     /**
      * 必须（thymeleaf页面使用shiro标签控制按钮是否显示）
      * 未引入thymeleaf包，Caused by: java.lang.ClassNotFoundException: org.thymeleaf.dialect.AbstractProcessorDialect
-     * @return
+     * @return shiro注释器
      */
     @Bean
     public ShiroDialect shiroDialect() {
@@ -269,7 +279,7 @@ public class ShiroConfig {
      * 开启shiro 注解模式
      * 可以在controller中的方法前加上注解
      * 如 @RequiresPermissions("userInfo:add")
-     * @param securityManager
+     * @param securityManager 安全控制器
      * @return
      */
     @Bean
@@ -285,7 +295,7 @@ public class ShiroConfig {
      * 只有perms，roles，ssl，rest，port才是属于AuthorizationFilter，而anon，authcBasic，auchc，user是AuthenticationFilter，
      * 所以unauthorizedUrl设置后页面不跳转 Shiro注解模式下，登录失败与没有权限都是通过抛出异常。
      * 并且默认并没有去处理或者捕获这些异常。在SpringMVC下需要配置捕获相应异常来通知用户信息
-     * @return
+     * @return 权限控制
      */
     @Bean
     public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
@@ -298,11 +308,10 @@ public class ShiroConfig {
         return simpleMappingExceptionResolver;
     }
 
-
     /**
      * shiro缓存管理器;
      * 需要添加到securityManager中
-     * @return
+     * @return 配置ehcache缓存
      */
     @Bean
     public EhCacheManager ehCacheManager(){

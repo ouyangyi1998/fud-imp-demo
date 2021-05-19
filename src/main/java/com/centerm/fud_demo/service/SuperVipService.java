@@ -15,27 +15,27 @@ public interface SuperVipService {
     /**
      * 成为管理员
      * @param userId 用户id
-     * @return
+     * @return 结果
      */
     Boolean becomeAdmin(Long userId);
 
     /**
      * 移除管理员
      * @param userId 用户
-     * @return
+     * @return 结果
      */
     Boolean removeAdmin(Long userId);
 
     /**
      * 获取用户角色
      * @param userId 用户id
-     * @return
+     * @return 角色id
      */
     Long getUserRoles(Long userId);
 
     /**
      * 获取所有用户（除了超级管理员）
-     * @return
+     * @return 角色信息
      */
     List<User> getAllUserExceptSuperVIP();
 

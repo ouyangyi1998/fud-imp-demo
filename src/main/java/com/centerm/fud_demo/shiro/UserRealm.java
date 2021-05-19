@@ -18,7 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
+ * 用户权限过滤系统
  * @author jerry
  */
 @Component
@@ -28,26 +28,38 @@ public class UserRealm extends AuthorizingRealm {
     @Autowired
     private UserService userService;
 
+    /**
+     * 权限认证
+     * @param principals
+     * @return 认证
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         log.info("Current User is：　" + user.getUsername());
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         String roleName = userService.findRoles(user.getUsername());
-        Set<String> set=new HashSet<>();
+        Set<String> set = new HashSet<>();
         set.add(roleName);
         authorizationInfo.setRoles(set);
         log.info("Current permission is： " + roleName);
         return authorizationInfo;
     }
 
+    /**
+     * 登录校验
+     * @param token 用户token
+     * @return 校验
+     * @throws AuthenticationException 校验异常
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException{
-        String username=(String)token.getPrincipal();
+        String username = (String)token.getPrincipal();
         User user = null;
         try {
             user = userService.findByUsername(username);
         }catch (NullPointerException e) {}
+
         if(null == user)
         {
             throw new UnknownAccountException();
@@ -57,9 +69,10 @@ public class UserRealm extends AuthorizingRealm {
             throw new LockedAccountException();
         }
 
-        SimpleAuthenticationInfo authenticationInfo=new SimpleAuthenticationInfo(user,user.getPassword(), ByteSource.Util.bytes(user.getUsername()),getName());
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user,user.getPassword(), ByteSource.Util.bytes(user.getUsername()),getName());
         return authenticationInfo;
     }
+
     /**
      * 重写方法,清除当前用户的的 授权缓存
      * @param principals

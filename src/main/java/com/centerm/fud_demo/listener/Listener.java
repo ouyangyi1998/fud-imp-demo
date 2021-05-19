@@ -7,6 +7,7 @@ import org.apache.shiro.session.SessionListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * 在线人数监听
  * @author ouyangyi
@@ -29,9 +30,5 @@ public class Listener implements SessionListener {
     @Override
     public void onExpiration(Session session) {
         SESSION_COUNT .getAndDecrement();
-    }
-    public AtomicInteger getSessionCount()
-    {
-        return SESSION_COUNT ;
     }
 }
