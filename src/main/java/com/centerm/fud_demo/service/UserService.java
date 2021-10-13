@@ -10,8 +10,8 @@ public interface UserService {
 
     /**
      * 通过用户名查找用户
-     * @param username
-     * @return
+     * @param username 用户名
+     * @return 用户信息
      */
     User findByUsername(String username);
 
@@ -37,14 +37,15 @@ public interface UserService {
 
     /**
      * 修改用户头像
-     * @param username
+     * @param username 用户名
+     * @param filePath 文件路径
      */
     void updateHeadPicture(String username,String filePath);
 
     /**
      * 找到之前的头像文件
      * @param username 用户名称
-     * @return
+     * @return 头像url
      */
     String selectHeadPcitureURL(String username);
 

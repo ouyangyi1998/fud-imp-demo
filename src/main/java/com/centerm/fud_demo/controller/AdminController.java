@@ -27,9 +27,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.centerm.fud_demo.constant.Constants.FAIL;
+import static jdk.nashorn.tools.Shell.SUCCESS;
+
 /**
  * 管理员控制类
  * @author jerry
+ * @time 2021.2.23
  */
 @Controller
 @RequestMapping("admin")
@@ -46,9 +50,13 @@ public class AdminController {
     @Autowired
     private UploadService uploadService;
 
-
+    /**
+     * 管理员跳转文件管理
+     * @param request 请求参数
+     * @return 用户文件管理页面
+     */
     @GetMapping("file")
-    @RequiresRoles("SUPERVIP")
+    @RequiresRoles(value = {"ADMIN","SUPERVIP"},logical = Logical.OR)
     public String adminDownload(HttpServletRequest request)
     {
         List<FileRecord> fileList=fileService.getAllFile();
@@ -56,12 +64,16 @@ public class AdminController {
         return "admin/filelist";
     }
 
+    /**
+     * 跳转管理员主页
+     * @param request 请求参数
+     * @return 管理员主页
+     */
     @GetMapping("index")
     @RequiresRoles(value = {"ADMIN","SUPERVIP"},logical = Logical.OR)
     public String adminIndex(ServletRequest request)
     {
-        System.out.println("FSDFSAFSDFSDAFDSA");
-        AtomicInteger userNum=Listener.sessionCount;
+        AtomicInteger userNum = Listener.SESSION_COUNT;
         long fileNums = uploadService.getUploadTimes();
         Long downloadTimes = downloadService.getDownloadTimes();
         List<FileRecord> fileRecordList = downloadService.getMostDownloadRecord();
@@ -72,6 +84,11 @@ public class AdminController {
         return "admin/index";
     }
 
+    /**
+     * 管理员跳转用户封禁页面
+     * @param request 请求参数
+     * @return 管理员封禁主页
+     */
     @GetMapping("ban")
     @RequiresRoles(value = {"ADMIN","SUPERVIP"},logical = Logical.OR)
     public String adminBan(HttpServletRequest request) {
@@ -82,6 +99,12 @@ public class AdminController {
         return "admin/ban";
     }
 
+    /**
+     * 管理员封禁用户
+     * @param request 请求参数
+     * @return 用户封禁参数
+     * @throws AccountBanException 用户封禁异常
+     */
     @PostMapping("banUser")
     @RequiresRoles(value = {"ADMIN","SUPERVIP"},logical = Logical.OR)
     @ResponseBody
@@ -91,11 +114,11 @@ public class AdminController {
         String username = request.getParameter("username");
         User target = userService.findByUsername(username);
         Integer userState = target.getState();
-        Long userId=target.getId();
+        Long userId = target.getId();
         if (Constants.NORMAL.equals(userState))
         {
            //执行账号封禁
-           Boolean isSuccess= adminService.banUser(userId);
+           Boolean isSuccess = adminService.banUser(userId);
            if (!isSuccess)
            {
                throw new AccountBanException();
@@ -110,7 +133,7 @@ public class AdminController {
            }
            log.info("User: "+ username + " has been unlocked...");
        }
-        DefaultWebSecurityManager securityManager= (DefaultWebSecurityManager) SecurityUtils.getSecurityManager();
+        DefaultWebSecurityManager securityManager = (DefaultWebSecurityManager) SecurityUtils.getSecurityManager();
         UserRealm shiroRealm = (UserRealm) securityManager.getRealms().iterator().next();
         shiroRealm.clearAllCache();
         msg.setFlag(Constants.SUCCESS);
@@ -119,8 +142,9 @@ public class AdminController {
     }
 
     /**
-     * @param
-     * @return
+     * 删除用户文件
+     * @param request 请求参数
+     * @return 文件删除结果
      */
     @PostMapping("toDelete")
     @RequiresRoles(value = {"ADMIN","SUPERVIP"},logical = Logical.OR)
@@ -128,11 +152,11 @@ public class AdminController {
     public AjaxReturnMsg toDelete(HttpServletRequest request) {
         AjaxReturnMsg msg = new AjaxReturnMsg();
         Long fileId = Long.parseLong(request.getParameter("fileId"));
-        Boolean isSuccess=fileService.deleteFile(fileId);
+        Boolean isSuccess = fileService.deleteFile(fileId);
         downloadService.deleteDownloadRecord(fileId);
         if (!isSuccess)
         {
-            msg.setFlag(Constants.FAIL);
+            msg.setFlag(FAIL);
             msg.setMsg("Delete Failed...");
             return msg;
         }
@@ -140,25 +164,36 @@ public class AdminController {
         return msg;
     }
 
+    /**
+     * 搜索用户文件
+     * @param request 请求参数
+     * @return 搜索情况
+     */
     @PostMapping("search")
     @ResponseBody
     @RequiresRoles(value = {"ADMIN","SUPERVIP"},logical = Logical.OR)
     public AjaxReturnMsg search(HttpServletRequest request)
     {
-        AjaxReturnMsg msg=new AjaxReturnMsg();
+        AjaxReturnMsg msg = new AjaxReturnMsg();
         String contents = request.getParameter("contents");
-        List<User> userList= adminService.getUserLikeContents(contents);
+        List<User> userList = adminService.getUserLikeContents(contents);
         if (null == userList || userList.isEmpty())
         {
             msg.setMsg("No data...");
-            msg.setFlag(Constants.FAIL);
+            msg.setFlag(FAIL);
             return msg;
         }
 
         request.getSession().setAttribute("contents",contents);
-        msg.setFlag(Constants.SUCCESS);
+        msg.setFlag(SUCCESS);
         return msg;
     }
+
+    /**
+     * 管理员搜索用户
+     * @param request 请求参数
+     * @return 用户搜索
+     */
     @GetMapping("search")
     @RequiresRoles(value = {"ADMIN","SUPERVIP"},logical = Logical.OR)
     public String toSearch(HttpServletRequest request)
@@ -167,23 +202,27 @@ public class AdminController {
         request.setAttribute("userList",userList);
         return "admin/search";
     }
+
+    /**
+     * 绘制管理员折线图
+     * @return 折线图
+     */
     @PostMapping("getChart")
     @RequiresRoles(value = {"ADMIN", "SUPERVIP"},logical = Logical.OR)
     @ResponseBody
-    public List<Map<String,Object>> getChart(HttpServletRequest request)
+    public List<Map<String,Object>> getChart()
     {
-        List<Map<String,Object>> uploadList= adminService.getAllUploadToMorrisJs();
-        List<Map<String,Object>> downloadList= adminService.getAllDownloadToMorrisJs();
-
+        List<Map<String,Object>> uploadList = adminService.getAllUploadToMorrisJs();
+        List<Map<String,Object>> downloadList = adminService.getAllDownloadToMorrisJs();
 
         List<Map<String,Object>> list = new ArrayList<>();
-        Map<String,Object> map1=new HashMap<>();map1.put("days", GetDateUtil.getDate(7));map1.put("upload",0);map1.put("download",0);
-        Map<String,Object> map2=new HashMap<>();map2.put("days",GetDateUtil.getDate(6));map2.put("upload",0);map2.put("download",0);
-        Map<String,Object> map3=new HashMap<>();map3.put("days",GetDateUtil.getDate(5));map3.put("upload",0);map3.put("download",0);
-        Map<String,Object> map4=new HashMap<>();map4.put("days",GetDateUtil.getDate(4));map4.put("upload",0);map4.put("download",0);
-        Map<String,Object> map5=new HashMap<>();map5.put("days",GetDateUtil.getDate(3));map5.put("upload",0);map5.put("download",0);
-        Map<String,Object> map6=new HashMap<>();map6.put("days",GetDateUtil.getDate(2));map6.put("upload",0);map6.put("download",0);
-        Map<String,Object> map7=new HashMap<>();map7.put("days",GetDateUtil.getDate(1));map7.put("upload",0);map7.put("download",0);
+        Map<String,Object> map1 = new HashMap<>(2);map1.put("days", GetDateUtil.getDate(7));map1.put("upload",0);map1.put("download",0);
+        Map<String,Object> map2 = new HashMap<>(2);map2.put("days",GetDateUtil.getDate(6));map2.put("upload",0);map2.put("download",0);
+        Map<String,Object> map3 = new HashMap<>(2);map3.put("days",GetDateUtil.getDate(5));map3.put("upload",0);map3.put("download",0);
+        Map<String,Object> map4 = new HashMap<>(2);map4.put("days",GetDateUtil.getDate(4));map4.put("upload",0);map4.put("download",0);
+        Map<String,Object> map5 = new HashMap<>(2);map5.put("days",GetDateUtil.getDate(3));map5.put("upload",0);map5.put("download",0);
+        Map<String,Object> map6 = new HashMap<>(2);map6.put("days",GetDateUtil.getDate(2));map6.put("upload",0);map6.put("download",0);
+        Map<String,Object> map7 = new HashMap<>(2);map7.put("days",GetDateUtil.getDate(1));map7.put("upload",0);map7.put("download",0);
 
         for (Map<String, Object> m : uploadList)
         {
@@ -242,17 +281,24 @@ public class AdminController {
         list.add(map7);
         return list;
     }
+
+    /**
+     *  绘制管理员饼图
+     * @return c3饼图
+     */
     @PostMapping("getC3Chart")
     @RequiresRoles(value = {"ADMIN","SUPERVIP"},logical = Logical.OR)
     @ResponseBody
     public Map<String,Object> getC3Chart()
     {
-        Long allUserNumber = adminService.getAllUserNumber();
-        Long adminNumber = adminService.getAdminNumber();
+        long allUserNumber = adminService.getAllUserNumber();
+        long adminNumber = adminService.getAdminNumber();
         log.info("Admin number is： " + adminNumber);
-        Map<String,Object> map=new HashMap<>();
-        map.put("user",((allUserNumber - adminNumber) * 100) / allUserNumber);
-        map.put("admin",(100 * adminNumber) / allUserNumber);
+        Map<String,Object> map=new HashMap<>(2);
+        long userPrecent = ((allUserNumber - adminNumber) * 100) / allUserNumber;
+        long adminPrecent = (100 * adminNumber) / allUserNumber;
+        map.put("user",userPrecent);
+        map.put("admin",adminPrecent);
         return map;
     }
 

@@ -1,14 +1,15 @@
 package com.centerm.fud_demo.exception;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *  多账号在线异常处理
- *
  * @author         Jerry
  * @date           20/01/20
  * @version        1.0
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class MultiAccountOnlineException extends Exception {
     private String errorCode;

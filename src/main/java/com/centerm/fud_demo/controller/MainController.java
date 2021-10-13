@@ -7,10 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
+ * 用户主页控制
  * @author ouyangyi
  */
 @Controller
 public class MainController {
+    /**
+     * 前往用户主页
+     * @return 用户主页
+     */
     @RequestMapping("/")
     public String tologin(){
         Subject subject = SecurityUtils.getSubject();

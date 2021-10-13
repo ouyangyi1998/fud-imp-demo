@@ -4,6 +4,7 @@ import com.centerm.fud_demo.entity.User;
 import lombok.Data;
 
 /**
+ * 用户提醒
  * @author ouyangyi
  */
 @Data

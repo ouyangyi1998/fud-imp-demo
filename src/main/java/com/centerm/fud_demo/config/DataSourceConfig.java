@@ -23,7 +23,7 @@ import java.util.Properties;
  * @date 2021.5.7
  */
 @Configuration
-@MapperScan(basePackages =DataSourceConfig.PACKAGE,sqlSessionFactoryRef = "sqlSessionFactory")
+@MapperScan(basePackages = DataSourceConfig.PACKAGE,sqlSessionFactoryRef = "sqlSessionFactory")
 public class DataSourceConfig {
 
     public static final String PACKAGE="com.centerm.fud_demo.dao";
@@ -106,12 +106,22 @@ public class DataSourceConfig {
         return dataSource;
     }
 
+    /**
+     * 开启数据库事务控制
+     * @return 数据库事务管理系统
+     */
     @Bean
     public DataSourceTransactionManager dataSourceTransactionManager()
     {
         return new DataSourceTransactionManager(dataSource());
     }
 
+    /**
+     * 构造数据库Session参数
+     * @param dataSource 数据库连接池
+     * @return 数据库连接工厂模式
+     * @throws Exception 异常
+     */
     @Bean(name = "sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource")DataSource dataSource) throws Exception
     {

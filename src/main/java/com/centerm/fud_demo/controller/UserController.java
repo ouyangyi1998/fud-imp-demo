@@ -50,6 +50,7 @@ import static com.centerm.fud_demo.constant.Constants.*;
 public class UserController {
 
     private User currUser = null;
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -61,16 +62,28 @@ public class UserController {
     @Autowired
     private ResourceLoader resourceLoader;
 
-
+    /**
+     * 前往注册页面
+     * @return 注册页面
+     */
     @GetMapping("toRegister")
     public String toRegister(){return "register";}
 
+    /**
+     * 前往文件上传页面
+     * @return 文件上传
+     */
     @GetMapping("toUpload")
     public String toUploading()
     {
         return "user/upload";
     }
 
+    /**
+     * 用户信息
+     * @param request 请求参数
+     * @return 用户信息
+     */
     @GetMapping("information")
     public String userInformation(HttpServletRequest request)
     {
@@ -84,6 +97,10 @@ public class UserController {
         return "user/information";
     }
 
+    /**
+     * 前往登录页面
+     * @return 主页
+     */
     @GetMapping("toLogin")
     public String toLogin()
     {
@@ -97,6 +114,11 @@ public class UserController {
         }
     }
 
+    /**
+     * 返回用户文件管理
+     * @param model 模型
+     * @return 用户文件管理
+     */
     @GetMapping("filemanager")
     public String userFileManager(Model model)
     {
@@ -105,14 +127,28 @@ public class UserController {
         return "user/filemanager";
     }
 
+    /**
+     * 前往文件下载页面
+     * @param model 模型
+     * @return 用户下载页面
+     */
     @GetMapping("download")
     public String userDownload(Model model)
     {
         List<FileRecord> fileRecordList = fileService.getFileByUserId(currUser.getId());
+        for(FileRecord fileRecord : fileRecordList){
+            fileRecord.setLocalUrl(fileRecord.getLocalUrl().substring(14));
+            System.out.println(fileRecord.getLocalUrl());
+        }
         model.addAttribute("fileList", fileRecordList);
         return "user/download";
     }
 
+    /**
+     * 热门文件下载
+     * @param model 模型
+     * @return 返回热门文件下载
+     */
     @GetMapping("hotFile")
     public String hotFile(Model model)
     {
@@ -121,6 +157,12 @@ public class UserController {
         return "user/hotFile";
     }
 
+    /**
+     * 前往用户主页
+     * @param model 模型
+     * @param request 请求参数
+     * @return 用户主页
+     */
     @GetMapping("index")
     public String userIndex(Model model, HttpServletRequest request)
     {
@@ -140,25 +182,34 @@ public class UserController {
         return "user/index";
     }
 
-
+    /**
+     * 用户登录
+     * @param request 请求参数
+     * @return 用户登录情况
+     */
     @PostMapping(value = "login")
     @ResponseBody
     public AjaxReturnMsg login(HttpServletRequest request)
     {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+
         AjaxReturnMsg msg = new AjaxReturnMsg();
+
         if (null == username || null == password || "".equals(username) || "".equals(password))
         {
             log.warn("Neither username or password inputted...");
             throw new AuthenticationException();
         }
         User user = new User(username,password);
+
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());
 
         subject.login(token);
-        String exception=(String)request.getAttribute("shiroLoginFailure");
+
+        String exception = (String)request.getAttribute("shiroLoginFailure");
+
         if (null == exception){
             log.info("User: " + username + " login successfully...");
             User toIndex = userService.findByUsername(username);
@@ -170,6 +221,12 @@ public class UserController {
         return msg;
     }
 
+    /**
+     * 用户注册判断
+     * @param request 请求参数
+     * @return 用户注册情况
+     * @throws Exception 注册异常
+     */
     @PostMapping("register")
     @ResponseBody
     public AjaxReturnMsg register(HttpServletRequest request)throws Exception
@@ -209,6 +266,13 @@ public class UserController {
         return msg;
     }
 
+    /**
+     * 用户信息更新
+     * @param request 请求参数
+     * @param form 用户信息更新表单
+     * @return 用户信息更新情况
+     * @throws IOException IO异常
+     */
     @PostMapping("information")
     @ResponseBody
     public AjaxReturnMsg updateUser( HttpServletRequest request, UpdateForm form) throws IOException {
@@ -246,7 +310,7 @@ public class UserController {
             File old = new File(System.getProperty("user.dir")+ "/src/main/resources/static" + oldHeadPicture);
             if (old.exists()){
                 old.delete();
-                System.out.println("头像删除成功");
+                log.info(username+": 头像删除成功");
             }
             userService.updateHeadPicture(username,filePath);
             log.info(username + " HeadPicture update successfully...");
@@ -263,9 +327,13 @@ public class UserController {
         return msg;
     }
 
+    /**
+     * 用户登出
+     * @return 登录页面
+     */
     @RequestMapping("logout")
     @ResponseBody
-    public ModelAndView logout(HttpServletRequest request)
+    public ModelAndView logout()
     {
         Subject subject= SecurityUtils.getSubject();
         subject.logout();
@@ -274,13 +342,18 @@ public class UserController {
         return mv;
     }
 
+    /**
+     * 用户文件搜索
+     * @param request 请求参数
+     * @return 搜索结果
+     */
     @PostMapping("search")
     @ResponseBody
     public AjaxReturnMsg search(HttpServletRequest request)
     {
-        AjaxReturnMsg msg=new AjaxReturnMsg();
-        String contents=request.getParameter("contents");
-        Long userId=((User)request.getSession().getAttribute("user")).getId();
+        AjaxReturnMsg msg = new AjaxReturnMsg();
+        String contents = request.getParameter("contents");
+        Long userId = ((User)request.getSession().getAttribute("user")).getId();
         List<FileRecord> fileList = fileService.getFileLikeContents(contents,userId);
         if (null == fileList || fileList.isEmpty())
         {
@@ -293,20 +366,31 @@ public class UserController {
         return msg;
     }
 
+    /**
+     * 用户前往搜索页面
+     * @param request 请求参数
+     * @return 前往搜索页面
+     */
     @GetMapping("search")
-    public String Search(HttpServletRequest request)
+    public String toSearch(HttpServletRequest request)
     {
-        Long userId=((User)request.getSession().getAttribute("user")).getId();
-        List<FileRecord> fileList= fileService.getFileLikeContents((String) request.getSession().getAttribute("contents"),userId);
+        Long userId = ((User)request.getSession().getAttribute("user")).getId();
+        String content = (String) request.getSession().getAttribute("contents");
+        List<FileRecord> fileList = fileService.getFileLikeContents(content,userId);
         request.setAttribute("fileList",fileList);
         return "user/search";
     }
 
+    /**
+     * 绘制用户折线图
+     * @param request 请求参数
+     * @return 折线图绘制
+     */
     @PostMapping("getC3Chart")
     @ResponseBody
     public Map<String,Object> getC3Chart(HttpServletRequest request)
     {
-        Long userId=((User)request.getSession().getAttribute("user")).getId();
+        Long userId = ((User)request.getSession().getAttribute("user")).getId();
         Integer userFileNumber = fileService.getFileNumberById(userId);
         log.info("file number is： " + userFileNumber);
         List<FileRecord> userUploadFile = fileService.getFileByUserId(userId);
@@ -316,40 +400,61 @@ public class UserController {
         float documentNumber = 0;
         float pictureNumber = 0;
 
-        for (FileRecord fileRecord : userUploadFile){
+        for (FileRecord fileRecord : userUploadFile) {
+
             String suffix = fileRecord.getSuffix();
-            for(String audioSuffix:AUDIO_LIST){
-                if (suffix.toLowerCase().contains(audioSuffix.toLowerCase())){
+            int flag = 0;
+
+            for (String audioSuffix : AUDIO_LIST) {
+                if (suffix.toLowerCase().contains(audioSuffix.toLowerCase())) {
                     audioNumber++;
+                    flag = 1;
                     break;
                 }
             }
-            for(String vedioSuffix:VEDIO_LIST){
-                if (suffix.contains(vedioSuffix)){
-                    vedioNumber++;
-                    break;
+                if (flag == 0) {
+                    for (String vedioSuffix : VEDIO_LIST) {
+                        if (suffix.toLowerCase().contains(vedioSuffix.toLowerCase())) {
+                            vedioNumber++;
+                            flag = 1;
+                            break;
+                        }
+                    }
                 }
-            }
-            for(String documentSuffix:DOCUMENT_LIST){
-                if (suffix.contains(documentSuffix)){
-                    documentNumber++;
-                    break;
+
+                if (flag == 0) {
+                    for (String documentSuffix : DOCUMENT_LIST) {
+                        if (suffix.toLowerCase().contains(documentSuffix.toLowerCase())) {
+                            documentNumber++;
+                            flag = 1;
+                            break;
+                        }
+                    }
                 }
-            }
-            for(String pictureSuffix:PICTURE_LIST){
-                if (suffix.toLowerCase().contains(pictureSuffix.toLowerCase())){
-                    pictureNumber++;
-                    break;
+                if (flag == 0) {
+                    for (String pictureSuffix : PICTURE_LIST) {
+                        if (suffix.toLowerCase().contains(pictureSuffix.toLowerCase())) {
+                            pictureNumber++;
+                            flag = 1;
+                            break;
+                        }
+                    }
                 }
-            }
         }
 
-        Map<String,Object> map=new HashMap<>();
-        map.put("vedio",vedioNumber/userFileNumber);
-        map.put("audio",audioNumber/userFileNumber);
-        map.put("document",documentNumber/userFileNumber);
-        map.put("picture",pictureNumber/userFileNumber);
-        map.put("other",1-vedioNumber/userFileNumber-audioNumber/userFileNumber-documentNumber/userFileNumber-pictureNumber/userFileNumber);
+        float vedioPrecent = vedioNumber/userFileNumber;
+        float audioPrecent = audioNumber/userFileNumber;
+        float documentPrecent = documentNumber/userFileNumber;
+        float picturePrecent = pictureNumber/userFileNumber;
+        float other = 1 - vedioPrecent - audioPrecent - documentPrecent - picturePrecent;
+
+        Map<String,Object> map=new HashMap<>(8);
+
+        map.put("vedio",vedioPrecent);
+        map.put("audio",audioPrecent);
+        map.put("document",documentPrecent);
+        map.put("picture",picturePrecent);
+        map.put("other",other);
         return map;
     }
 
@@ -358,7 +463,7 @@ public class UserController {
      * @param dir1 图片路径
      * @param dir2 图片路径
      * @param filename 图片名称
-     * @return
+     * @return 图片文件
      */
     @GetMapping("/get/{dir1}/{dir2}/{filename}")
     public ResponseEntity get(@PathVariable String dir1,@PathVariable String dir2,@PathVariable String filename){

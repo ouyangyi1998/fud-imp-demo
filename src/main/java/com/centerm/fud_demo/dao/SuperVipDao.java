@@ -16,27 +16,27 @@ public interface SuperVipDao {
     /**
      * 成为管理员
      * @param userId 用户id
-     * @return
+     * @return 操作结果
      */
     Boolean becomeAdmin(Long userId);
 
     /**
      * 移除管理员
      * @param userId 用户id
-     * @return
+     * @return 操作结果
      */
     Boolean removeAdmin(Long userId);
 
     /**
      * 获取用户角色
      * @param userId  用户id
-     * @return
+     * @return 角色id
      */
     Long getUserRoles(Long userId);
 
     /**
      * 获取所有用户（除了管理员）
-     * @return
+     * @return 用户列表
      */
     List<User> getAllUserExceptSuperVIP();
 

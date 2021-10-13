@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 用户文件上传管理
  * @author Sheva
  * @version 1.0
  * @date 2020/1/30 下午2:20
@@ -30,32 +31,54 @@ import java.util.Map;
 @Slf4j
 public class UploadServiceImpl implements UploadService {
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+    private final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
     @Value("${filePath}")
     private String uploadPath;
+
     @Value("${backupPath}")
     private String backupPath;
+
     private Long userId = null;
 
     @Autowired
     FileDao fileDao;
 
+    /**
+     * 获取上传次数
+     * @return 上传次数
+     */
     @Override
     public Long getUploadTimes() {
         return fileDao.getUploadTimes();
     }
 
+    /**
+     * 或许最新的上传记录
+     * @param userId 用户id
+     * @return 文件信息
+     */
     @Override
     public List<FileRecord> getLatestUploaded(Long userId) {
         return fileDao.getLatestUploaded(userId);
     }
 
+    /**
+     * 根据用户id搜索上传次数
+     * @param userId 用户id
+     * @return 上传次数
+     */
     @Override
     public Long getUploadTimesByCurrUser(Long userId) {
         return fileDao.getUploadTimesByCurrUser(userId);
     }
 
+    /**
+     * 找寻文件的md5
+     * @param md5 md5
+     * @param currUserId 用户id
+     * @return 文件信息
+     */
     @Override
     public Map<String, Object> findByFileMd5(String md5, Long currUserId) {
         userId = currUserId;
@@ -65,7 +88,7 @@ public class UploadServiceImpl implements UploadService {
         Map<String, Object> map = null;
         if (null == uploadFile){
             log.info("File is not uploaded...");
-            map = new HashMap<>();
+            map = new HashMap<>(4);
             map.put("flag", 0);
             map.put("uuid", FileUtil.genUniqueKey());
             map.put("date", sdf.format(new Date()));
@@ -78,13 +101,13 @@ public class UploadServiceImpl implements UploadService {
                 log.info("findByFileMd5: file already exists..." );
                 if (uploadFile.getStatus() == 1){
                     log.info("File is not complete...");
-                    map = new HashMap<>();
+                    map = new HashMap<>(4);
                     map.put("flag", 1);
                     map.put("uuid", uploadFile.getUuid());
                     map.put("date", sdf.format(new Date()));
                 }else if(uploadFile.getStatus() == 2){
                     log.info("File is complete...");
-                    map = new HashMap<>();
+                    map = new HashMap<>(2);
                     map.put("flag", 2);
                 }
             }else {
@@ -97,6 +120,14 @@ public class UploadServiceImpl implements UploadService {
         return map;
     }
 
+    /**
+     *
+     * @param form 文件表单信息
+     * @param multipartFile 文件
+     * @param currUserId 用户id
+     * @return 文件信息
+     * @throws Exception 异常
+     */
     @Override
     public Map<String, Object> realUpload(FileForm form, MultipartFile multipartFile, Long currUserId) throws Exception {
         userId = currUserId;
@@ -207,6 +238,11 @@ public class UploadServiceImpl implements UploadService {
         return map;
     }
 
+    /**
+     * 检查文件上传信息
+     * @param form 文件信息
+     * @return 检查结果
+     */
     @Override
     public Map<String, Object> check(FileForm form){
         String uuid = form.getUuid();
@@ -230,14 +266,14 @@ public class UploadServiceImpl implements UploadService {
         }
         if (md5Str != null && md5Str.equals(partMd5)){
             //已上传该分片
-            map = new HashMap<>();
+            map = new HashMap<>(2);
             map.put("flag", "1");
             map.put("uuid", uuid);
             if (index != total){
                 return map;}
             }else{
             //分片未上传
-            map = new HashMap<>();
+            map = new HashMap<>(2);
             map.put("flag", "0");
             map.put("uuid", uuid);
             return map;

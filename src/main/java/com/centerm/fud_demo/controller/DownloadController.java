@@ -14,30 +14,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 文件下载控制
  * @author Sheva
  * @version 1.0
  * @date 2020/1/31 下午12:41
  */
-
 @Controller
 @ResponseBody
 @Slf4j
 @RequestMapping("download")
 public class DownloadController{
-    private   User currUser = null;
+
     @Autowired
     private DownloadService downloadService;
     @Autowired
     private FileService fileService;
 
     /**
+     * 用户下载文件
      * @param id 文件id
-     * @param response
-     * @return
+     * @param response 响应参数
+     * @return 用户下载页面
      */
     @GetMapping("toDownload")
     public String toDownload(Long id, HttpServletResponse response, HttpServletRequest request) throws Exception{
-        currUser = (User) request.getSession().getAttribute("user");
+        User currUser = (User) request.getSession().getAttribute("user");
         log.info("User: " + currUser.getUsername() + "  is downloading file(id)： " + id);
         downloadService.downloadFile(id, response);
         DownloadRecord downloadRecord = new DownloadRecord(currUser.getId(), id);

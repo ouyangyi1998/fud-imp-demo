@@ -24,13 +24,13 @@ import java.util.*;
 /**
  * 分片上传Controller
  * @author sheva
+ * @time 2020.1.23
  */
 @Controller
 @Slf4j
 @RequestMapping("file")
 public class UploadController {
 
-    private User currUser = null;
 
     @Autowired
     private UploadService uploadService;
@@ -39,10 +39,11 @@ public class UploadController {
     @Autowired
     private DownloadService downloadService;
 
-    private static Map<Integer, String> keyMap = new HashMap<>();
+    private static Map<Integer, String> keyMap = new HashMap<>(2);
+
     /**
      * 跳转到上传界面
-     * @return
+     * @return 文件上传页面
      */
     @GetMapping("index")
     public String toUpload() {
@@ -52,7 +53,7 @@ public class UploadController {
     @PostMapping("isUpload")
     @ResponseBody
     public Map<String, Object> isUpload(@Valid FileForm form, HttpServletRequest request) throws Exception{
-        currUser = (User)request.getSession().getAttribute("user");
+        User currUser = (User)request.getSession().getAttribute("user");
         log.info("需要上传的md5为： " + form.getMd5());
         Map<String, Object> map = new HashMap<>();
         map = uploadService.findByFileMd5(form.getMd5(), currUser.getId());
@@ -65,13 +66,21 @@ public class UploadController {
         return map;
     }
 
+    /**
+     *
+     * @param form 文件分片信息
+     * @param request 请求参数
+     * @param fileEncrypt 文件分片
+     * @param key rsa加密之后的秘钥
+     * @return 文件分片上传信息
+     */
     @PostMapping("/upload")
     @ResponseBody
     public Map<String, Object> upload(@Valid FileForm form, HttpServletRequest request,
                                       @RequestParam(value = "fileEncrypt", required = false)String fileEncrypt,
                                       @RequestParam(value = "key", required = false)String key
                                       ){
-        currUser = (User)request.getSession().getAttribute("user");
+       User currUser = (User)request.getSession().getAttribute("user");
         Map<String, Object> map = null;
         try{
             if (Constants.CHECK.equals(form.getAction())){
@@ -94,15 +103,16 @@ public class UploadController {
     }
 
     /**
-     * @param
-     * @return
+     * 用户删除文件
+     * @param request 请求参数
+     * @return 文件删除情况
      */
     @PostMapping("toDelete")
     @ResponseBody
     public AjaxReturnMsg toDelete(HttpServletRequest request) {
         AjaxReturnMsg msg = new AjaxReturnMsg();
-        Long fileId=Long.parseLong(request.getParameter("fileId"));
-        currUser = (User) request.getSession().getAttribute("user");
+        Long fileId = Long.parseLong(request.getParameter("fileId"));
+        User currUser = (User) request.getSession().getAttribute("user");
         log.info("Current user id is：" + currUser.getId());
         Boolean isSuccess = fileService.deleteFileById(currUser.getId(), fileId);
         downloadService.deleteDownloadRecord(fileId);
@@ -116,6 +126,11 @@ public class UploadController {
         return msg;
     }
 
+    /**
+     * 修改文件范围为公有
+     * @param request 请求参数
+     * @return 操作信息
+     */
     @PostMapping("changeFileScopeToPublic")
     @ResponseBody
     public AjaxReturnMsg changeFileScopeToPublic(HttpServletRequest request) {
@@ -128,6 +143,11 @@ public class UploadController {
         return msg;
     }
 
+    /**
+     * 修改文件范围为私有
+     * @param request 请求参数
+     * @return 操作信息
+     */
     @PostMapping("changeFileScopeToPrivate")
     @ResponseBody
     public AjaxReturnMsg changeFileScopeToPrivate(HttpServletRequest request) {
@@ -140,24 +160,27 @@ public class UploadController {
         return msg;
     }
 
-
+    /**
+     * 用户下载上传折线图
+     * @param request 请求参数
+     * @return 用户折线图
+     */
     @PostMapping("getChart")
     @ResponseBody
     public List<Map<String,Object>> getChart(HttpServletRequest request)
     {
-        Long userId=((User)request.getSession().getAttribute("user")).getId();
-        List<Map<String,Object>> uploadList= fileService.getUploadToMorrisJs(userId);
-        List<Map<String,Object>> downloadList= fileService.getDownloadToMorrisJs(userId);
+        Long userId = ((User)request.getSession().getAttribute("user")).getId();
+        List<Map<String,Object>> uploadList = fileService.getUploadToMorrisJs(userId);
+        List<Map<String,Object>> downloadList = fileService.getDownloadToMorrisJs(userId);
 
-
-        List<Map<String,Object>> list=new ArrayList<>();
-        Map<String,Object> map1=new HashMap<>();map1.put("days",GetDateUtil.getDate(7));map1.put("upload",0);map1.put("download",0);
-        Map<String,Object> map2=new HashMap<>();map2.put("days",GetDateUtil.getDate(6));map2.put("upload",0);map2.put("download",0);
-        Map<String,Object> map3=new HashMap<>();map3.put("days",GetDateUtil.getDate(5));map3.put("upload",0);map3.put("download",0);
-        Map<String,Object> map4=new HashMap<>();map4.put("days",GetDateUtil.getDate(4));map4.put("upload",0);map4.put("download",0);
-        Map<String,Object> map5=new HashMap<>();map5.put("days",GetDateUtil.getDate(3));map5.put("upload",0);map5.put("download",0);
-        Map<String,Object> map6=new HashMap<>();map6.put("days",GetDateUtil.getDate(2));map6.put("upload",0);map6.put("download",0);
-        Map<String,Object> map7=new HashMap<>();map7.put("days",GetDateUtil.getDate(1));map7.put("upload",0);map7.put("download",0);
+        List<Map<String,Object>> list = new ArrayList<>();
+        Map<String,Object> map1 = new HashMap<> (2);map1.put("days",GetDateUtil.getDate(7));map1.put("upload",0);map1.put("download",0);
+        Map<String,Object> map2 = new HashMap<>(2);map2.put("days",GetDateUtil.getDate(6));map2.put("upload",0);map2.put("download",0);
+        Map<String,Object> map3 = new HashMap<>(2);map3.put("days",GetDateUtil.getDate(5));map3.put("upload",0);map3.put("download",0);
+        Map<String,Object> map4 = new HashMap<>(2);map4.put("days",GetDateUtil.getDate(4));map4.put("upload",0);map4.put("download",0);
+        Map<String,Object> map5 = new HashMap<>(2);map5.put("days",GetDateUtil.getDate(3));map5.put("upload",0);map5.put("download",0);
+        Map<String,Object> map6 = new HashMap<>(2);map6.put("days",GetDateUtil.getDate(2));map6.put("upload",0);map6.put("download",0);
+        Map<String,Object> map7 = new HashMap<>(2);map7.put("days",GetDateUtil.getDate(1));map7.put("upload",0);map7.put("download",0);
 
         for (Map<String, Object> m : uploadList)
         {

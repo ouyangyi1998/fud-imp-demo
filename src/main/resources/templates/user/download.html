@@ -19,6 +19,32 @@
     <script th:src="@{/js/utils/sweetalert2.js}"></script>
     <script th:src="@{/js/utils/jquery.js}"></script>
     <script type="text/javascript">
+
+       window.onload = function showHref() {
+            for(var i = 0; i < 20; i++) {
+
+                var id = "a" + i;
+                var fileUrl = document.getElementById(id).name;
+
+                if (fileUrl.indexOf(".jpg") > -1 ||fileUrl.indexOf(".png") > -1) {
+                }else {
+                    document.getElementById(id).innerHTML = null;
+                }
+            }
+            }
+
+        function showPicture(e) {
+            var url = e.name;
+            swal({
+                title: 'Sweet',
+                text: '感动您的精彩瞬间！',
+                imageUrl: url,
+                imageWidth: 400,
+                imageHeight: 300,
+                imageAlt: 'Custom image',
+            })
+        }
+
         function search() {
             event.preventDefault();
             $.ajax({
@@ -157,16 +183,18 @@
                                         <th>文件类型</th>
                                         <th>文件上传时间</th>
                                         <th>文件下载</th>
+                                        <th>在线观看</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="file:${fileList}">
                                         <td th:text="${fileStat.count}"></td>
-                                        <td th:text="${file.name}"></td>
+                                        <td><a th:text="${file.name}"></a></td>
                                         <td th:text="${file.size}"></td>
                                         <td th:text="${file.suffix}"></td>
                                         <td th:text="${file.createTime}"></td>
                                         <td><a th:href="@{/download/toDownload(id=${file.id})}">下载</a></td>
+                                        <td><a href="#" onclick="showPicture(this);" th:id="a+${fileStat.index}" th:name="${file.localUrl}">点击查看</a></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -185,6 +213,7 @@
 <script th:src="@{/js/index/waves.js}"></script>
 <script th:src="@{/js/index/sidebarmenu.js}"></script>
 <script th:src="@{/js/index/custom.min.js}"></script>
+<script th:src="@{/js/index/raphael-min.js}"></script>
 </body>
 
 </html>

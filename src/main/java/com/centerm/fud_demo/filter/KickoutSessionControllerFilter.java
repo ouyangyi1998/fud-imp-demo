@@ -20,6 +20,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 /**
+ * 项目单点登录控制
  * @author jerry
  */
 @Slf4j
@@ -95,7 +96,8 @@ public class KickoutSessionControllerFilter extends AccessControlFilter {
         //如果队列里的sessionId数超出最大会话数，开始踢人
         while(deque.size() > maxSession) {
             Serializable kickoutSessionId = null;
-            if(kickoutAfter) { //如果踢出后者
+            //如果踢出后者
+            if(kickoutAfter) {
                 kickoutSessionId=deque.getFirst();
                 kickoutSessionId = deque.removeFirst();
             } else { //否则踢出前者
@@ -117,6 +119,7 @@ public class KickoutSessionControllerFilter extends AccessControlFilter {
             try {
                 subject.logout();
             } catch (Exception e) {
+                log.warn(e.getMessage());
             }
             WebUtils.issueRedirect(request, response, kickoutUrl);
             return false;

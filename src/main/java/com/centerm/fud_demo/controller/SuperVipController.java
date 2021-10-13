@@ -18,9 +18,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+import static com.centerm.fud_demo.constant.Constants.ADMIN;
+import static com.centerm.fud_demo.constant.Constants.USER;
+
 /**
  * 超级管理员控制类
  * @author jerry
+ * @time 2020.2.1
  */
 @Controller
 @RequestMapping("supervip")
@@ -30,6 +34,11 @@ public class SuperVipController {
     @Autowired
     private SuperVipService superVipService;
 
+    /**
+     * 进入超级管理员模块
+     * @param request 请求参数
+     * @return 超级管理员页面
+     */
     @GetMapping("permission")
     @RequiresRoles(value = "SUPERVIP")
     public String permission(ServletRequest request)
@@ -39,19 +48,24 @@ public class SuperVipController {
         return "supervip/permission";
     }
 
+    /**
+     * 用户授权管理员处理
+     * @param request 请求参数
+     * @return 授权结果
+     */
     @RequestMapping("/handleAdmin")
     @RequiresRoles(value = "SUPERVIP")
     @ResponseBody
     public AjaxReturnMsg handleAdmin(ServletRequest request)
     {
         log.info("Handling admin...");
-        AjaxReturnMsg msg=new AjaxReturnMsg();
+        AjaxReturnMsg msg = new AjaxReturnMsg();
         Long userId = Long.parseLong(request.getParameter("userId"));
         log.info("User id: " + userId);
-        if (superVipService.getUserRoles(userId) == Constants.ADMIN)
+        if (superVipService.getUserRoles(userId).equals(ADMIN))
         {
             superVipService.removeAdmin(userId);
-        }else if (superVipService.getUserRoles(userId) == Constants.USER)
+        }else if (superVipService.getUserRoles(userId).equals(USER))
         {
 
             superVipService.becomeAdmin(userId);
@@ -62,15 +76,17 @@ public class SuperVipController {
         msg.setFlag(Constants.SUCCESS);
         return msg;
     }
+
     /**
-     * @param
-     * @return
+     * 超级管理员删除用户
+     * @param request 请求参数
+     * @return 删除结果
      */
     @PostMapping("delete")
     @RequiresRoles(value = "SUPERVIP")
     @ResponseBody
     public AjaxReturnMsg deleteUser(HttpServletRequest request) {
-        Long userId=Long.valueOf(request.getParameter("userId"));
+        Long userId = Long.valueOf(request.getParameter("userId"));
         AjaxReturnMsg msg = new AjaxReturnMsg();
         superVipService.removeUser(userId);
         msg.setFlag(Constants.SUCCESS);
