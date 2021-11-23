@@ -5,17 +5,12 @@ HELP.md
 !**/src/main/**
 mvnw
 mvnw.cmd
-
-
-
-
+*.log
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
-4506395_www.ouyangyi.info.pfx
+*.pfx
 src/resources/application-product.properties
-
-
