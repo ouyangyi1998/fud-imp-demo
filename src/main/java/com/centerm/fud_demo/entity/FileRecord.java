@@ -3,9 +3,6 @@ package com.centerm.fud_demo.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 
 /**
  * 文件实体类

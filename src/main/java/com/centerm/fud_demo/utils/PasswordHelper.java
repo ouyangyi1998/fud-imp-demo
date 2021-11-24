@@ -21,7 +21,8 @@ public class PasswordHelper {
      */
     public static void encryptPassword(User user)
     {
-        String newPassword = new SimpleHash(ALGORITHM_NAME,user.getPassword(), ByteSource.Util.bytes(user.getUsername()),HASH_ITERATIONS).toHex();
+        String newPassword = new SimpleHash(ALGORITHM_NAME,user.getPassword(),
+                ByteSource.Util.bytes(user.getUsername()), HASH_ITERATIONS).toHex();
         user.setPassword(newPassword);
     }
 }

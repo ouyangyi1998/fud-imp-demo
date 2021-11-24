@@ -23,7 +23,7 @@ import java.util.Properties;
  * @date 2021.5.7
  */
 @Configuration
-@MapperScan(basePackages = DataSourceConfig.PACKAGE,sqlSessionFactoryRef = "sqlSessionFactory")
+@MapperScan(basePackages = DataSourceConfig.PACKAGE, sqlSessionFactoryRef = "sqlSessionFactory")
 public class DataSourceConfig {
 
     public static final String PACKAGE="com.centerm.fud_demo.dao";
@@ -40,7 +40,6 @@ public class DataSourceConfig {
 
     @Value("${spring.datasource.driver-class-name}")
     private String driverClassName;
-
 
     @Value("${spring.datasource.initialSize}")
     private int initialSize;

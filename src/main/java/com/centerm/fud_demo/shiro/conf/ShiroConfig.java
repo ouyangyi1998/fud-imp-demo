@@ -20,7 +20,6 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.Cookie;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
-import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -161,7 +160,7 @@ public class ShiroConfig {
         sessionManager.setSessionIdCookie(sessionIdCookie());
         sessionManager.setSessionDAO(sessionDAO());
         sessionManager.setCacheManager(ehCacheManager());
-        //全局会话超时时间（单位毫秒），默认30分钟  暂时设置为10秒钟 用来测试
+        //全局会话超时时间（单位毫秒），默认30分钟
         sessionManager.setGlobalSessionTimeout(1800000);
         //是否开启删除无效的session对象  默认为true
         sessionManager.setDeleteInvalidSessions(true);
@@ -182,7 +181,8 @@ public class ShiroConfig {
     /**
      * SessionDAO的作用是为Session提供CRUD并进行持久化的一个shiro组件
      * MemorySessionDAO 直接在内存中进行会话维护
-     * EnterpriseCacheSessionDAO  提供了缓存功能的会话维护，默认情况下使用MapCache实现，内部使用ConcurrentHashMap保存缓存的会话。
+     * EnterpriseCacheSessionDAO  提供了缓存功能的会话维护
+     * 默认情况下使用MapCache实现，内部使用ConcurrentHashMap保存缓存的会话
      * @return sessionDao
      */
     @Bean
@@ -259,7 +259,7 @@ public class ShiroConfig {
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher()
     {
-        HashedCredentialsMatcher hashedCredentialsMatcher=new HashedCredentialsMatcher();
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
         hashedCredentialsMatcher.setHashAlgorithmName("MD5");
         hashedCredentialsMatcher.setHashIterations(5);
         return hashedCredentialsMatcher;
@@ -292,8 +292,8 @@ public class ShiroConfig {
     /**
      * 解决： 无权限页面不跳转 shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorized") 无效
      * shiro的源代码ShiroFilterFactoryBean.Java定义的filter必须满足filter instanceof AuthorizationFilter，
-     * 只有perms，roles，ssl，rest，port才是属于AuthorizationFilter，而anon，authcBasic，auchc，user是AuthenticationFilter，
-     * 所以unauthorizedUrl设置后页面不跳转 Shiro注解模式下，登录失败与没有权限都是通过抛出异常。
+     * 只有perms，roles，ssl，rest，port才是属于AuthorizationFilter，而anon，authcBasic，auchc，user是AuthenticationFilter
+     * 所以unauthorizedUrl设置后页面不跳转 Shiro注解模式下，登录失败与没有权限都是通过抛出异常
      * 并且默认并没有去处理或者捕获这些异常。在SpringMVC下需要配置捕获相应异常来通知用户信息
      * @return 权限控制
      */
@@ -319,18 +319,5 @@ public class ShiroConfig {
         cacheManager.setCacheManagerConfigFile("classpath:config/ehcache-shiro.xml");
         return cacheManager;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

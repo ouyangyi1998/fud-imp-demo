@@ -7,6 +7,7 @@ import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.monitor.FileAlterationMonitor;
 import org.apache.commons.io.monitor.FileAlterationObserver;
 import org.springframework.stereotype.Component;
+
 import javax.annotation.Resource;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -38,6 +39,5 @@ public class FileListenerMonitorUtils {
         observer.addListener(fileListener);
         FileAlterationMonitor monitor = new FileAlterationMonitor(interval, observer);
         return monitor;
-
     }
 }

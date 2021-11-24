@@ -4,7 +4,6 @@ import com.centerm.fud_demo.entity.Question;
 import com.centerm.fud_demo.entity.User;
 import com.centerm.fud_demo.entity.dto.PageDTO;
 import com.centerm.fud_demo.mapper.NotificationMapper;
-import com.centerm.fud_demo.service.NotificationService;
 import com.centerm.fud_demo.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;

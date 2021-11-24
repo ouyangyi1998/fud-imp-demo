@@ -1,8 +1,6 @@
 package com.centerm.fud_demo.service;
 
 import com.centerm.fud_demo.entity.User;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;

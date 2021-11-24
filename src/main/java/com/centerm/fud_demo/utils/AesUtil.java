@@ -1,6 +1,8 @@
 package com.centerm.fud_demo.utils;
+
 import org.apache.commons.lang3.StringUtils;
 import sun.misc.BASE64Decoder;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.spec.SecretKeySpec;
@@ -33,7 +35,6 @@ public class AesUtil {
     /**
      * base 64 decode解码---》因为传过来的值是通过base64编码而后再进行aes加密出来的，所以解密之前先进行base64解码
      */
-
     private static byte[] base64Decode(String base64Code) throws Exception {
         return StringUtils.isEmpty(base64Code) ? null : new BASE64Decoder().decodeBuffer(base64Code);
     }

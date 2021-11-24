@@ -4,7 +4,6 @@ import com.centerm.fud_demo.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 超级管理员映射

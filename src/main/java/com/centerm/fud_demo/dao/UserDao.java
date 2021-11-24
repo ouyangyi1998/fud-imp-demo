@@ -1,11 +1,7 @@
 package com.centerm.fud_demo.dao;
 
-import com.centerm.fud_demo.entity.FileRecord;
 import com.centerm.fud_demo.entity.User;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Set;
 
 /**
  * 用户操作

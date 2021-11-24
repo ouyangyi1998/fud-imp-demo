@@ -7,8 +7,6 @@ import com.centerm.fud_demo.entity.dto.QuestionDTO;
 import com.centerm.fud_demo.mapper.NotificationMapper;
 import com.centerm.fud_demo.service.CommentService;
 import com.centerm.fud_demo.service.QuestionService;
-import lombok.extern.java.Log;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;

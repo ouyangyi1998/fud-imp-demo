@@ -1,11 +1,6 @@
 package com.centerm.fud_demo.entity;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * 下载记录实体

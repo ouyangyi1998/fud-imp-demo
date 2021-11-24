@@ -13,10 +13,8 @@ import com.centerm.fud_demo.enums.NotificationStatusEnum;
 import com.centerm.fud_demo.mapper.CommentMapper;
 import com.centerm.fud_demo.mapper.NotificationMapper;
 import com.centerm.fud_demo.mapper.QuestionMapper;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

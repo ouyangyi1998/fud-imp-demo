@@ -1,18 +1,15 @@
 package com.centerm.fud_demo.controller.blog;
 
 import com.centerm.fud_demo.entity.Question;
-import com.centerm.fud_demo.entity.ajax.AjaxReturnMsg;
 import com.centerm.fud_demo.entity.dto.PageDTO;
-import com.centerm.fud_demo.mapper.QuestionMapper;
 import com.centerm.fud_demo.service.QuestionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 论坛帖子查询模块

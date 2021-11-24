@@ -42,7 +42,7 @@ public class UserRealm extends AuthorizingRealm {
         Set<String> set = new HashSet<>();
         set.add(roleName);
         authorizationInfo.setRoles(set);
-        log.info("Current permission is： " + roleName);
+        log.info("Current Permission is： " + roleName);
         return authorizationInfo;
     }
 
@@ -58,7 +58,7 @@ public class UserRealm extends AuthorizingRealm {
         User user = null;
         try {
             user = userService.findByUsername(username);
-        }catch (NullPointerException e) {}
+        } catch (NullPointerException e) {}
 
         if(null == user)
         {
@@ -69,7 +69,8 @@ public class UserRealm extends AuthorizingRealm {
             throw new LockedAccountException();
         }
 
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user,user.getPassword(), ByteSource.Util.bytes(user.getUsername()),getName());
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user, user.getPassword(),
+                ByteSource.Util.bytes(user.getUsername()), getName());
         return authenticationInfo;
     }
 

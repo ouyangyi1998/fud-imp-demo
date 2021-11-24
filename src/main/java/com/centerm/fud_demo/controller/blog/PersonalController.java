@@ -1,6 +1,5 @@
 package com.centerm.fud_demo.controller.blog;
 
-import com.centerm.fud_demo.dao.UserDao;
 import com.centerm.fud_demo.entity.Question;
 import com.centerm.fud_demo.entity.User;
 import com.centerm.fud_demo.entity.dto.NotificationDTO;
@@ -24,7 +23,6 @@ import java.nio.file.Paths;
 
 import static com.centerm.fud_demo.constant.Constants.INFORMATION;
 import static com.centerm.fud_demo.constant.Constants.QUESTIONS;
-import static org.apache.coyote.http11.Constants.QUESTION;
 
 /**
  * 用户个人信息处理

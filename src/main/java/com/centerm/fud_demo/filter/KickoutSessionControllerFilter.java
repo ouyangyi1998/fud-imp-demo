@@ -10,7 +10,6 @@ import org.apache.shiro.session.mgt.DefaultSessionKey;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
-import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
@@ -64,7 +63,8 @@ public class KickoutSessionControllerFilter extends AccessControlFilter {
     }
 
     /**
-     * 表示访问拒绝时是否自己处理，如果返回true表示自己不处理且继续拦截器链执行，返回false表示自己已经处理了（比如重定向到另一个页面）。
+     * 表示访问拒绝时是否自己处理，如果返回true表示自己不处理且继续拦截器链执行
+     * 返回false表示自己已经处理了（比如重定向到另一个页面）
      */
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
@@ -76,7 +76,8 @@ public class KickoutSessionControllerFilter extends AccessControlFilter {
 
         Session session = subject.getSession();
         //这里获取的User是实体 因为我在 自定义ShiroRealm中的doGetAuthenticationInfo方法中
-        //new SimpleAuthenticationInfo(user, password, getName()); 传的是 User实体 所以这里拿到的也是实体,如果传的是userName 这里拿到的就是userName
+        //new SimpleAuthenticationInfo(user, password, getName()); 传的是 User实体
+        // 所以这里拿到的也是实体,如果传的是userName 这里拿到的就是userName
         String username = ((User) subject.getPrincipal()).getUsername();
 
         Serializable sessionId = session.getId();
@@ -98,7 +99,6 @@ public class KickoutSessionControllerFilter extends AccessControlFilter {
             Serializable kickoutSessionId = null;
             //如果踢出后者
             if(kickoutAfter) {
-                kickoutSessionId=deque.getFirst();
                 kickoutSessionId = deque.removeFirst();
             } else { //否则踢出前者
                 kickoutSessionId = deque.removeLast();
